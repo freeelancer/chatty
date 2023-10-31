@@ -57,11 +57,11 @@ func (msg *MsgUpdatePubkey) ValidateBasic() error {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "Error decoding PEM block")
 	}
 
-	if block.Type != "PUBLIC KEY" {
-		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "Found block of type %s instead of PUBLIC KEY", block.Type)
+	if block.Type != "RSA PUBLIC KEY" {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "Found block of type %s instead of RSA PUBLIC KEY", block.Type)
 	}
 	// Parse the RSA public key
-	_, err = x509.ParsePKIXPublicKey(block.Bytes)
+	_, err = x509.ParsePKCS1PublicKey(block.Bytes)
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "Error parsing RSA public key:", err)
 	}

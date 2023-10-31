@@ -1,11 +1,9 @@
 package cli
 
 import (
-	"fmt"
 	"strconv"
 
 	"chatty/x/chat/types"
-
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
@@ -13,11 +11,11 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdConversations() *cobra.Command {
+func CmdPubkeys() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "conversations [chatter]",
-		Short: "Query conversations",
-		Args:  cobra.ExactArgs(1),
+		Use:   "pubkeys",
+		Short: "Query pubkeys",
+		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -27,14 +25,9 @@ func CmdConversations() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			chatter := args[0]
-			if chatter == "" {
-				return fmt.Errorf("chatter cannot be empty")
-			}
+			params := &types.QueryPubkeysRequest{}
 
-			params := &types.QueryConversationsRequest{Chatter: chatter}
-
-			res, err := queryClient.Conversations(cmd.Context(), params)
+			res, err := queryClient.Pubkeys(cmd.Context(), params)
 			if err != nil {
 				return err
 			}

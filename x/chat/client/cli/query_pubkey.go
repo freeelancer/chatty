@@ -13,10 +13,10 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdConversations() *cobra.Command {
+func CmdPubkey() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "conversations [chatter]",
-		Short: "Query conversations",
+		Use:   "pubkey [address]",
+		Short: "Query pubkey",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 
@@ -27,14 +27,14 @@ func CmdConversations() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			chatter := args[0]
-			if chatter == "" {
-				return fmt.Errorf("chatter cannot be empty")
+			address := args[0]
+			if address == "" {
+				return fmt.Errorf("address cannot be empty")
 			}
 
-			params := &types.QueryConversationsRequest{Chatter: chatter}
+			params := &types.QueryPubkeyRequest{Address: address}
 
-			res, err := queryClient.Conversations(cmd.Context(), params)
+			res, err := queryClient.Pubkey(cmd.Context(), params)
 			if err != nil {
 				return err
 			}

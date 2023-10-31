@@ -174,6 +174,87 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /chatty/chat/pubkey:
+    get:
+      summary: Queries a list of Pubkeys items.
+      operationId: ChattyChatPubkeys
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              pubkeys:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                    key:
+                      type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /chatty/chat/pubkey/{address}:
+    get:
+      summary: Queries a list of Pubkey items.
+      operationId: ChattyChatPubkey
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              pubkey:
+                type: object
+                properties:
+                  address:
+                    type: string
+                  key:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: address
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /cosmos/params/v1beta1/params:
     get:
       summary: |-
@@ -711,6 +792,13 @@ definitions:
   chatty.chat.Params:
     type: object
     description: Params defines the parameters for the module.
+  chatty.chat.PubKey:
+    type: object
+    properties:
+      address:
+        type: string
+      key:
+        type: string
   chatty.chat.QueryConversationResponse:
     type: object
     properties:
@@ -784,6 +872,28 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  chatty.chat.QueryPubkeyResponse:
+    type: object
+    properties:
+      pubkey:
+        type: object
+        properties:
+          address:
+            type: string
+          key:
+            type: string
+  chatty.chat.QueryPubkeysResponse:
+    type: object
+    properties:
+      pubkeys:
+        type: array
+        items:
+          type: object
+          properties:
+            address:
+              type: string
+            key:
+              type: string
   chatty.chat.MsgCreateChatMessageResponse:
     type: object
   chatty.chat.MsgUpdateParamsResponse:

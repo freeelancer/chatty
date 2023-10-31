@@ -24,6 +24,10 @@ type QueryClient interface {
 	Conversation(ctx context.Context, in *QueryConversationRequest, opts ...grpc.CallOption) (*QueryConversationResponse, error)
 	// Queries a list of Conversations items.
 	Conversations(ctx context.Context, in *QueryConversationsRequest, opts ...grpc.CallOption) (*QueryConversationsResponse, error)
+	// Queries a list of Pubkeys items.
+	Pubkeys(ctx context.Context, in *QueryPubkeysRequest, opts ...grpc.CallOption) (*QueryPubkeysResponse, error)
+	// Queries a list of Pubkey items.
+	Pubkey(ctx context.Context, in *QueryPubkeyRequest, opts ...grpc.CallOption) (*QueryPubkeyResponse, error)
 }
 
 type queryClient struct {
@@ -61,6 +65,24 @@ func (c *queryClient) Conversations(ctx context.Context, in *QueryConversationsR
 	return out, nil
 }
 
+func (c *queryClient) Pubkeys(ctx context.Context, in *QueryPubkeysRequest, opts ...grpc.CallOption) (*QueryPubkeysResponse, error) {
+	out := new(QueryPubkeysResponse)
+	err := c.cc.Invoke(ctx, "/chatty.chat.Query/Pubkeys", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) Pubkey(ctx context.Context, in *QueryPubkeyRequest, opts ...grpc.CallOption) (*QueryPubkeyResponse, error) {
+	out := new(QueryPubkeyResponse)
+	err := c.cc.Invoke(ctx, "/chatty.chat.Query/Pubkey", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -71,6 +93,10 @@ type QueryServer interface {
 	Conversation(context.Context, *QueryConversationRequest) (*QueryConversationResponse, error)
 	// Queries a list of Conversations items.
 	Conversations(context.Context, *QueryConversationsRequest) (*QueryConversationsResponse, error)
+	// Queries a list of Pubkeys items.
+	Pubkeys(context.Context, *QueryPubkeysRequest) (*QueryPubkeysResponse, error)
+	// Queries a list of Pubkey items.
+	Pubkey(context.Context, *QueryPubkeyRequest) (*QueryPubkeyResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -86,6 +112,12 @@ func (UnimplementedQueryServer) Conversation(context.Context, *QueryConversation
 }
 func (UnimplementedQueryServer) Conversations(context.Context, *QueryConversationsRequest) (*QueryConversationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Conversations not implemented")
+}
+func (UnimplementedQueryServer) Pubkeys(context.Context, *QueryPubkeysRequest) (*QueryPubkeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Pubkeys not implemented")
+}
+func (UnimplementedQueryServer) Pubkey(context.Context, *QueryPubkeyRequest) (*QueryPubkeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Pubkey not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -154,6 +186,42 @@ func _Query_Conversations_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_Pubkeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPubkeysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).Pubkeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chatty.chat.Query/Pubkeys",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).Pubkeys(ctx, req.(*QueryPubkeysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_Pubkey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPubkeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).Pubkey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chatty.chat.Query/Pubkey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).Pubkey(ctx, req.(*QueryPubkeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -172,6 +240,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Conversations",
 			Handler:    _Query_Conversations_Handler,
+		},
+		{
+			MethodName: "Pubkeys",
+			Handler:    _Query_Pubkeys_Handler,
+		},
+		{
+			MethodName: "Pubkey",
+			Handler:    _Query_Pubkey_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

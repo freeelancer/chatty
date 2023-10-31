@@ -59,6 +59,18 @@ func (k Keeper) SetPubkey(ctx sdk.Context, pubkey types.PubKey) error {
 	return nil
 }
 
+// GetPubkey gets a pubkey from the store.
+func (k Keeper) GetPubkey(ctx sdk.Context, address string) (*types.PubKey, bool) {
+	store := ctx.KVStore(k.storeKey)
+	pubkeyBs := store.Get(types.GetPubkeyKey(address))
+	if pubkeyBs == nil {
+		return nil, false
+	}
+	pubkey := types.PubKey{}
+	k.cdc.MustUnmarshal(pubkeyBs, &pubkey)
+	return &pubkey, true
+}
+
 // SetConversation sets a conversation to the store.
 func (k Keeper) SetConversation(ctx sdk.Context, conversation types.Conversation) error {
 	store := ctx.KVStore(k.storeKey)

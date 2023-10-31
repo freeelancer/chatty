@@ -16,7 +16,7 @@ var _ = strconv.Itoa(0)
 
 func CmdCreateChatMessage() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-chat-message [receiver] [message] [encrypted (1 or 0)]",
+		Use:   "create-chat-message [receiver] [message] [pubkey filepath]",
 		Short: "Broadcast message create-chat-message",
 		Args:  cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -36,22 +36,22 @@ func CmdCreateChatMessage() *cobra.Command {
 				return fmt.Errorf("message cannot be empty")
 			}
 
-			encryptedInt, err := strconv.ParseBool(args[2])
-			if err != nil {
-				return fmt.Errorf("encrypted must be 1 or 0")
-			}
-
-			encrypted := false
-			if encryptedInt {
-				encrypted = true
-			}
-
 			msg := types.NewMsgCreateChatMessage(
 				clientCtx.GetFromAddress().String(),
 				receiver,
 				message,
-				encrypted,
+				false,
 			)
+
+			pubkeyFilePath := args[2]
+			if pubkeyFilePath != "" {
+				encryptedMessage, err := EncryptMessageWithPubKey(message, pubkeyFilePath)
+				if err != nil {
+					return err
+				}
+				msg.Encrypted = true
+				msg.Message = encryptedMessage
+			}
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err

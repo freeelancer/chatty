@@ -45,3 +45,37 @@ func (k Keeper) Conversations(goCtx context.Context, req *types.QueryConversatio
 
 	return &types.QueryConversationsResponse{Conversations: conversations}, nil
 }
+
+func (k Keeper) Pubkey(goCtx context.Context, req *types.QueryPubkeyRequest) (*types.QueryPubkeyResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	pubkey, hasPubkey := k.GetPubkey(ctx, req.Address)
+	if !hasPubkey {
+		return nil, status.Error(codes.NotFound, "not found")
+	}
+
+	return &types.QueryPubkeyResponse{Pubkey: pubkey}, nil
+}
+
+func (k Keeper) Pubkeys(goCtx context.Context, req *types.QueryPubkeysRequest) (*types.QueryPubkeysResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	store := ctx.KVStore(k.storeKey)
+	pubkeys := []*types.PubKey{}
+	iter := sdk.KVStorePrefixIterator(store, types.PubkeyKeyPrefix)
+	defer iter.Close()
+	for ; iter.Valid(); iter.Next() {
+		pubkey := &types.PubKey{}
+		k.cdc.MustUnmarshal(iter.Value(), pubkey)
+		pubkeys = append(pubkeys, pubkey)
+	}
+
+	return &types.QueryPubkeysResponse{Pubkeys: pubkeys}, nil
+}

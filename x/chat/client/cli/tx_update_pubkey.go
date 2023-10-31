@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"encoding/hex"
 	"fmt"
 	"strconv"
 
@@ -17,7 +18,7 @@ var _ = strconv.Itoa(0)
 func CmdUpdatePubkey() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "update-pubkey",
-		Short: "Broadcast message update-pubkey",
+		Short: "Broadcast message update-pubkey [pubkey filepath]",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 
@@ -26,14 +27,19 @@ func CmdUpdatePubkey() *cobra.Command {
 				return err
 			}
 
-			pubkeyStr := args[0]
-			if pubkeyStr == "" {
+			pubkeyFilePath := args[0]
+			if pubkeyFilePath == "" {
 				return fmt.Errorf("pubkey cannot be empty")
 			}
+			pemData, err := GetPemDataBs(pubkeyFilePath)
+			if err != nil {
+				return err
+			}
+			pemDataHexStr := hex.EncodeToString(pemData)
 
 			msg := types.NewMsgUpdatePubkey(
 				clientCtx.GetFromAddress().String(),
-				pubkeyStr,
+				pemDataHexStr,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
