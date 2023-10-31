@@ -128,7 +128,9 @@ Get group conversation of id
 
 ### Future Improvements
 
+- Fix export and init genesis, add test cases
 - Allow state updates to group conversation like adding/updating of pubkey, participants, admin
 - State pruning of messages passed a certain duration. This can be either done through beginblockers or at the beginning of every createMessage transaction
+- Use another way to store one-to-one conversations between two users. Current way stores each conversation twice under two different keys (addressA+addressB and addressB+addressA). It is done this way to faciliate quicker queries of getting all conversations of a single user.
 
 
