@@ -14,7 +14,7 @@ func NewMsgCreateGroupConversationMessage(creator, message string, conversationI
 	return &MsgCreateGroupConversationMessage{
 		Creator:        creator,
 		ConversationId: conversationId,
-		Messsage:       message,
+		Message:        message,
 		Encrypted:      encrypted,
 	}
 }
@@ -44,6 +44,9 @@ func (msg *MsgCreateGroupConversationMessage) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
+	}
+	if msg.Message == "" {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "message is empty")
 	}
 	return nil
 }

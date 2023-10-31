@@ -27,6 +27,11 @@ Group conversation creators sets the public key for the group conversation on cr
 
 Cli commands that create messages takes in the <pubkey pem filepath> which can be empty. This would mean the message will not be encrypted.
 
+### Unit Tests
+```
+go test $(pwd)/x/chat/keeper 
+```
+
 ### Setup rsa PKCS1 private public key pair
 
 ```

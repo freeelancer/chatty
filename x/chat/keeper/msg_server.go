@@ -22,6 +22,10 @@ var _ types.MsgServer = msgServer{}
 func (k msgServer) CreateChatMessage(goCtx context.Context, msg *types.MsgCreateChatMessage) (*types.MsgCreateChatMessageResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	if err := msg.ValidateBasic(); err != nil {
+		return nil, err
+	}
+
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return nil, err
@@ -40,6 +44,10 @@ func (k msgServer) CreateChatMessage(goCtx context.Context, msg *types.MsgCreate
 func (k msgServer) UpdatePubkey(goCtx context.Context, msg *types.MsgUpdatePubkey) (*types.MsgUpdatePubkeyResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	if err := msg.ValidateBasic(); err != nil {
+		return nil, err
+	}
+
 	if err := k.Keeper.UpdatePubkey(ctx, msg.Creator, msg.Pubkey); err != nil {
 		return nil, err
 	}
@@ -49,6 +57,10 @@ func (k msgServer) UpdatePubkey(goCtx context.Context, msg *types.MsgUpdatePubke
 
 func (k msgServer) CreateGroupConversation(goCtx context.Context, msg *types.MsgCreateGroupConversation) (*types.MsgCreateGroupConversationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	if err := msg.ValidateBasic(); err != nil {
+		return nil, err
+	}
 
 	if err := k.Keeper.CreateGroupConversation(ctx, msg.Creator, msg.Name, msg.Participants, msg.Message, msg.Pubkey); err != nil {
 		return nil, err
@@ -60,7 +72,11 @@ func (k msgServer) CreateGroupConversation(goCtx context.Context, msg *types.Msg
 func (k msgServer) CreateGroupConversationMessage(goCtx context.Context, msg *types.MsgCreateGroupConversationMessage) (*types.MsgCreateGroupConversationMessageResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	if err := k.Keeper.CreateGroupConversationMessage(ctx, msg.Creator, msg.ConversationId, msg.Messsage, msg.Encrypted); err != nil {
+	if err := msg.ValidateBasic(); err != nil {
+		return nil, err
+	}
+
+	if err := k.Keeper.CreateGroupConversationMessage(ctx, msg.Creator, msg.ConversationId, msg.Message, msg.Encrypted); err != nil {
 		return nil, err
 	}
 

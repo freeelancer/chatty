@@ -52,5 +52,8 @@ func (msg *MsgCreateChatMessage) ValidateBasic() error {
 	if msg.Creator == msg.Receiver {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "creator and receiver are the same")
 	}
+	if msg.Message == "" {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "message is empty")
+	}
 	return nil
 }

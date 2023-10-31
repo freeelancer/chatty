@@ -80,6 +80,12 @@ func (msg *MsgCreateGroupConversation) ValidateBasic() error {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "participants cannot be empty")
 	}
 
+	if len(msg.Participants) == 1 {
+		if msg.Participants[0] == msg.Creator {
+			return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "participants only has creator")
+		}
+	}
+
 	for _, participant := range msg.Participants {
 		_, err := sdk.AccAddressFromBech32(participant)
 		if err != nil {
