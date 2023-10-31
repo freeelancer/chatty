@@ -550,6 +550,8 @@ definitions:
       MsgUpdateParams message.
 
       Since: cosmos-sdk 0.47
+  chatty.chat.MsgUpdatePubkeyResponse:
+    type: object
   cosmos.auth.v1beta1.MsgUpdateParamsResponse:
     type: object
     description: |-

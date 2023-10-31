@@ -36,3 +36,13 @@ func (k msgServer) CreateChatMessage(goCtx context.Context, msg *types.MsgCreate
 
 	return &types.MsgCreateChatMessageResponse{}, nil
 }
+
+func (k msgServer) UpdatePubkey(goCtx context.Context, msg *types.MsgUpdatePubkey) (*types.MsgUpdatePubkeyResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	if err := k.Keeper.UpdatePubkey(ctx, msg.Creator, msg.Pubkey); err != nil {
+		return nil, err
+	}
+
+	return &types.MsgUpdatePubkeyResponse{}, nil
+}

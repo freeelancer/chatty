@@ -20,6 +20,7 @@ service Msg {
   // Since: cosmos-sdk 0.47
   rpc UpdateParams      (MsgUpdateParams     ) returns (MsgUpdateParamsResponse     );
   rpc CreateChatMessage (MsgCreateChatMessage) returns (MsgCreateChatMessageResponse);
+  rpc UpdatePubkey      (MsgUpdatePubkey     ) returns (MsgUpdatePubkeyResponse     );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 //
@@ -44,11 +45,18 @@ message MsgUpdateParams {
 message MsgUpdateParamsResponse {}
 
 message MsgCreateChatMessage {
-  string creator = 1;
-  string receiver = 2;
-  string message = 3;
-  bool encrypted = 4;
+  string creator   = 1;
+  string receiver  = 2;
+  string message   = 3;
+  bool   encrypted = 4;
 }
 
 message MsgCreateChatMessageResponse {}
+
+message MsgUpdatePubkey {
+  string creator = 1;
+  string pubkey  = 2;
+}
+
+message MsgUpdatePubkeyResponse {}
 

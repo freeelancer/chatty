@@ -52,6 +52,13 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
+// SetPubkey sets a pubkey to the store.
+func (k Keeper) SetPubkey(ctx sdk.Context, pubkey types.PubKey) error {
+	store := ctx.KVStore(k.storeKey)
+	store.Set(types.GetPubkeyKey(pubkey.Address), k.cdc.MustMarshal(&pubkey))
+	return nil
+}
+
 // SetConversation sets a conversation to the store.
 func (k Keeper) SetConversation(ctx sdk.Context, conversation types.Conversation) error {
 	store := ctx.KVStore(k.storeKey)

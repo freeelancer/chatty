@@ -17,6 +17,7 @@ const (
 var (
 	ParamsKey             = []byte("p_chat")
 	ConversationKeyPrefix = []byte{0x01}
+	PubkeyKeyPrefix       = []byte{0x02}
 )
 
 func KeyPrefix(p string) []byte {
@@ -25,4 +26,8 @@ func KeyPrefix(p string) []byte {
 
 func GetConversationKey(sender, receiver string) ([]byte, []byte) {
 	return append(ConversationKeyPrefix, []byte(sender+receiver)...), append(ConversationKeyPrefix, []byte(receiver+sender)...)
+}
+
+func GetPubkeyKey(creator string) []byte {
+	return append(PubkeyKeyPrefix, []byte(creator)...)
 }
