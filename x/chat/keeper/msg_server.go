@@ -50,9 +50,7 @@ func (k msgServer) UpdatePubkey(goCtx context.Context, msg *types.MsgUpdatePubke
 func (k msgServer) CreateGroupConversation(goCtx context.Context, msg *types.MsgCreateGroupConversation) (*types.MsgCreateGroupConversationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	creator := sdk.AccAddress(msg.Creator)
-
-	if err := k.Keeper.CreateGroupConversation(ctx, creator, msg.Name, msg.Participants, msg.Message, msg.Pubkey); err != nil {
+	if err := k.Keeper.CreateGroupConversation(ctx, msg.Creator, msg.Name, msg.Participants, msg.Message, msg.Pubkey); err != nil {
 		return nil, err
 	}
 

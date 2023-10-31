@@ -96,12 +96,12 @@ func (k Keeper) GetConversation(ctx sdk.Context, chatterA, chatterB string) (*ty
 // SetGroupConversation sets a group conversation to the store.
 func (k Keeper) SetGroupConversation(ctx sdk.Context, groupConversation types.GroupConversation) error {
 	store := ctx.KVStore(k.storeKey)
-	store.Set(types.GetGroupConversationKey(uint64(groupConversation.Id)), k.cdc.MustMarshal(&groupConversation))
+	store.Set(types.GetGroupConversationKey(groupConversation.Id), k.cdc.MustMarshal(&groupConversation))
 	return nil
 }
 
 // GetGroupConversation gets a group conversation from the store.
-func (k Keeper) GetGroupConversation(ctx sdk.Context, id uint64) (*types.GroupConversation, bool) {
+func (k Keeper) GetGroupConversation(ctx sdk.Context, id int64) (*types.GroupConversation, bool) {
 	store := ctx.KVStore(k.storeKey)
 	groupConversationBs := store.Get(types.GetGroupConversationKey(id))
 	if groupConversationBs == nil {

@@ -28,6 +28,10 @@ type QueryClient interface {
 	Pubkeys(ctx context.Context, in *QueryPubkeysRequest, opts ...grpc.CallOption) (*QueryPubkeysResponse, error)
 	// Queries a list of Pubkey items.
 	Pubkey(ctx context.Context, in *QueryPubkeyRequest, opts ...grpc.CallOption) (*QueryPubkeyResponse, error)
+	// Queries a list of GroupConversationById items.
+	GroupConversationById(ctx context.Context, in *QueryGroupConversationByIdRequest, opts ...grpc.CallOption) (*QueryGroupConversationByIdResponse, error)
+	// Queries a list of GroupConversationsByAddress items.
+	GroupConversationsByAddress(ctx context.Context, in *QueryGroupConversationsByAddressRequest, opts ...grpc.CallOption) (*QueryGroupConversationsByAddressResponse, error)
 }
 
 type queryClient struct {
@@ -83,6 +87,24 @@ func (c *queryClient) Pubkey(ctx context.Context, in *QueryPubkeyRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) GroupConversationById(ctx context.Context, in *QueryGroupConversationByIdRequest, opts ...grpc.CallOption) (*QueryGroupConversationByIdResponse, error) {
+	out := new(QueryGroupConversationByIdResponse)
+	err := c.cc.Invoke(ctx, "/chatty.chat.Query/GroupConversationById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) GroupConversationsByAddress(ctx context.Context, in *QueryGroupConversationsByAddressRequest, opts ...grpc.CallOption) (*QueryGroupConversationsByAddressResponse, error) {
+	out := new(QueryGroupConversationsByAddressResponse)
+	err := c.cc.Invoke(ctx, "/chatty.chat.Query/GroupConversationsByAddress", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -97,6 +119,10 @@ type QueryServer interface {
 	Pubkeys(context.Context, *QueryPubkeysRequest) (*QueryPubkeysResponse, error)
 	// Queries a list of Pubkey items.
 	Pubkey(context.Context, *QueryPubkeyRequest) (*QueryPubkeyResponse, error)
+	// Queries a list of GroupConversationById items.
+	GroupConversationById(context.Context, *QueryGroupConversationByIdRequest) (*QueryGroupConversationByIdResponse, error)
+	// Queries a list of GroupConversationsByAddress items.
+	GroupConversationsByAddress(context.Context, *QueryGroupConversationsByAddressRequest) (*QueryGroupConversationsByAddressResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -118,6 +144,12 @@ func (UnimplementedQueryServer) Pubkeys(context.Context, *QueryPubkeysRequest) (
 }
 func (UnimplementedQueryServer) Pubkey(context.Context, *QueryPubkeyRequest) (*QueryPubkeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pubkey not implemented")
+}
+func (UnimplementedQueryServer) GroupConversationById(context.Context, *QueryGroupConversationByIdRequest) (*QueryGroupConversationByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GroupConversationById not implemented")
+}
+func (UnimplementedQueryServer) GroupConversationsByAddress(context.Context, *QueryGroupConversationsByAddressRequest) (*QueryGroupConversationsByAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GroupConversationsByAddress not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -222,6 +254,42 @@ func _Query_Pubkey_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_GroupConversationById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGroupConversationByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).GroupConversationById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chatty.chat.Query/GroupConversationById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).GroupConversationById(ctx, req.(*QueryGroupConversationByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_GroupConversationsByAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGroupConversationsByAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).GroupConversationsByAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chatty.chat.Query/GroupConversationsByAddress",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).GroupConversationsByAddress(ctx, req.(*QueryGroupConversationsByAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -248,6 +316,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Pubkey",
 			Handler:    _Query_Pubkey_Handler,
+		},
+		{
+			MethodName: "GroupConversationById",
+			Handler:    _Query_GroupConversationById_Handler,
+		},
+		{
+			MethodName: "GroupConversationsByAddress",
+			Handler:    _Query_GroupConversationsByAddress_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

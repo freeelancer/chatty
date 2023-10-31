@@ -2669,15 +2669,71 @@ func (x *fastReflection_MsgUpdatePubkeyResponse) ProtoMethods() *protoiface.Meth
 	}
 }
 
+var _ protoreflect.List = (*_MsgCreateGroupConversation_3_list)(nil)
+
+type _MsgCreateGroupConversation_3_list struct {
+	list *[]string
+}
+
+func (x *_MsgCreateGroupConversation_3_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_MsgCreateGroupConversation_3_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfString((*x.list)[i])
+}
+
+func (x *_MsgCreateGroupConversation_3_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.String()
+	concreteValue := valueUnwrapped
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_MsgCreateGroupConversation_3_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.String()
+	concreteValue := valueUnwrapped
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_MsgCreateGroupConversation_3_list) AppendMutable() protoreflect.Value {
+	panic(fmt.Errorf("AppendMutable can not be called on message MsgCreateGroupConversation at list field Participants as it is not of Message kind"))
+}
+
+func (x *_MsgCreateGroupConversation_3_list) Truncate(n int) {
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_MsgCreateGroupConversation_3_list) NewElement() protoreflect.Value {
+	v := ""
+	return protoreflect.ValueOfString(v)
+}
+
+func (x *_MsgCreateGroupConversation_3_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_MsgCreateGroupConversation         protoreflect.MessageDescriptor
-	fd_MsgCreateGroupConversation_creator protoreflect.FieldDescriptor
+	md_MsgCreateGroupConversation              protoreflect.MessageDescriptor
+	fd_MsgCreateGroupConversation_creator      protoreflect.FieldDescriptor
+	fd_MsgCreateGroupConversation_name         protoreflect.FieldDescriptor
+	fd_MsgCreateGroupConversation_participants protoreflect.FieldDescriptor
+	fd_MsgCreateGroupConversation_pubkey       protoreflect.FieldDescriptor
+	fd_MsgCreateGroupConversation_message      protoreflect.FieldDescriptor
+	fd_MsgCreateGroupConversation_encrypted    protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_chatty_chat_tx_proto_init()
 	md_MsgCreateGroupConversation = File_chatty_chat_tx_proto.Messages().ByName("MsgCreateGroupConversation")
 	fd_MsgCreateGroupConversation_creator = md_MsgCreateGroupConversation.Fields().ByName("creator")
+	fd_MsgCreateGroupConversation_name = md_MsgCreateGroupConversation.Fields().ByName("name")
+	fd_MsgCreateGroupConversation_participants = md_MsgCreateGroupConversation.Fields().ByName("participants")
+	fd_MsgCreateGroupConversation_pubkey = md_MsgCreateGroupConversation.Fields().ByName("pubkey")
+	fd_MsgCreateGroupConversation_message = md_MsgCreateGroupConversation.Fields().ByName("message")
+	fd_MsgCreateGroupConversation_encrypted = md_MsgCreateGroupConversation.Fields().ByName("encrypted")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgCreateGroupConversation)(nil)
@@ -2751,6 +2807,36 @@ func (x *fastReflection_MsgCreateGroupConversation) Range(f func(protoreflect.Fi
 			return
 		}
 	}
+	if x.Name != "" {
+		value := protoreflect.ValueOfString(x.Name)
+		if !f(fd_MsgCreateGroupConversation_name, value) {
+			return
+		}
+	}
+	if len(x.Participants) != 0 {
+		value := protoreflect.ValueOfList(&_MsgCreateGroupConversation_3_list{list: &x.Participants})
+		if !f(fd_MsgCreateGroupConversation_participants, value) {
+			return
+		}
+	}
+	if x.Pubkey != "" {
+		value := protoreflect.ValueOfString(x.Pubkey)
+		if !f(fd_MsgCreateGroupConversation_pubkey, value) {
+			return
+		}
+	}
+	if x.Message != "" {
+		value := protoreflect.ValueOfString(x.Message)
+		if !f(fd_MsgCreateGroupConversation_message, value) {
+			return
+		}
+	}
+	if x.Encrypted != false {
+		value := protoreflect.ValueOfBool(x.Encrypted)
+		if !f(fd_MsgCreateGroupConversation_encrypted, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -2768,6 +2854,16 @@ func (x *fastReflection_MsgCreateGroupConversation) Has(fd protoreflect.FieldDes
 	switch fd.FullName() {
 	case "chatty.chat.MsgCreateGroupConversation.creator":
 		return x.Creator != ""
+	case "chatty.chat.MsgCreateGroupConversation.name":
+		return x.Name != ""
+	case "chatty.chat.MsgCreateGroupConversation.participants":
+		return len(x.Participants) != 0
+	case "chatty.chat.MsgCreateGroupConversation.pubkey":
+		return x.Pubkey != ""
+	case "chatty.chat.MsgCreateGroupConversation.message":
+		return x.Message != ""
+	case "chatty.chat.MsgCreateGroupConversation.encrypted":
+		return x.Encrypted != false
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.MsgCreateGroupConversation"))
@@ -2786,6 +2882,16 @@ func (x *fastReflection_MsgCreateGroupConversation) Clear(fd protoreflect.FieldD
 	switch fd.FullName() {
 	case "chatty.chat.MsgCreateGroupConversation.creator":
 		x.Creator = ""
+	case "chatty.chat.MsgCreateGroupConversation.name":
+		x.Name = ""
+	case "chatty.chat.MsgCreateGroupConversation.participants":
+		x.Participants = nil
+	case "chatty.chat.MsgCreateGroupConversation.pubkey":
+		x.Pubkey = ""
+	case "chatty.chat.MsgCreateGroupConversation.message":
+		x.Message = ""
+	case "chatty.chat.MsgCreateGroupConversation.encrypted":
+		x.Encrypted = false
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.MsgCreateGroupConversation"))
@@ -2805,6 +2911,24 @@ func (x *fastReflection_MsgCreateGroupConversation) Get(descriptor protoreflect.
 	case "chatty.chat.MsgCreateGroupConversation.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
+	case "chatty.chat.MsgCreateGroupConversation.name":
+		value := x.Name
+		return protoreflect.ValueOfString(value)
+	case "chatty.chat.MsgCreateGroupConversation.participants":
+		if len(x.Participants) == 0 {
+			return protoreflect.ValueOfList(&_MsgCreateGroupConversation_3_list{})
+		}
+		listValue := &_MsgCreateGroupConversation_3_list{list: &x.Participants}
+		return protoreflect.ValueOfList(listValue)
+	case "chatty.chat.MsgCreateGroupConversation.pubkey":
+		value := x.Pubkey
+		return protoreflect.ValueOfString(value)
+	case "chatty.chat.MsgCreateGroupConversation.message":
+		value := x.Message
+		return protoreflect.ValueOfString(value)
+	case "chatty.chat.MsgCreateGroupConversation.encrypted":
+		value := x.Encrypted
+		return protoreflect.ValueOfBool(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.MsgCreateGroupConversation"))
@@ -2827,6 +2951,18 @@ func (x *fastReflection_MsgCreateGroupConversation) Set(fd protoreflect.FieldDes
 	switch fd.FullName() {
 	case "chatty.chat.MsgCreateGroupConversation.creator":
 		x.Creator = value.Interface().(string)
+	case "chatty.chat.MsgCreateGroupConversation.name":
+		x.Name = value.Interface().(string)
+	case "chatty.chat.MsgCreateGroupConversation.participants":
+		lv := value.List()
+		clv := lv.(*_MsgCreateGroupConversation_3_list)
+		x.Participants = *clv.list
+	case "chatty.chat.MsgCreateGroupConversation.pubkey":
+		x.Pubkey = value.Interface().(string)
+	case "chatty.chat.MsgCreateGroupConversation.message":
+		x.Message = value.Interface().(string)
+	case "chatty.chat.MsgCreateGroupConversation.encrypted":
+		x.Encrypted = value.Bool()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.MsgCreateGroupConversation"))
@@ -2847,8 +2983,22 @@ func (x *fastReflection_MsgCreateGroupConversation) Set(fd protoreflect.FieldDes
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateGroupConversation) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.MsgCreateGroupConversation.participants":
+		if x.Participants == nil {
+			x.Participants = []string{}
+		}
+		value := &_MsgCreateGroupConversation_3_list{list: &x.Participants}
+		return protoreflect.ValueOfList(value)
 	case "chatty.chat.MsgCreateGroupConversation.creator":
 		panic(fmt.Errorf("field creator of message chatty.chat.MsgCreateGroupConversation is not mutable"))
+	case "chatty.chat.MsgCreateGroupConversation.name":
+		panic(fmt.Errorf("field name of message chatty.chat.MsgCreateGroupConversation is not mutable"))
+	case "chatty.chat.MsgCreateGroupConversation.pubkey":
+		panic(fmt.Errorf("field pubkey of message chatty.chat.MsgCreateGroupConversation is not mutable"))
+	case "chatty.chat.MsgCreateGroupConversation.message":
+		panic(fmt.Errorf("field message of message chatty.chat.MsgCreateGroupConversation is not mutable"))
+	case "chatty.chat.MsgCreateGroupConversation.encrypted":
+		panic(fmt.Errorf("field encrypted of message chatty.chat.MsgCreateGroupConversation is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.MsgCreateGroupConversation"))
@@ -2864,6 +3014,17 @@ func (x *fastReflection_MsgCreateGroupConversation) NewField(fd protoreflect.Fie
 	switch fd.FullName() {
 	case "chatty.chat.MsgCreateGroupConversation.creator":
 		return protoreflect.ValueOfString("")
+	case "chatty.chat.MsgCreateGroupConversation.name":
+		return protoreflect.ValueOfString("")
+	case "chatty.chat.MsgCreateGroupConversation.participants":
+		list := []string{}
+		return protoreflect.ValueOfList(&_MsgCreateGroupConversation_3_list{list: &list})
+	case "chatty.chat.MsgCreateGroupConversation.pubkey":
+		return protoreflect.ValueOfString("")
+	case "chatty.chat.MsgCreateGroupConversation.message":
+		return protoreflect.ValueOfString("")
+	case "chatty.chat.MsgCreateGroupConversation.encrypted":
+		return protoreflect.ValueOfBool(false)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.MsgCreateGroupConversation"))
@@ -2937,6 +3098,27 @@ func (x *fastReflection_MsgCreateGroupConversation) ProtoMethods() *protoiface.M
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		l = len(x.Name)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if len(x.Participants) > 0 {
+			for _, s := range x.Participants {
+				l = len(s)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		l = len(x.Pubkey)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Message)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.Encrypted {
+			n += 2
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -2965,6 +3147,46 @@ func (x *fastReflection_MsgCreateGroupConversation) ProtoMethods() *protoiface.M
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Encrypted {
+			i--
+			if x.Encrypted {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i--
+			dAtA[i] = 0x30
+		}
+		if len(x.Message) > 0 {
+			i -= len(x.Message)
+			copy(dAtA[i:], x.Message)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Message)))
+			i--
+			dAtA[i] = 0x2a
+		}
+		if len(x.Pubkey) > 0 {
+			i -= len(x.Pubkey)
+			copy(dAtA[i:], x.Pubkey)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Pubkey)))
+			i--
+			dAtA[i] = 0x22
+		}
+		if len(x.Participants) > 0 {
+			for iNdEx := len(x.Participants) - 1; iNdEx >= 0; iNdEx-- {
+				i -= len(x.Participants[iNdEx])
+				copy(dAtA[i:], x.Participants[iNdEx])
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Participants[iNdEx])))
+				i--
+				dAtA[i] = 0x1a
+			}
+		}
+		if len(x.Name) > 0 {
+			i -= len(x.Name)
+			copy(dAtA[i:], x.Name)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Name)))
+			i--
+			dAtA[i] = 0x12
 		}
 		if len(x.Creator) > 0 {
 			i -= len(x.Creator)
@@ -3054,6 +3276,154 @@ func (x *fastReflection_MsgCreateGroupConversation) ProtoMethods() *protoiface.M
 				}
 				x.Creator = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Name = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Participants", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Participants = append(x.Participants, string(dAtA[iNdEx:postIndex]))
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pubkey", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Pubkey = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 5:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Message = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 6:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Encrypted", wireType)
+				}
+				var v int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				x.Encrypted = bool(v != 0)
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -3695,7 +4065,12 @@ type MsgCreateGroupConversation struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Creator      string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Name         string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Participants []string `protobuf:"bytes,3,rep,name=participants,proto3" json:"participants,omitempty"`
+	Pubkey       string   `protobuf:"bytes,4,opt,name=pubkey,proto3" json:"pubkey,omitempty"`
+	Message      string   `protobuf:"bytes,5,opt,name=message,proto3" json:"message,omitempty"`
+	Encrypted    bool     `protobuf:"varint,6,opt,name=encrypted,proto3" json:"encrypted,omitempty"`
 }
 
 func (x *MsgCreateGroupConversation) Reset() {
@@ -3723,6 +4098,41 @@ func (x *MsgCreateGroupConversation) GetCreator() string {
 		return x.Creator
 	}
 	return ""
+}
+
+func (x *MsgCreateGroupConversation) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *MsgCreateGroupConversation) GetParticipants() []string {
+	if x != nil {
+		return x.Participants
+	}
+	return nil
+}
+
+func (x *MsgCreateGroupConversation) GetPubkey() string {
+	if x != nil {
+		return x.Pubkey
+	}
+	return ""
+}
+
+func (x *MsgCreateGroupConversation) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *MsgCreateGroupConversation) GetEncrypted() bool {
+	if x != nil {
+		return x.Encrypted
+	}
+	return false
 }
 
 type MsgCreateGroupConversationResponse struct {
@@ -3793,46 +4203,55 @@ var file_chatty_chat_tx_proto_rawDesc = []byte{
 	0x16, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x55, 0x70,
 	0x64, 0x61, 0x74, 0x65, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x22, 0x36, 0x0a, 0x1a, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47,
-	0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x24, 0x0a, 0x22, 0x4d, 0x73,
-	0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76,
-	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x32, 0x8c, 0x03, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x52, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61,
-	0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x1c, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74,
+	0x73, 0x65, 0x22, 0xbe, 0x01, 0x0a, 0x1a, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
+	0x22, 0x0a, 0x0c, 0x70, 0x61, 0x72, 0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e, 0x74, 0x73, 0x18,
+	0x03, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0c, 0x70, 0x61, 0x72, 0x74, 0x69, 0x63, 0x69, 0x70, 0x61,
+	0x6e, 0x74, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x6d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x65, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74,
+	0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x65, 0x6e, 0x63, 0x72, 0x79, 0x70,
+	0x74, 0x65, 0x64, 0x22, 0x24, 0x0a, 0x22, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x8c, 0x03, 0x0a, 0x03, 0x4d, 0x73,
+	0x67, 0x12, 0x52, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d,
+	0x73, 0x12, 0x1c, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e,
+	0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a,
+	0x24, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73,
+	0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x61, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43,
+	0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x21, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x29, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x12, 0x1c, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74,
 	0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x24, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e,
-	0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x61, 0x0a, 0x11,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x12, 0x21, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e,
-	0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73,
-	0x73, 0x61, 0x67, 0x65, 0x1a, 0x29, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68,
-	0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74,
-	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x52, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x12,
-	0x1c, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73,
-	0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x1a, 0x24, 0x2e,
-	0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x73, 0x0a, 0x17, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x72, 0x6f,
-	0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x27,
-	0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67,
+	0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x1a, 0x24, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x75,
+	0x62, 0x6b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x73, 0x0a, 0x17,
 	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65,
-	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x2f, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79,
+	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x27, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79,
 	0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47,
 	0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42,
-	0x85, 0x01, 0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63,
-	0x68, 0x61, 0x74, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1c,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69,
-	0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0xa2, 0x02, 0x03, 0x43,
-	0x43, 0x58, 0xaa, 0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x43, 0x68, 0x61, 0x74,
-	0xca, 0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0xe2, 0x02,
-	0x17, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0x5c, 0x47, 0x50, 0x42,
-	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0c, 0x43, 0x68, 0x61, 0x74, 0x74,
-	0x79, 0x3a, 0x3a, 0x43, 0x68, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x1a, 0x2f, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d,
+	0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e,
+	0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0x85, 0x01, 0x0a, 0x0f, 0x63, 0x6f, 0x6d,
+	0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x42, 0x07, 0x54, 0x78,
+	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1c, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73,
+	0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79,
+	0x2f, 0x63, 0x68, 0x61, 0x74, 0xa2, 0x02, 0x03, 0x43, 0x43, 0x58, 0xaa, 0x02, 0x0b, 0x43, 0x68,
+	0x61, 0x74, 0x74, 0x79, 0x2e, 0x43, 0x68, 0x61, 0x74, 0xca, 0x02, 0x0b, 0x43, 0x68, 0x61, 0x74,
+	0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0xe2, 0x02, 0x17, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79,
+	0x5c, 0x43, 0x68, 0x61, 0x74, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x0c, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x3a, 0x3a, 0x43, 0x68, 0x61, 0x74,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (

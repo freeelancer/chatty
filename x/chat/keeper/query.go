@@ -79,3 +79,42 @@ func (k Keeper) Pubkeys(goCtx context.Context, req *types.QueryPubkeysRequest) (
 
 	return &types.QueryPubkeysResponse{Pubkeys: pubkeys}, nil
 }
+
+func (k Keeper) GroupConversationById(goCtx context.Context, req *types.QueryGroupConversationByIdRequest) (*types.QueryGroupConversationByIdResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	groupConvo, found := k.GetGroupConversation(ctx, req.Id)
+	if !found {
+		return nil, status.Error(codes.NotFound, "not found")
+	}
+
+	return &types.QueryGroupConversationByIdResponse{GroupConversation: groupConvo}, nil
+}
+
+func (k Keeper) GroupConversationsByAddress(goCtx context.Context, req *types.QueryGroupConversationsByAddressRequest) (*types.QueryGroupConversationsByAddressResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	addressGroup, found := k.GetAddressGroup(ctx, req.Address)
+	if !found {
+		return nil, status.Error(codes.NotFound, "not found")
+	}
+
+	conversations := []*types.GroupConversation{}
+	for _, id := range addressGroup.GroupIds {
+		conversation, found := k.GetGroupConversation(ctx, id)
+		if !found {
+			return nil, status.Error(codes.NotFound, "not found")
+		}
+		conversations = append(conversations, conversation)
+	}
+
+	return &types.QueryGroupConversationsByAddressResponse{GroupConversations: conversations}, nil
+}

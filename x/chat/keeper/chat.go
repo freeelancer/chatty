@@ -28,7 +28,7 @@ func (k Keeper) CreateChatMessage(ctx sdk.Context, sender, receiver sdk.AccAddre
 }
 
 // CreateGroupConversation creates a group conversation
-func (k Keeper) CreateGroupConversation(ctx sdk.Context, admin sdk.AccAddress, name string, participants []string, message, pubkey string) error {
+func (k Keeper) CreateGroupConversation(ctx sdk.Context, admin, name string, participants []string, message, pubkey string) error {
 	params := k.GetParams(ctx)
 	convoId := params.GroupConversationCounter
 	params.GroupConversationCounter = params.GroupConversationCounter + 1
@@ -42,13 +42,13 @@ func (k Keeper) CreateGroupConversation(ctx sdk.Context, admin sdk.AccAddress, n
 		if err != nil {
 			return err
 		}
-		if admin.String() == participant {
+		if admin == participant {
 			addAdminToParticipants = false
 		}
 	}
 
 	if addAdminToParticipants {
-		participants = append(participants, admin.String())
+		participants = append(participants, admin)
 	}
 
 	for _, participant := range participants {
@@ -59,7 +59,7 @@ func (k Keeper) CreateGroupConversation(ctx sdk.Context, admin sdk.AccAddress, n
 
 	groupConvo := types.GroupConversation{
 		Id:            convoId,
-		Admin:         admin.String(),
+		Admin:         admin,
 		Name:          name,
 		Participants:  participants,
 		Messages:      []*types.ChatMessage{},
@@ -71,14 +71,14 @@ func (k Keeper) CreateGroupConversation(ctx sdk.Context, admin sdk.AccAddress, n
 	if pubkey != "" {
 		encrypted = true
 		groupConvo.PubKey = &types.PubKey{
-			Address: admin.String(),
+			Address: admin,
 			Key:     pubkey,
 		}
 	}
 
 	if message != "" {
 		chatMessage := types.ChatMessage{
-			Sender:    admin.String(),
+			Sender:    admin,
 			Message:   message,
 			Encrypted: encrypted,
 			CreatedAt: ctx.BlockTime().Unix(),
@@ -90,7 +90,7 @@ func (k Keeper) CreateGroupConversation(ctx sdk.Context, admin sdk.AccAddress, n
 }
 
 // CreateGroupConversationMessage for Group Conversation
-func (k Keeper) CreateGroupConversationMessage(ctx sdk.Context, sender sdk.AccAddress, id uint64, message string, encrypted bool) error {
+func (k Keeper) CreateGroupConversationMessage(ctx sdk.Context, sender sdk.AccAddress, id int64, message string, encrypted bool) error {
 	groupConvo, hasGroupConvo := k.GetGroupConversation(ctx, id)
 	if !hasGroupConvo {
 		return fmt.Errorf("group conversation with id %d does not exist", id)

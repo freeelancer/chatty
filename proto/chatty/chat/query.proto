@@ -43,6 +43,18 @@ service Query {
     option (google.api.http).get = "/chatty/chat/pubkey/{address}";
   
   }
+  
+  // Queries a list of GroupConversationById items.
+  rpc GroupConversationById (QueryGroupConversationByIdRequest) returns (QueryGroupConversationByIdResponse) {
+    option (google.api.http).get = "/chatty/chat/group_conversation/id/{id}";
+  
+  }
+  
+  // Queries a list of GroupConversationsByAddress items.
+  rpc GroupConversationsByAddress (QueryGroupConversationsByAddressRequest) returns (QueryGroupConversationsByAddressResponse) {
+    option (google.api.http).get = "/chatty/chat/group_conversation/address/{address}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -83,5 +95,21 @@ message QueryPubkeyRequest {
 
 message QueryPubkeyResponse {
   PubKey pubkey = 1;
+}
+
+message QueryGroupConversationByIdRequest {
+  int64 id = 1;
+}
+
+message QueryGroupConversationByIdResponse {
+  GroupConversation group_conversation = 1;
+}
+
+message QueryGroupConversationsByAddressRequest {
+  string address = 1;
+}
+
+message QueryGroupConversationsByAddressResponse {
+  repeated GroupConversation group_conversations = 1;
 }
 

@@ -38,8 +38,8 @@ func GetAddressPubkeyKey(creator string) []byte {
 	return append(AddressPubkeyKeyPrefix, []byte(creator)...)
 }
 
-func GetGroupConversationKey(id uint64) []byte {
-	return append(GroupConversationKeyPrefix, sdk.Uint64ToBigEndian(id)...)
+func GetGroupConversationKey(id int64) []byte {
+	return append(GroupConversationKeyPrefix, sdk.Uint64ToBigEndian(uint64(id))...)
 }
 
 func GetAddressGroupKey(address string) []byte {

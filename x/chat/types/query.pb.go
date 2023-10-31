@@ -466,6 +466,186 @@ func (m *QueryPubkeyResponse) GetPubkey() *PubKey {
 	return nil
 }
 
+type QueryGroupConversationByIdRequest struct {
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *QueryGroupConversationByIdRequest) Reset()         { *m = QueryGroupConversationByIdRequest{} }
+func (m *QueryGroupConversationByIdRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGroupConversationByIdRequest) ProtoMessage()    {}
+func (*QueryGroupConversationByIdRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_632e7d5904251b7e, []int{10}
+}
+func (m *QueryGroupConversationByIdRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGroupConversationByIdRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGroupConversationByIdRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGroupConversationByIdRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGroupConversationByIdRequest.Merge(m, src)
+}
+func (m *QueryGroupConversationByIdRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGroupConversationByIdRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGroupConversationByIdRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGroupConversationByIdRequest proto.InternalMessageInfo
+
+func (m *QueryGroupConversationByIdRequest) GetId() int64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type QueryGroupConversationByIdResponse struct {
+	GroupConversation *GroupConversation `protobuf:"bytes,1,opt,name=group_conversation,json=groupConversation,proto3" json:"group_conversation,omitempty"`
+}
+
+func (m *QueryGroupConversationByIdResponse) Reset()         { *m = QueryGroupConversationByIdResponse{} }
+func (m *QueryGroupConversationByIdResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGroupConversationByIdResponse) ProtoMessage()    {}
+func (*QueryGroupConversationByIdResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_632e7d5904251b7e, []int{11}
+}
+func (m *QueryGroupConversationByIdResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGroupConversationByIdResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGroupConversationByIdResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGroupConversationByIdResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGroupConversationByIdResponse.Merge(m, src)
+}
+func (m *QueryGroupConversationByIdResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGroupConversationByIdResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGroupConversationByIdResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGroupConversationByIdResponse proto.InternalMessageInfo
+
+func (m *QueryGroupConversationByIdResponse) GetGroupConversation() *GroupConversation {
+	if m != nil {
+		return m.GroupConversation
+	}
+	return nil
+}
+
+type QueryGroupConversationsByAddressRequest struct {
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (m *QueryGroupConversationsByAddressRequest) Reset() {
+	*m = QueryGroupConversationsByAddressRequest{}
+}
+func (m *QueryGroupConversationsByAddressRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGroupConversationsByAddressRequest) ProtoMessage()    {}
+func (*QueryGroupConversationsByAddressRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_632e7d5904251b7e, []int{12}
+}
+func (m *QueryGroupConversationsByAddressRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGroupConversationsByAddressRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGroupConversationsByAddressRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGroupConversationsByAddressRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGroupConversationsByAddressRequest.Merge(m, src)
+}
+func (m *QueryGroupConversationsByAddressRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGroupConversationsByAddressRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGroupConversationsByAddressRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGroupConversationsByAddressRequest proto.InternalMessageInfo
+
+func (m *QueryGroupConversationsByAddressRequest) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+type QueryGroupConversationsByAddressResponse struct {
+	GroupConversations []*GroupConversation `protobuf:"bytes,1,rep,name=group_conversations,json=groupConversations,proto3" json:"group_conversations,omitempty"`
+}
+
+func (m *QueryGroupConversationsByAddressResponse) Reset() {
+	*m = QueryGroupConversationsByAddressResponse{}
+}
+func (m *QueryGroupConversationsByAddressResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGroupConversationsByAddressResponse) ProtoMessage()    {}
+func (*QueryGroupConversationsByAddressResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_632e7d5904251b7e, []int{13}
+}
+func (m *QueryGroupConversationsByAddressResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGroupConversationsByAddressResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGroupConversationsByAddressResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGroupConversationsByAddressResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGroupConversationsByAddressResponse.Merge(m, src)
+}
+func (m *QueryGroupConversationsByAddressResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGroupConversationsByAddressResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGroupConversationsByAddressResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGroupConversationsByAddressResponse proto.InternalMessageInfo
+
+func (m *QueryGroupConversationsByAddressResponse) GetGroupConversations() []*GroupConversation {
+	if m != nil {
+		return m.GroupConversations
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "chatty.chat.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "chatty.chat.QueryParamsResponse")
@@ -477,49 +657,63 @@ func init() {
 	proto.RegisterType((*QueryPubkeysResponse)(nil), "chatty.chat.QueryPubkeysResponse")
 	proto.RegisterType((*QueryPubkeyRequest)(nil), "chatty.chat.QueryPubkeyRequest")
 	proto.RegisterType((*QueryPubkeyResponse)(nil), "chatty.chat.QueryPubkeyResponse")
+	proto.RegisterType((*QueryGroupConversationByIdRequest)(nil), "chatty.chat.QueryGroupConversationByIdRequest")
+	proto.RegisterType((*QueryGroupConversationByIdResponse)(nil), "chatty.chat.QueryGroupConversationByIdResponse")
+	proto.RegisterType((*QueryGroupConversationsByAddressRequest)(nil), "chatty.chat.QueryGroupConversationsByAddressRequest")
+	proto.RegisterType((*QueryGroupConversationsByAddressResponse)(nil), "chatty.chat.QueryGroupConversationsByAddressResponse")
 }
 
 func init() { proto.RegisterFile("chatty/chat/query.proto", fileDescriptor_632e7d5904251b7e) }
 
 var fileDescriptor_632e7d5904251b7e = []byte{
-	// 592 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x54, 0xc1, 0x6b, 0x13, 0x4f,
-	0x14, 0xce, 0xf6, 0xf7, 0x33, 0x31, 0xaf, 0xed, 0xc1, 0x49, 0x8a, 0xc9, 0x56, 0x37, 0x71, 0x25,
-	0x2a, 0x2d, 0xcd, 0x90, 0x16, 0x05, 0x0f, 0x22, 0x46, 0x3c, 0x89, 0xa0, 0xc1, 0x53, 0x41, 0x64,
-	0x36, 0x1d, 0xb6, 0xa1, 0x66, 0x67, 0xbb, 0xb3, 0x29, 0x86, 0x92, 0x8b, 0x77, 0x41, 0xf0, 0xe2,
-	0x9f, 0xe0, 0xd1, 0x3f, 0xa3, 0xc7, 0x82, 0x17, 0x4f, 0x22, 0x89, 0xe0, 0x5f, 0x21, 0x48, 0x66,
-	0xde, 0xc6, 0x1d, 0xb3, 0x4d, 0x2e, 0xdd, 0x99, 0xf7, 0xbe, 0xf9, 0xbe, 0x6f, 0xe6, 0x7d, 0x0d,
-	0x5c, 0xed, 0x1e, 0xb2, 0x38, 0x1e, 0xd2, 0xe9, 0x87, 0x1e, 0x0f, 0x78, 0x34, 0x6c, 0x86, 0x91,
-	0x88, 0x05, 0x59, 0xd5, 0x8d, 0xe6, 0xf4, 0x63, 0x5f, 0x61, 0xfd, 0x5e, 0x20, 0xa8, 0xfa, 0xab,
-	0xfb, 0x76, 0xd9, 0x17, 0xbe, 0x50, 0x4b, 0x3a, 0x5d, 0x61, 0xf5, 0x9a, 0x2f, 0x84, 0xff, 0x86,
-	0x53, 0x16, 0xf6, 0x28, 0x0b, 0x02, 0x11, 0xb3, 0xb8, 0x27, 0x02, 0x89, 0xdd, 0xad, 0xae, 0x90,
-	0x7d, 0x21, 0xa9, 0xc7, 0x24, 0xd7, 0x62, 0xf4, 0xa4, 0xe5, 0xf1, 0x98, 0xb5, 0x68, 0xc8, 0xfc,
-	0x5e, 0xa0, 0xc0, 0x88, 0xad, 0xa4, 0x8d, 0x85, 0x2c, 0x62, 0xfd, 0x84, 0xa5, 0x9a, 0xee, 0xf8,
-	0x3c, 0xe0, 0xb2, 0x87, 0x2d, 0xb7, 0x0c, 0xe4, 0xc5, 0x94, 0xf6, 0xb9, 0xc2, 0x77, 0xf8, 0xf1,
-	0x80, 0xcb, 0xd8, 0x7d, 0x06, 0x25, 0xa3, 0x2a, 0x43, 0x11, 0x48, 0x4e, 0xee, 0x41, 0x5e, 0xf3,
-	0x56, 0xac, 0xba, 0x75, 0x67, 0x75, 0xb7, 0xd4, 0x4c, 0x5d, 0xb9, 0xa9, 0xc1, 0xed, 0xe2, 0xd9,
-	0xf7, 0x5a, 0xee, 0xf3, 0xaf, 0x2f, 0x5b, 0x56, 0x07, 0xd1, 0xee, 0x4b, 0xa8, 0x28, 0xba, 0xc7,
-	0x22, 0x38, 0xe1, 0x91, 0x54, 0xa6, 0x51, 0x8a, 0x6c, 0x42, 0x51, 0x91, 0xf0, 0xe8, 0x35, 0x53,
-	0xb4, 0xc5, 0xce, 0x65, 0x2c, 0x3c, 0x4a, 0x37, 0xbd, 0xca, 0x8a, 0xd1, 0x6c, 0xbb, 0xfb, 0x50,
-	0xcd, 0x60, 0x45, 0xab, 0x0f, 0x60, 0xad, 0x9b, 0xaa, 0xa3, 0xe1, 0xaa, 0x61, 0xd8, 0x38, 0x68,
-	0xc0, 0xdd, 0xbb, 0x19, 0xdc, 0xc9, 0xeb, 0x90, 0x0a, 0x14, 0xd0, 0x04, 0x1a, 0x4e, 0xb6, 0xee,
-	0x2b, 0xb0, 0xb3, 0x8e, 0xa1, 0xa7, 0x87, 0xb0, 0x9e, 0x16, 0x99, 0xbe, 0xe2, 0x7f, 0x8b, 0x4d,
-	0x99, 0x78, 0x77, 0x23, 0x19, 0xcb, 0xc0, 0x3b, 0xe2, 0xc3, 0xd9, 0xb4, 0x9e, 0x40, 0xd9, 0x2c,
-	0xa3, 0xde, 0x0e, 0x14, 0x42, 0x5d, 0x42, 0xa5, 0x7f, 0xe6, 0x35, 0xf0, 0x9e, 0xf2, 0x61, 0x27,
-	0xc1, 0xb8, 0xcd, 0x24, 0x0a, 0x6a, 0x9f, 0xba, 0x2c, 0x3b, 0x38, 0x88, 0xb8, 0x94, 0xc9, 0x65,
-	0x71, 0xeb, 0xb6, 0x0d, 0x37, 0x33, 0xd5, 0x6d, 0xc8, 0x6b, 0xc6, 0xec, 0x90, 0x68, 0x51, 0x84,
-	0xec, 0xfe, 0xfe, 0x1f, 0x2e, 0x29, 0x12, 0x72, 0x08, 0x79, 0x1d, 0x20, 0x52, 0x33, 0x0e, 0xcc,
-	0xa7, 0xd3, 0xae, 0x5f, 0x0c, 0xd0, 0x1e, 0xdc, 0xcd, 0x77, 0x5f, 0x7f, 0x7e, 0x5c, 0xd9, 0x20,
-	0x25, 0x3a, 0xff, 0x3f, 0x41, 0x3e, 0x59, 0xb0, 0x96, 0x7e, 0x65, 0xd2, 0x98, 0xe7, 0xcb, 0x48,
-	0xaa, 0x7d, 0x6b, 0x19, 0x0c, 0xc5, 0xef, 0x2b, 0xf1, 0x3d, 0xd2, 0x32, 0xc4, 0xd3, 0x93, 0xa4,
-	0xa7, 0xb3, 0xc8, 0x8f, 0xfe, 0xae, 0xbd, 0x11, 0x79, 0x6f, 0xc1, 0xba, 0x91, 0x1d, 0xb2, 0x44,
-	0x74, 0xf6, 0x26, 0xb7, 0x97, 0xe2, 0xd0, 0xdd, 0xb6, 0x72, 0xd7, 0x20, 0x37, 0x97, 0xbb, 0x1b,
-	0x91, 0x23, 0x28, 0x60, 0xa8, 0x48, 0xd6, 0xa3, 0x1b, 0x31, 0xb4, 0x6f, 0x2c, 0x40, 0x2c, 0x9e,
-	0x8b, 0x42, 0x91, 0x08, 0xf2, 0x1a, 0x9f, 0x99, 0x80, 0x74, 0x28, 0xed, 0xfa, 0xc5, 0x00, 0x54,
-	0x6a, 0x28, 0xa5, 0x1a, 0xb9, 0x9e, 0xa1, 0x44, 0x4f, 0x31, 0xc2, 0xa3, 0xf6, 0xce, 0xd9, 0xd8,
-	0xb1, 0xce, 0xc7, 0x8e, 0xf5, 0x63, 0xec, 0x58, 0x1f, 0x26, 0x4e, 0xee, 0x7c, 0xe2, 0xe4, 0xbe,
-	0x4d, 0x9c, 0xdc, 0x7e, 0x09, 0xcf, 0xbd, 0xd5, 0x27, 0xe3, 0x61, 0xc8, 0xa5, 0x97, 0x57, 0x3f,
-	0x9a, 0x7b, 0x7f, 0x02, 0x00, 0x00, 0xff, 0xff, 0xc4, 0xdd, 0x96, 0x1d, 0x04, 0x06, 0x00, 0x00,
+	// 746 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x56, 0x51, 0x4b, 0xdc, 0x4a,
+	0x14, 0xde, 0xac, 0xdc, 0xdd, 0xeb, 0x51, 0x2f, 0x38, 0xab, 0xdc, 0x35, 0xde, 0xbb, 0xea, 0x14,
+	0xab, 0x55, 0xdc, 0x41, 0xad, 0x85, 0x3e, 0x94, 0xe2, 0x4a, 0x29, 0xa5, 0x48, 0xdb, 0xa5, 0x4f,
+	0x42, 0x91, 0xc4, 0x0c, 0x31, 0x58, 0x33, 0x31, 0x93, 0x95, 0x86, 0x65, 0x5f, 0xfa, 0x5e, 0x28,
+	0xf4, 0xa5, 0x3f, 0xa1, 0x7d, 0xeb, 0x9f, 0x28, 0xf8, 0x28, 0xf4, 0xa5, 0x4f, 0xa5, 0x68, 0xa1,
+	0xcf, 0xfd, 0x07, 0x65, 0x27, 0x93, 0x35, 0x63, 0x62, 0x62, 0x5f, 0x36, 0xc9, 0x39, 0xdf, 0x7c,
+	0xdf, 0x37, 0x67, 0xe6, 0x1c, 0x16, 0xfe, 0xdd, 0xdb, 0x37, 0x82, 0x20, 0x24, 0xfd, 0x07, 0x39,
+	0xea, 0x50, 0x3f, 0x6c, 0x7a, 0x3e, 0x0b, 0x18, 0x1a, 0x89, 0x12, 0xcd, 0xfe, 0x43, 0x1f, 0x37,
+	0x0e, 0x1d, 0x97, 0x11, 0xf1, 0x1b, 0xe5, 0xf5, 0x09, 0x9b, 0xd9, 0x4c, 0xbc, 0x92, 0xfe, 0x9b,
+	0x8c, 0xfe, 0x67, 0x33, 0x66, 0xbf, 0xa4, 0xc4, 0xf0, 0x1c, 0x62, 0xb8, 0x2e, 0x0b, 0x8c, 0xc0,
+	0x61, 0x2e, 0x97, 0xd9, 0xa5, 0x3d, 0xc6, 0x0f, 0x19, 0x27, 0xa6, 0xc1, 0x69, 0x24, 0x46, 0x8e,
+	0x57, 0x4d, 0x1a, 0x18, 0xab, 0xc4, 0x33, 0x6c, 0xc7, 0x15, 0x60, 0x89, 0xad, 0x27, 0x8d, 0x79,
+	0x86, 0x6f, 0x1c, 0xc6, 0x2c, 0x53, 0xc9, 0x8c, 0x4d, 0x5d, 0xca, 0x1d, 0x99, 0xc2, 0x13, 0x80,
+	0x9e, 0xf5, 0x69, 0x9f, 0x0a, 0x7c, 0x9b, 0x1e, 0x75, 0x28, 0x0f, 0xf0, 0x36, 0xd4, 0x94, 0x28,
+	0xf7, 0x98, 0xcb, 0x29, 0xba, 0x03, 0x95, 0x88, 0xb7, 0xae, 0xcd, 0x6a, 0x8b, 0x23, 0x6b, 0xb5,
+	0x66, 0x62, 0xcb, 0xcd, 0x08, 0xdc, 0x1a, 0x3e, 0xf9, 0x36, 0x53, 0xfa, 0xf0, 0xf3, 0xd3, 0x92,
+	0xd6, 0x96, 0x68, 0xfc, 0x1c, 0xea, 0x82, 0x6e, 0x8b, 0xb9, 0xc7, 0xd4, 0xe7, 0xc2, 0xb4, 0x94,
+	0x42, 0xd3, 0x30, 0x2c, 0x48, 0xa8, 0xbf, 0x6b, 0x08, 0xda, 0xe1, 0xf6, 0xdf, 0x32, 0xb0, 0x99,
+	0x4c, 0x9a, 0xf5, 0xb2, 0x92, 0x6c, 0xe1, 0x1d, 0x98, 0xca, 0x60, 0x95, 0x56, 0xef, 0xc1, 0xe8,
+	0x5e, 0x22, 0x2e, 0x0d, 0x4f, 0x29, 0x86, 0x95, 0x85, 0x0a, 0x1c, 0x6f, 0x64, 0x70, 0xc7, 0xd5,
+	0x41, 0x75, 0xa8, 0x4a, 0x13, 0xd2, 0x70, 0xfc, 0x89, 0x5f, 0x80, 0x9e, 0xb5, 0x4c, 0x7a, 0xba,
+	0x0f, 0x63, 0x49, 0x91, 0x7e, 0x15, 0x87, 0xf2, 0x4d, 0xa9, 0x78, 0x3c, 0x19, 0x1f, 0x4b, 0xc7,
+	0x3c, 0xa0, 0xe1, 0xe0, 0xb4, 0x1e, 0xc0, 0x84, 0x1a, 0x96, 0x7a, 0x2b, 0x50, 0xf5, 0xa2, 0x90,
+	0x54, 0xba, 0x74, 0x5e, 0x1d, 0xf3, 0x31, 0x0d, 0xdb, 0x31, 0x06, 0x37, 0xe3, 0xab, 0x20, 0xbe,
+	0x13, 0x9b, 0x35, 0x2c, 0xcb, 0xa7, 0x9c, 0xc7, 0x9b, 0x95, 0x9f, 0xb8, 0xa5, 0xb8, 0x19, 0xa8,
+	0x2e, 0x43, 0x25, 0x62, 0xcc, 0xbe, 0x24, 0x91, 0xa8, 0x84, 0xe0, 0x75, 0x98, 0x13, 0x1c, 0x0f,
+	0x7d, 0xd6, 0xf1, 0x92, 0x5b, 0x6f, 0x85, 0x8f, 0xac, 0xd8, 0xc2, 0x3f, 0x50, 0x76, 0x2c, 0xc1,
+	0x36, 0xd4, 0x2e, 0x3b, 0x16, 0xe6, 0x80, 0xf3, 0x16, 0x49, 0x1f, 0xdb, 0x80, 0xec, 0x3e, 0x60,
+	0x37, 0xe3, 0x1e, 0x34, 0x14, 0x4f, 0x29, 0x9e, 0xf6, 0xb8, 0x7d, 0x39, 0x84, 0xb7, 0x60, 0x21,
+	0x5b, 0x94, 0xb7, 0xc2, 0xcd, 0xa8, 0x22, 0xc5, 0x25, 0xeb, 0xc2, 0x62, 0x31, 0x89, 0xf4, 0xff,
+	0x04, 0x6a, 0x69, 0xff, 0xf1, 0x49, 0x16, 0x6d, 0x00, 0xa5, 0x36, 0xc0, 0xd7, 0x7e, 0x55, 0xe1,
+	0x2f, 0xa1, 0x8e, 0xf6, 0xa1, 0x12, 0x35, 0x2b, 0x9a, 0x51, 0x78, 0xd2, 0x93, 0x40, 0x9f, 0xbd,
+	0x1a, 0x10, 0xf9, 0xc4, 0xd3, 0xaf, 0xbf, 0xfc, 0x78, 0x57, 0x9e, 0x44, 0x35, 0x92, 0x9e, 0x3f,
+	0xe8, 0xbd, 0x06, 0xa3, 0x49, 0x17, 0x68, 0x3e, 0xcd, 0x97, 0x31, 0x15, 0xf4, 0x9b, 0x45, 0x30,
+	0x29, 0x7e, 0x57, 0x88, 0xaf, 0xa3, 0x55, 0x45, 0x3c, 0x59, 0x31, 0xd2, 0x1d, 0x8c, 0x97, 0xde,
+	0xc5, 0xbb, 0xd9, 0x43, 0x6f, 0x34, 0x18, 0x53, 0x0a, 0x84, 0x0a, 0x44, 0x07, 0x35, 0x59, 0x28,
+	0xc4, 0x49, 0x77, 0xcb, 0xc2, 0xdd, 0x3c, 0xba, 0x51, 0xec, 0xae, 0x87, 0x0e, 0xa0, 0x2a, 0x1b,
+	0x18, 0x65, 0x15, 0x5d, 0x69, 0x79, 0x7d, 0x2e, 0x07, 0x91, 0x7f, 0x2e, 0x02, 0x85, 0x7c, 0xa8,
+	0x44, 0xf8, 0xcc, 0x1b, 0x90, 0x1c, 0x00, 0xfa, 0xec, 0xd5, 0x00, 0xa9, 0x34, 0x2f, 0x94, 0x66,
+	0xd0, 0xff, 0x19, 0x4a, 0xa4, 0x2b, 0xef, 0x7e, 0x0f, 0x7d, 0xd4, 0x60, 0x32, 0xb3, 0x65, 0x51,
+	0x33, 0x2d, 0x91, 0x37, 0x10, 0x74, 0x72, 0x6d, 0xbc, 0x74, 0x48, 0x84, 0xc3, 0x5b, 0x68, 0x41,
+	0x71, 0x98, 0x6e, 0x2f, 0xe2, 0x58, 0xa4, 0xeb, 0x58, 0x3d, 0xf4, 0x59, 0x83, 0xe9, 0x9c, 0x26,
+	0x45, 0xb7, 0xaf, 0xe1, 0x20, 0x35, 0x18, 0xf4, 0x8d, 0x3f, 0x5c, 0x95, 0x7b, 0xc9, 0x33, 0xdc,
+	0xcb, 0x52, 0x5f, 0xd4, 0xbc, 0xb5, 0x72, 0x72, 0xd6, 0xd0, 0x4e, 0xcf, 0x1a, 0xda, 0xf7, 0xb3,
+	0x86, 0xf6, 0xf6, 0xbc, 0x51, 0x3a, 0x3d, 0x6f, 0x94, 0xbe, 0x9e, 0x37, 0x4a, 0x3b, 0x35, 0xc9,
+	0xf5, 0x2a, 0x62, 0x0b, 0x42, 0x8f, 0x72, 0xb3, 0x22, 0xfe, 0x14, 0xac, 0xff, 0x0e, 0x00, 0x00,
+	0xff, 0xff, 0xac, 0x7d, 0x2d, 0x2c, 0xe4, 0x08, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -544,6 +738,10 @@ type QueryClient interface {
 	Pubkeys(ctx context.Context, in *QueryPubkeysRequest, opts ...grpc.CallOption) (*QueryPubkeysResponse, error)
 	// Queries a list of Pubkey items.
 	Pubkey(ctx context.Context, in *QueryPubkeyRequest, opts ...grpc.CallOption) (*QueryPubkeyResponse, error)
+	// Queries a list of GroupConversationById items.
+	GroupConversationById(ctx context.Context, in *QueryGroupConversationByIdRequest, opts ...grpc.CallOption) (*QueryGroupConversationByIdResponse, error)
+	// Queries a list of GroupConversationsByAddress items.
+	GroupConversationsByAddress(ctx context.Context, in *QueryGroupConversationsByAddressRequest, opts ...grpc.CallOption) (*QueryGroupConversationsByAddressResponse, error)
 }
 
 type queryClient struct {
@@ -599,6 +797,24 @@ func (c *queryClient) Pubkey(ctx context.Context, in *QueryPubkeyRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) GroupConversationById(ctx context.Context, in *QueryGroupConversationByIdRequest, opts ...grpc.CallOption) (*QueryGroupConversationByIdResponse, error) {
+	out := new(QueryGroupConversationByIdResponse)
+	err := c.cc.Invoke(ctx, "/chatty.chat.Query/GroupConversationById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) GroupConversationsByAddress(ctx context.Context, in *QueryGroupConversationsByAddressRequest, opts ...grpc.CallOption) (*QueryGroupConversationsByAddressResponse, error) {
+	out := new(QueryGroupConversationsByAddressResponse)
+	err := c.cc.Invoke(ctx, "/chatty.chat.Query/GroupConversationsByAddress", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -611,6 +827,10 @@ type QueryServer interface {
 	Pubkeys(context.Context, *QueryPubkeysRequest) (*QueryPubkeysResponse, error)
 	// Queries a list of Pubkey items.
 	Pubkey(context.Context, *QueryPubkeyRequest) (*QueryPubkeyResponse, error)
+	// Queries a list of GroupConversationById items.
+	GroupConversationById(context.Context, *QueryGroupConversationByIdRequest) (*QueryGroupConversationByIdResponse, error)
+	// Queries a list of GroupConversationsByAddress items.
+	GroupConversationsByAddress(context.Context, *QueryGroupConversationsByAddressRequest) (*QueryGroupConversationsByAddressResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -631,6 +851,12 @@ func (*UnimplementedQueryServer) Pubkeys(ctx context.Context, req *QueryPubkeysR
 }
 func (*UnimplementedQueryServer) Pubkey(ctx context.Context, req *QueryPubkeyRequest) (*QueryPubkeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pubkey not implemented")
+}
+func (*UnimplementedQueryServer) GroupConversationById(ctx context.Context, req *QueryGroupConversationByIdRequest) (*QueryGroupConversationByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GroupConversationById not implemented")
+}
+func (*UnimplementedQueryServer) GroupConversationsByAddress(ctx context.Context, req *QueryGroupConversationsByAddressRequest) (*QueryGroupConversationsByAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GroupConversationsByAddress not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -727,6 +953,42 @@ func _Query_Pubkey_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_GroupConversationById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGroupConversationByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).GroupConversationById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chatty.chat.Query/GroupConversationById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).GroupConversationById(ctx, req.(*QueryGroupConversationByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_GroupConversationsByAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGroupConversationsByAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).GroupConversationsByAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chatty.chat.Query/GroupConversationsByAddress",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).GroupConversationsByAddress(ctx, req.(*QueryGroupConversationsByAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "chatty.chat.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -750,6 +1012,14 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Pubkey",
 			Handler:    _Query_Pubkey_Handler,
+		},
+		{
+			MethodName: "GroupConversationById",
+			Handler:    _Query_GroupConversationById_Handler,
+		},
+		{
+			MethodName: "GroupConversationsByAddress",
+			Handler:    _Query_GroupConversationsByAddress_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1076,6 +1346,136 @@ func (m *QueryPubkeyResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryGroupConversationByIdRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGroupConversationByIdRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGroupConversationByIdRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Id != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGroupConversationByIdResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGroupConversationByIdResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGroupConversationByIdResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.GroupConversation != nil {
+		{
+			size, err := m.GroupConversation.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGroupConversationsByAddressRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGroupConversationsByAddressRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGroupConversationsByAddressRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGroupConversationsByAddressResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGroupConversationsByAddressResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGroupConversationsByAddressResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.GroupConversations) > 0 {
+		for iNdEx := len(m.GroupConversations) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.GroupConversations[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -1211,6 +1611,59 @@ func (m *QueryPubkeyResponse) Size() (n int) {
 	if m.Pubkey != nil {
 		l = m.Pubkey.Size()
 		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGroupConversationByIdRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != 0 {
+		n += 1 + sovQuery(uint64(m.Id))
+	}
+	return n
+}
+
+func (m *QueryGroupConversationByIdResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.GroupConversation != nil {
+		l = m.GroupConversation.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGroupConversationsByAddressRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGroupConversationsByAddressResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.GroupConversations) > 0 {
+		for _, e := range m.GroupConversations {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
 	}
 	return n
 }
@@ -1998,6 +2451,327 @@ func (m *QueryPubkeyResponse) Unmarshal(dAtA []byte) error {
 				m.Pubkey = &PubKey{}
 			}
 			if err := m.Pubkey.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGroupConversationByIdRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGroupConversationByIdRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGroupConversationByIdRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGroupConversationByIdResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGroupConversationByIdResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGroupConversationByIdResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupConversation", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.GroupConversation == nil {
+				m.GroupConversation = &GroupConversation{}
+			}
+			if err := m.GroupConversation.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGroupConversationsByAddressRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGroupConversationsByAddressRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGroupConversationsByAddressRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGroupConversationsByAddressResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGroupConversationsByAddressResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGroupConversationsByAddressResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupConversations", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupConversations = append(m.GroupConversations, &GroupConversation{})
+			if err := m.GroupConversations[len(m.GroupConversations)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
