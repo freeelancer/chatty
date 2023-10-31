@@ -27,10 +27,17 @@ Group conversation creators sets the public key for the group conversation on cr
 
 Cli commands that create messages takes in the <pubkey pem filepath> which can be empty. This would mean the message will not be encrypted.
 
+### Setup rsa PKCS1 private public key pair
+
+```
+ssh-keygen -b 2048 -t rsa -m pem -f ~/.ssh/chatty_rsa
+ssh-keygen -f ~/.ssh/chatty_rsa.pub -m 'PEM' -e > ~/.ssh/chatty_rsa.pub.pem
+```
+
 ### Transaction Commands
 
 ```
-chattyd tx chat update-pubkey /.ssh/chatty.pub.pem --from alice --keyring-backend test
+chattyd tx chat update-pubkey ~/.ssh/chatty_rsa.pub.pem --from alice --keyring-backend test
 ```
 ```
 chattyd tx chat update-pubkey <pubkey pem filepath> --from <alice/bob> --keyring-backend test
@@ -40,7 +47,7 @@ Updates the pubkey for user. This will be shown to public.
 
 
 ```
-chattyd tx chat create-chat-message cosmos1g7s2hmkun7548huyepkdvy4pw80vjv9v6qn6qt "hi" /.ssh/chatty.pub.pem --from alice --keyring-backend test
+chattyd tx chat create-chat-message cosmos1g7s2hmkun7548huyepkdvy4pw80vjv9v6qn6qt "hi" ~/.ssh/chatty_rsa.pub.pem --from alice --keyring-backend test
 ```
 ```
 chattyd tx chat create-chat-message <receiver bech32 address> <message> <pubkey pem filepath> --from alice --keyring-backend test
@@ -72,42 +79,49 @@ Creates message for existing group conversation
 ```
 chattyd q chat params
 ```
+http://localhost:1317/chatty/chat/params
 
 Get Params which contains they current group_conversation_counter (which is one more than total number of group conversations)
 
 ```
 chattyd q chat pubkeys
 ```
+http://localhost:1317/chatty/chat/pubkey/
 
 Get all pubkeys
 
 ```
 chattyd q chat pubkey <address>
 ```
+http://localhost:1317/chatty/chat/pubkey/{address}
 
 Get pubkey of address
 
 ```
 chattyd q chat conversations <address>
 ```
+http://localhost:1317/chatty/chat/conversation/{address}
 
 Get all one-to-one conversations of address
 
 ```
 chattyd q chat conversation <addressA> <addressB>
 ```
+http://localhost:1317/chatty/chat/conversation/{address_a}/{address_b}
 
 Get one-to-one conversation between two addresses
 
 ```
 chattyd q chat group-conversations-by-address <address>
 ```
+http://localhost:1317/chatty/chat/group_conversation/address/{address}
 
 Get all group conversations address is in
 
 ```
 chattyd q chat group-conversation-by-id <id>
 ```
+http://localhost:1317/chatty/chat/group_conversation/id/{id}
 
 Get group conversation of id
 

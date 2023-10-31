@@ -43,7 +43,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis := types.DefaultGenesis()
 	genesis.Params = k.GetParams(ctx)
 
-	pubkeysResp, err := k.Pubkeys(ctx.Context(), &types.QueryPubkeysRequest{})
+	pubkeysResp, err := k.Pubkeys(sdk.WrapSDKContext(ctx), &types.QueryPubkeysRequest{})
 	if err != nil {
 		panic(err)
 	}
