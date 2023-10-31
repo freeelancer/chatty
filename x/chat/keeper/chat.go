@@ -36,6 +36,21 @@ func (k Keeper) CreateGroupConversation(ctx sdk.Context, admin sdk.AccAddress, n
 		return err
 	}
 
+	addAdminToParticipants := true
+	for _, participant := range participants {
+		_, err := sdk.AccAddressFromBech32(participant)
+		if err != nil {
+			return err
+		}
+		if admin.String() == participant {
+			addAdminToParticipants = false
+		}
+	}
+
+	if addAdminToParticipants {
+		participants = append(participants, admin.String())
+	}
+
 	for _, participant := range participants {
 		if err := k.AddIdToAddressGroup(ctx, participant, convoId); err != nil {
 			return err

@@ -32,6 +32,7 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(CmdCreateChatMessage())
 	cmd.AddCommand(CmdUpdatePubkey())
+	cmd.AddCommand(CmdCreateGroupConversation())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

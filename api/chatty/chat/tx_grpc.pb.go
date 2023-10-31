@@ -22,6 +22,7 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateChatMessage(ctx context.Context, in *MsgCreateChatMessage, opts ...grpc.CallOption) (*MsgCreateChatMessageResponse, error)
 	UpdatePubkey(ctx context.Context, in *MsgUpdatePubkey, opts ...grpc.CallOption) (*MsgUpdatePubkeyResponse, error)
+	CreateGroupConversation(ctx context.Context, in *MsgCreateGroupConversation, opts ...grpc.CallOption) (*MsgCreateGroupConversationResponse, error)
 }
 
 type msgClient struct {
@@ -59,6 +60,15 @@ func (c *msgClient) UpdatePubkey(ctx context.Context, in *MsgUpdatePubkey, opts 
 	return out, nil
 }
 
+func (c *msgClient) CreateGroupConversation(ctx context.Context, in *MsgCreateGroupConversation, opts ...grpc.CallOption) (*MsgCreateGroupConversationResponse, error) {
+	out := new(MsgCreateGroupConversationResponse)
+	err := c.cc.Invoke(ctx, "/chatty.chat.Msg/CreateGroupConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -67,6 +77,7 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateChatMessage(context.Context, *MsgCreateChatMessage) (*MsgCreateChatMessageResponse, error)
 	UpdatePubkey(context.Context, *MsgUpdatePubkey) (*MsgUpdatePubkeyResponse, error)
+	CreateGroupConversation(context.Context, *MsgCreateGroupConversation) (*MsgCreateGroupConversationResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -82,6 +93,9 @@ func (UnimplementedMsgServer) CreateChatMessage(context.Context, *MsgCreateChatM
 }
 func (UnimplementedMsgServer) UpdatePubkey(context.Context, *MsgUpdatePubkey) (*MsgUpdatePubkeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePubkey not implemented")
+}
+func (UnimplementedMsgServer) CreateGroupConversation(context.Context, *MsgCreateGroupConversation) (*MsgCreateGroupConversationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGroupConversation not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -150,6 +164,24 @@ func _Msg_UpdatePubkey_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CreateGroupConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateGroupConversation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateGroupConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chatty.chat.Msg/CreateGroupConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateGroupConversation(ctx, req.(*MsgCreateGroupConversation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -168,6 +200,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdatePubkey",
 			Handler:    _Msg_UpdatePubkey_Handler,
+		},
+		{
+			MethodName: "CreateGroupConversation",
+			Handler:    _Msg_CreateGroupConversation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

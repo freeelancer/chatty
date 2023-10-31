@@ -896,6 +896,8 @@ definitions:
               type: string
   chatty.chat.MsgCreateChatMessageResponse:
     type: object
+  chatty.chat.MsgCreateGroupConversationResponse:
+    type: object
   chatty.chat.MsgUpdateParamsResponse:
     type: object
     description: |-

@@ -116,11 +116,115 @@ func (x *_GenesisState_3_list) IsValid() bool {
 	return x.list != nil
 }
 
+var _ protoreflect.List = (*_GenesisState_4_list)(nil)
+
+type _GenesisState_4_list struct {
+	list *[]*GroupConversation
+}
+
+func (x *_GenesisState_4_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_4_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GenesisState_4_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*GroupConversation)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_4_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*GroupConversation)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_4_list) AppendMutable() protoreflect.Value {
+	v := new(GroupConversation)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_4_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_4_list) NewElement() protoreflect.Value {
+	v := new(GroupConversation)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_4_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_GenesisState_5_list)(nil)
+
+type _GenesisState_5_list struct {
+	list *[]*AddressGroups
+}
+
+func (x *_GenesisState_5_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_5_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GenesisState_5_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*AddressGroups)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_5_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*AddressGroups)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_5_list) AppendMutable() protoreflect.Value {
+	v := new(AddressGroups)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_5_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_5_list) NewElement() protoreflect.Value {
+	v := new(AddressGroups)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_5_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_GenesisState               protoreflect.MessageDescriptor
-	fd_GenesisState_params        protoreflect.FieldDescriptor
-	fd_GenesisState_pubKeys       protoreflect.FieldDescriptor
-	fd_GenesisState_conversations protoreflect.FieldDescriptor
+	md_GenesisState                    protoreflect.MessageDescriptor
+	fd_GenesisState_params             protoreflect.FieldDescriptor
+	fd_GenesisState_pubKeys            protoreflect.FieldDescriptor
+	fd_GenesisState_conversations      protoreflect.FieldDescriptor
+	fd_GenesisState_groupConversations protoreflect.FieldDescriptor
+	fd_GenesisState_addressGroups      protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -129,6 +233,8 @@ func init() {
 	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
 	fd_GenesisState_pubKeys = md_GenesisState.Fields().ByName("pubKeys")
 	fd_GenesisState_conversations = md_GenesisState.Fields().ByName("conversations")
+	fd_GenesisState_groupConversations = md_GenesisState.Fields().ByName("groupConversations")
+	fd_GenesisState_addressGroups = md_GenesisState.Fields().ByName("addressGroups")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -214,6 +320,18 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
+	if len(x.GroupConversations) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_4_list{list: &x.GroupConversations})
+		if !f(fd_GenesisState_groupConversations, value) {
+			return
+		}
+	}
+	if len(x.AddressGroups) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_5_list{list: &x.AddressGroups})
+		if !f(fd_GenesisState_addressGroups, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -235,6 +353,10 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 		return len(x.PubKeys) != 0
 	case "chatty.chat.GenesisState.conversations":
 		return len(x.Conversations) != 0
+	case "chatty.chat.GenesisState.groupConversations":
+		return len(x.GroupConversations) != 0
+	case "chatty.chat.GenesisState.addressGroups":
+		return len(x.AddressGroups) != 0
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GenesisState"))
@@ -257,6 +379,10 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 		x.PubKeys = nil
 	case "chatty.chat.GenesisState.conversations":
 		x.Conversations = nil
+	case "chatty.chat.GenesisState.groupConversations":
+		x.GroupConversations = nil
+	case "chatty.chat.GenesisState.addressGroups":
+		x.AddressGroups = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GenesisState"))
@@ -288,6 +414,18 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 		}
 		listValue := &_GenesisState_3_list{list: &x.Conversations}
 		return protoreflect.ValueOfList(listValue)
+	case "chatty.chat.GenesisState.groupConversations":
+		if len(x.GroupConversations) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_4_list{})
+		}
+		listValue := &_GenesisState_4_list{list: &x.GroupConversations}
+		return protoreflect.ValueOfList(listValue)
+	case "chatty.chat.GenesisState.addressGroups":
+		if len(x.AddressGroups) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_5_list{})
+		}
+		listValue := &_GenesisState_5_list{list: &x.AddressGroups}
+		return protoreflect.ValueOfList(listValue)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GenesisState"))
@@ -318,6 +456,14 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 		lv := value.List()
 		clv := lv.(*_GenesisState_3_list)
 		x.Conversations = *clv.list
+	case "chatty.chat.GenesisState.groupConversations":
+		lv := value.List()
+		clv := lv.(*_GenesisState_4_list)
+		x.GroupConversations = *clv.list
+	case "chatty.chat.GenesisState.addressGroups":
+		lv := value.List()
+		clv := lv.(*_GenesisState_5_list)
+		x.AddressGroups = *clv.list
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GenesisState"))
@@ -355,6 +501,18 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 		}
 		value := &_GenesisState_3_list{list: &x.Conversations}
 		return protoreflect.ValueOfList(value)
+	case "chatty.chat.GenesisState.groupConversations":
+		if x.GroupConversations == nil {
+			x.GroupConversations = []*GroupConversation{}
+		}
+		value := &_GenesisState_4_list{list: &x.GroupConversations}
+		return protoreflect.ValueOfList(value)
+	case "chatty.chat.GenesisState.addressGroups":
+		if x.AddressGroups == nil {
+			x.AddressGroups = []*AddressGroups{}
+		}
+		value := &_GenesisState_5_list{list: &x.AddressGroups}
+		return protoreflect.ValueOfList(value)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GenesisState"))
@@ -377,6 +535,12 @@ func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) 
 	case "chatty.chat.GenesisState.conversations":
 		list := []*Conversation{}
 		return protoreflect.ValueOfList(&_GenesisState_3_list{list: &list})
+	case "chatty.chat.GenesisState.groupConversations":
+		list := []*GroupConversation{}
+		return protoreflect.ValueOfList(&_GenesisState_4_list{list: &list})
+	case "chatty.chat.GenesisState.addressGroups":
+		list := []*AddressGroups{}
+		return protoreflect.ValueOfList(&_GenesisState_5_list{list: &list})
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GenesisState"))
@@ -462,6 +626,18 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				n += 1 + l + runtime.Sov(uint64(l))
 			}
 		}
+		if len(x.GroupConversations) > 0 {
+			for _, e := range x.GroupConversations {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if len(x.AddressGroups) > 0 {
+			for _, e := range x.AddressGroups {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -490,6 +666,38 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.AddressGroups) > 0 {
+			for iNdEx := len(x.AddressGroups) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.AddressGroups[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x2a
+			}
+		}
+		if len(x.GroupConversations) > 0 {
+			for iNdEx := len(x.GroupConversations) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.GroupConversations[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x22
+			}
 		}
 		if len(x.Conversations) > 0 {
 			for iNdEx := len(x.Conversations) - 1; iNdEx >= 0; iNdEx-- {
@@ -687,6 +895,74 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				}
 				x.Conversations = append(x.Conversations, &Conversation{})
 				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Conversations[len(x.Conversations)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GroupConversations", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.GroupConversations = append(x.GroupConversations, &GroupConversation{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.GroupConversations[len(x.GroupConversations)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 5:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field AddressGroups", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.AddressGroups = append(x.AddressGroups, &AddressGroups{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.AddressGroups[len(x.AddressGroups)-1]); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
@@ -1930,7 +2206,6 @@ func (x *fastReflection_Conversation) ProtoMethods() *protoiface.Methods {
 var (
 	md_ChatMessage            protoreflect.MessageDescriptor
 	fd_ChatMessage_sender     protoreflect.FieldDescriptor
-	fd_ChatMessage_receiver   protoreflect.FieldDescriptor
 	fd_ChatMessage_message    protoreflect.FieldDescriptor
 	fd_ChatMessage_encrypted  protoreflect.FieldDescriptor
 	fd_ChatMessage_created_at protoreflect.FieldDescriptor
@@ -1940,7 +2215,6 @@ func init() {
 	file_chatty_chat_genesis_proto_init()
 	md_ChatMessage = File_chatty_chat_genesis_proto.Messages().ByName("ChatMessage")
 	fd_ChatMessage_sender = md_ChatMessage.Fields().ByName("sender")
-	fd_ChatMessage_receiver = md_ChatMessage.Fields().ByName("receiver")
 	fd_ChatMessage_message = md_ChatMessage.Fields().ByName("message")
 	fd_ChatMessage_encrypted = md_ChatMessage.Fields().ByName("encrypted")
 	fd_ChatMessage_created_at = md_ChatMessage.Fields().ByName("created_at")
@@ -2017,12 +2291,6 @@ func (x *fastReflection_ChatMessage) Range(f func(protoreflect.FieldDescriptor, 
 			return
 		}
 	}
-	if x.Receiver != "" {
-		value := protoreflect.ValueOfString(x.Receiver)
-		if !f(fd_ChatMessage_receiver, value) {
-			return
-		}
-	}
 	if x.Message != "" {
 		value := protoreflect.ValueOfString(x.Message)
 		if !f(fd_ChatMessage_message, value) {
@@ -2058,8 +2326,6 @@ func (x *fastReflection_ChatMessage) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	case "chatty.chat.ChatMessage.sender":
 		return x.Sender != ""
-	case "chatty.chat.ChatMessage.receiver":
-		return x.Receiver != ""
 	case "chatty.chat.ChatMessage.message":
 		return x.Message != ""
 	case "chatty.chat.ChatMessage.encrypted":
@@ -2084,8 +2350,6 @@ func (x *fastReflection_ChatMessage) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "chatty.chat.ChatMessage.sender":
 		x.Sender = ""
-	case "chatty.chat.ChatMessage.receiver":
-		x.Receiver = ""
 	case "chatty.chat.ChatMessage.message":
 		x.Message = ""
 	case "chatty.chat.ChatMessage.encrypted":
@@ -2110,9 +2374,6 @@ func (x *fastReflection_ChatMessage) Get(descriptor protoreflect.FieldDescriptor
 	switch descriptor.FullName() {
 	case "chatty.chat.ChatMessage.sender":
 		value := x.Sender
-		return protoreflect.ValueOfString(value)
-	case "chatty.chat.ChatMessage.receiver":
-		value := x.Receiver
 		return protoreflect.ValueOfString(value)
 	case "chatty.chat.ChatMessage.message":
 		value := x.Message
@@ -2145,8 +2406,6 @@ func (x *fastReflection_ChatMessage) Set(fd protoreflect.FieldDescriptor, value 
 	switch fd.FullName() {
 	case "chatty.chat.ChatMessage.sender":
 		x.Sender = value.Interface().(string)
-	case "chatty.chat.ChatMessage.receiver":
-		x.Receiver = value.Interface().(string)
 	case "chatty.chat.ChatMessage.message":
 		x.Message = value.Interface().(string)
 	case "chatty.chat.ChatMessage.encrypted":
@@ -2175,8 +2434,6 @@ func (x *fastReflection_ChatMessage) Mutable(fd protoreflect.FieldDescriptor) pr
 	switch fd.FullName() {
 	case "chatty.chat.ChatMessage.sender":
 		panic(fmt.Errorf("field sender of message chatty.chat.ChatMessage is not mutable"))
-	case "chatty.chat.ChatMessage.receiver":
-		panic(fmt.Errorf("field receiver of message chatty.chat.ChatMessage is not mutable"))
 	case "chatty.chat.ChatMessage.message":
 		panic(fmt.Errorf("field message of message chatty.chat.ChatMessage is not mutable"))
 	case "chatty.chat.ChatMessage.encrypted":
@@ -2197,8 +2454,6 @@ func (x *fastReflection_ChatMessage) Mutable(fd protoreflect.FieldDescriptor) pr
 func (x *fastReflection_ChatMessage) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "chatty.chat.ChatMessage.sender":
-		return protoreflect.ValueOfString("")
-	case "chatty.chat.ChatMessage.receiver":
 		return protoreflect.ValueOfString("")
 	case "chatty.chat.ChatMessage.message":
 		return protoreflect.ValueOfString("")
@@ -2279,10 +2534,6 @@ func (x *fastReflection_ChatMessage) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.Receiver)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
 		l = len(x.Message)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -2325,7 +2576,7 @@ func (x *fastReflection_ChatMessage) ProtoMethods() *protoiface.Methods {
 		if x.CreatedAt != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.CreatedAt))
 			i--
-			dAtA[i] = 0x28
+			dAtA[i] = 0x20
 		}
 		if x.Encrypted {
 			i--
@@ -2335,19 +2586,12 @@ func (x *fastReflection_ChatMessage) ProtoMethods() *protoiface.Methods {
 				dAtA[i] = 0
 			}
 			i--
-			dAtA[i] = 0x20
+			dAtA[i] = 0x18
 		}
 		if len(x.Message) > 0 {
 			i -= len(x.Message)
 			copy(dAtA[i:], x.Message)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Message)))
-			i--
-			dAtA[i] = 0x1a
-		}
-		if len(x.Receiver) > 0 {
-			i -= len(x.Receiver)
-			copy(dAtA[i:], x.Receiver)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Receiver)))
 			i--
 			dAtA[i] = 0x12
 		}
@@ -2441,38 +2685,6 @@ func (x *fastReflection_ChatMessage) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Receiver", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Receiver = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 3:
-				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
 				}
 				var stringLen uint64
@@ -2503,7 +2715,7 @@ func (x *fastReflection_ChatMessage) ProtoMethods() *protoiface.Methods {
 				}
 				x.Message = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 4:
+			case 3:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Encrypted", wireType)
 				}
@@ -2523,7 +2735,7 @@ func (x *fastReflection_ChatMessage) ProtoMethods() *protoiface.Methods {
 					}
 				}
 				x.Encrypted = bool(v != 0)
-			case 5:
+			case 4:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
 				}
@@ -2541,6 +2753,1576 @@ func (x *fastReflection_ChatMessage) ProtoMethods() *protoiface.Methods {
 					if b < 0x80 {
 						break
 					}
+				}
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var _ protoreflect.List = (*_GroupConversation_4_list)(nil)
+
+type _GroupConversation_4_list struct {
+	list *[]string
+}
+
+func (x *_GroupConversation_4_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GroupConversation_4_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfString((*x.list)[i])
+}
+
+func (x *_GroupConversation_4_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.String()
+	concreteValue := valueUnwrapped
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GroupConversation_4_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.String()
+	concreteValue := valueUnwrapped
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GroupConversation_4_list) AppendMutable() protoreflect.Value {
+	panic(fmt.Errorf("AppendMutable can not be called on message GroupConversation at list field Participants as it is not of Message kind"))
+}
+
+func (x *_GroupConversation_4_list) Truncate(n int) {
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GroupConversation_4_list) NewElement() protoreflect.Value {
+	v := ""
+	return protoreflect.ValueOfString(v)
+}
+
+func (x *_GroupConversation_4_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_GroupConversation_5_list)(nil)
+
+type _GroupConversation_5_list struct {
+	list *[]*ChatMessage
+}
+
+func (x *_GroupConversation_5_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GroupConversation_5_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GroupConversation_5_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*ChatMessage)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GroupConversation_5_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*ChatMessage)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GroupConversation_5_list) AppendMutable() protoreflect.Value {
+	v := new(ChatMessage)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GroupConversation_5_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GroupConversation_5_list) NewElement() protoreflect.Value {
+	v := new(ChatMessage)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GroupConversation_5_list) IsValid() bool {
+	return x.list != nil
+}
+
+var (
+	md_GroupConversation                 protoreflect.MessageDescriptor
+	fd_GroupConversation_id              protoreflect.FieldDescriptor
+	fd_GroupConversation_admin           protoreflect.FieldDescriptor
+	fd_GroupConversation_name            protoreflect.FieldDescriptor
+	fd_GroupConversation_participants    protoreflect.FieldDescriptor
+	fd_GroupConversation_messages        protoreflect.FieldDescriptor
+	fd_GroupConversation_created_at      protoreflect.FieldDescriptor
+	fd_GroupConversation_last_message_at protoreflect.FieldDescriptor
+	fd_GroupConversation_pubKey          protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_chatty_chat_genesis_proto_init()
+	md_GroupConversation = File_chatty_chat_genesis_proto.Messages().ByName("GroupConversation")
+	fd_GroupConversation_id = md_GroupConversation.Fields().ByName("id")
+	fd_GroupConversation_admin = md_GroupConversation.Fields().ByName("admin")
+	fd_GroupConversation_name = md_GroupConversation.Fields().ByName("name")
+	fd_GroupConversation_participants = md_GroupConversation.Fields().ByName("participants")
+	fd_GroupConversation_messages = md_GroupConversation.Fields().ByName("messages")
+	fd_GroupConversation_created_at = md_GroupConversation.Fields().ByName("created_at")
+	fd_GroupConversation_last_message_at = md_GroupConversation.Fields().ByName("last_message_at")
+	fd_GroupConversation_pubKey = md_GroupConversation.Fields().ByName("pubKey")
+}
+
+var _ protoreflect.Message = (*fastReflection_GroupConversation)(nil)
+
+type fastReflection_GroupConversation GroupConversation
+
+func (x *GroupConversation) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_GroupConversation)(x)
+}
+
+func (x *GroupConversation) slowProtoReflect() protoreflect.Message {
+	mi := &file_chatty_chat_genesis_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_GroupConversation_messageType fastReflection_GroupConversation_messageType
+var _ protoreflect.MessageType = fastReflection_GroupConversation_messageType{}
+
+type fastReflection_GroupConversation_messageType struct{}
+
+func (x fastReflection_GroupConversation_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_GroupConversation)(nil)
+}
+func (x fastReflection_GroupConversation_messageType) New() protoreflect.Message {
+	return new(fastReflection_GroupConversation)
+}
+func (x fastReflection_GroupConversation_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_GroupConversation
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_GroupConversation) Descriptor() protoreflect.MessageDescriptor {
+	return md_GroupConversation
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_GroupConversation) Type() protoreflect.MessageType {
+	return _fastReflection_GroupConversation_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_GroupConversation) New() protoreflect.Message {
+	return new(fastReflection_GroupConversation)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_GroupConversation) Interface() protoreflect.ProtoMessage {
+	return (*GroupConversation)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_GroupConversation) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Id != int64(0) {
+		value := protoreflect.ValueOfInt64(x.Id)
+		if !f(fd_GroupConversation_id, value) {
+			return
+		}
+	}
+	if x.Admin != "" {
+		value := protoreflect.ValueOfString(x.Admin)
+		if !f(fd_GroupConversation_admin, value) {
+			return
+		}
+	}
+	if x.Name != "" {
+		value := protoreflect.ValueOfString(x.Name)
+		if !f(fd_GroupConversation_name, value) {
+			return
+		}
+	}
+	if len(x.Participants) != 0 {
+		value := protoreflect.ValueOfList(&_GroupConversation_4_list{list: &x.Participants})
+		if !f(fd_GroupConversation_participants, value) {
+			return
+		}
+	}
+	if len(x.Messages) != 0 {
+		value := protoreflect.ValueOfList(&_GroupConversation_5_list{list: &x.Messages})
+		if !f(fd_GroupConversation_messages, value) {
+			return
+		}
+	}
+	if x.CreatedAt != int64(0) {
+		value := protoreflect.ValueOfInt64(x.CreatedAt)
+		if !f(fd_GroupConversation_created_at, value) {
+			return
+		}
+	}
+	if x.LastMessageAt != int64(0) {
+		value := protoreflect.ValueOfInt64(x.LastMessageAt)
+		if !f(fd_GroupConversation_last_message_at, value) {
+			return
+		}
+	}
+	if x.PubKey != nil {
+		value := protoreflect.ValueOfMessage(x.PubKey.ProtoReflect())
+		if !f(fd_GroupConversation_pubKey, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_GroupConversation) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "chatty.chat.GroupConversation.id":
+		return x.Id != int64(0)
+	case "chatty.chat.GroupConversation.admin":
+		return x.Admin != ""
+	case "chatty.chat.GroupConversation.name":
+		return x.Name != ""
+	case "chatty.chat.GroupConversation.participants":
+		return len(x.Participants) != 0
+	case "chatty.chat.GroupConversation.messages":
+		return len(x.Messages) != 0
+	case "chatty.chat.GroupConversation.created_at":
+		return x.CreatedAt != int64(0)
+	case "chatty.chat.GroupConversation.last_message_at":
+		return x.LastMessageAt != int64(0)
+	case "chatty.chat.GroupConversation.pubKey":
+		return x.PubKey != nil
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GroupConversation"))
+		}
+		panic(fmt.Errorf("message chatty.chat.GroupConversation does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_GroupConversation) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "chatty.chat.GroupConversation.id":
+		x.Id = int64(0)
+	case "chatty.chat.GroupConversation.admin":
+		x.Admin = ""
+	case "chatty.chat.GroupConversation.name":
+		x.Name = ""
+	case "chatty.chat.GroupConversation.participants":
+		x.Participants = nil
+	case "chatty.chat.GroupConversation.messages":
+		x.Messages = nil
+	case "chatty.chat.GroupConversation.created_at":
+		x.CreatedAt = int64(0)
+	case "chatty.chat.GroupConversation.last_message_at":
+		x.LastMessageAt = int64(0)
+	case "chatty.chat.GroupConversation.pubKey":
+		x.PubKey = nil
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GroupConversation"))
+		}
+		panic(fmt.Errorf("message chatty.chat.GroupConversation does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_GroupConversation) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "chatty.chat.GroupConversation.id":
+		value := x.Id
+		return protoreflect.ValueOfInt64(value)
+	case "chatty.chat.GroupConversation.admin":
+		value := x.Admin
+		return protoreflect.ValueOfString(value)
+	case "chatty.chat.GroupConversation.name":
+		value := x.Name
+		return protoreflect.ValueOfString(value)
+	case "chatty.chat.GroupConversation.participants":
+		if len(x.Participants) == 0 {
+			return protoreflect.ValueOfList(&_GroupConversation_4_list{})
+		}
+		listValue := &_GroupConversation_4_list{list: &x.Participants}
+		return protoreflect.ValueOfList(listValue)
+	case "chatty.chat.GroupConversation.messages":
+		if len(x.Messages) == 0 {
+			return protoreflect.ValueOfList(&_GroupConversation_5_list{})
+		}
+		listValue := &_GroupConversation_5_list{list: &x.Messages}
+		return protoreflect.ValueOfList(listValue)
+	case "chatty.chat.GroupConversation.created_at":
+		value := x.CreatedAt
+		return protoreflect.ValueOfInt64(value)
+	case "chatty.chat.GroupConversation.last_message_at":
+		value := x.LastMessageAt
+		return protoreflect.ValueOfInt64(value)
+	case "chatty.chat.GroupConversation.pubKey":
+		value := x.PubKey
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GroupConversation"))
+		}
+		panic(fmt.Errorf("message chatty.chat.GroupConversation does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_GroupConversation) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "chatty.chat.GroupConversation.id":
+		x.Id = value.Int()
+	case "chatty.chat.GroupConversation.admin":
+		x.Admin = value.Interface().(string)
+	case "chatty.chat.GroupConversation.name":
+		x.Name = value.Interface().(string)
+	case "chatty.chat.GroupConversation.participants":
+		lv := value.List()
+		clv := lv.(*_GroupConversation_4_list)
+		x.Participants = *clv.list
+	case "chatty.chat.GroupConversation.messages":
+		lv := value.List()
+		clv := lv.(*_GroupConversation_5_list)
+		x.Messages = *clv.list
+	case "chatty.chat.GroupConversation.created_at":
+		x.CreatedAt = value.Int()
+	case "chatty.chat.GroupConversation.last_message_at":
+		x.LastMessageAt = value.Int()
+	case "chatty.chat.GroupConversation.pubKey":
+		x.PubKey = value.Message().Interface().(*PubKey)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GroupConversation"))
+		}
+		panic(fmt.Errorf("message chatty.chat.GroupConversation does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_GroupConversation) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "chatty.chat.GroupConversation.participants":
+		if x.Participants == nil {
+			x.Participants = []string{}
+		}
+		value := &_GroupConversation_4_list{list: &x.Participants}
+		return protoreflect.ValueOfList(value)
+	case "chatty.chat.GroupConversation.messages":
+		if x.Messages == nil {
+			x.Messages = []*ChatMessage{}
+		}
+		value := &_GroupConversation_5_list{list: &x.Messages}
+		return protoreflect.ValueOfList(value)
+	case "chatty.chat.GroupConversation.pubKey":
+		if x.PubKey == nil {
+			x.PubKey = new(PubKey)
+		}
+		return protoreflect.ValueOfMessage(x.PubKey.ProtoReflect())
+	case "chatty.chat.GroupConversation.id":
+		panic(fmt.Errorf("field id of message chatty.chat.GroupConversation is not mutable"))
+	case "chatty.chat.GroupConversation.admin":
+		panic(fmt.Errorf("field admin of message chatty.chat.GroupConversation is not mutable"))
+	case "chatty.chat.GroupConversation.name":
+		panic(fmt.Errorf("field name of message chatty.chat.GroupConversation is not mutable"))
+	case "chatty.chat.GroupConversation.created_at":
+		panic(fmt.Errorf("field created_at of message chatty.chat.GroupConversation is not mutable"))
+	case "chatty.chat.GroupConversation.last_message_at":
+		panic(fmt.Errorf("field last_message_at of message chatty.chat.GroupConversation is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GroupConversation"))
+		}
+		panic(fmt.Errorf("message chatty.chat.GroupConversation does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_GroupConversation) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "chatty.chat.GroupConversation.id":
+		return protoreflect.ValueOfInt64(int64(0))
+	case "chatty.chat.GroupConversation.admin":
+		return protoreflect.ValueOfString("")
+	case "chatty.chat.GroupConversation.name":
+		return protoreflect.ValueOfString("")
+	case "chatty.chat.GroupConversation.participants":
+		list := []string{}
+		return protoreflect.ValueOfList(&_GroupConversation_4_list{list: &list})
+	case "chatty.chat.GroupConversation.messages":
+		list := []*ChatMessage{}
+		return protoreflect.ValueOfList(&_GroupConversation_5_list{list: &list})
+	case "chatty.chat.GroupConversation.created_at":
+		return protoreflect.ValueOfInt64(int64(0))
+	case "chatty.chat.GroupConversation.last_message_at":
+		return protoreflect.ValueOfInt64(int64(0))
+	case "chatty.chat.GroupConversation.pubKey":
+		m := new(PubKey)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.GroupConversation"))
+		}
+		panic(fmt.Errorf("message chatty.chat.GroupConversation does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_GroupConversation) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in chatty.chat.GroupConversation", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_GroupConversation) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_GroupConversation) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_GroupConversation) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_GroupConversation) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*GroupConversation)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if x.Id != 0 {
+			n += 1 + runtime.Sov(uint64(x.Id))
+		}
+		l = len(x.Admin)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Name)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if len(x.Participants) > 0 {
+			for _, s := range x.Participants {
+				l = len(s)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if len(x.Messages) > 0 {
+			for _, e := range x.Messages {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.CreatedAt != 0 {
+			n += 1 + runtime.Sov(uint64(x.CreatedAt))
+		}
+		if x.LastMessageAt != 0 {
+			n += 1 + runtime.Sov(uint64(x.LastMessageAt))
+		}
+		if x.PubKey != nil {
+			l = options.Size(x.PubKey)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*GroupConversation)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.PubKey != nil {
+			encoded, err := options.Marshal(x.PubKey)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0x42
+		}
+		if x.LastMessageAt != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LastMessageAt))
+			i--
+			dAtA[i] = 0x38
+		}
+		if x.CreatedAt != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CreatedAt))
+			i--
+			dAtA[i] = 0x30
+		}
+		if len(x.Messages) > 0 {
+			for iNdEx := len(x.Messages) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Messages[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x2a
+			}
+		}
+		if len(x.Participants) > 0 {
+			for iNdEx := len(x.Participants) - 1; iNdEx >= 0; iNdEx-- {
+				i -= len(x.Participants[iNdEx])
+				copy(dAtA[i:], x.Participants[iNdEx])
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Participants[iNdEx])))
+				i--
+				dAtA[i] = 0x22
+			}
+		}
+		if len(x.Name) > 0 {
+			i -= len(x.Name)
+			copy(dAtA[i:], x.Name)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Name)))
+			i--
+			dAtA[i] = 0x1a
+		}
+		if len(x.Admin) > 0 {
+			i -= len(x.Admin)
+			copy(dAtA[i:], x.Admin)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Admin)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if x.Id != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
+			i--
+			dAtA[i] = 0x8
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*GroupConversation)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: GroupConversation: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: GroupConversation: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				x.Id = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Id |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Admin", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Admin = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Name = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Participants", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Participants = append(x.Participants, string(dAtA[iNdEx:postIndex]))
+				iNdEx = postIndex
+			case 5:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Messages", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Messages = append(x.Messages, &ChatMessage{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Messages[len(x.Messages)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 6:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+				}
+				x.CreatedAt = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.CreatedAt |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 7:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LastMessageAt", wireType)
+				}
+				x.LastMessageAt = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.LastMessageAt |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 8:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PubKey", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.PubKey == nil {
+					x.PubKey = &PubKey{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.PubKey); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var _ protoreflect.List = (*_AddressGroups_2_list)(nil)
+
+type _AddressGroups_2_list struct {
+	list *[]int64
+}
+
+func (x *_AddressGroups_2_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_AddressGroups_2_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfInt64((*x.list)[i])
+}
+
+func (x *_AddressGroups_2_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Int()
+	concreteValue := valueUnwrapped
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_AddressGroups_2_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Int()
+	concreteValue := valueUnwrapped
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_AddressGroups_2_list) AppendMutable() protoreflect.Value {
+	panic(fmt.Errorf("AppendMutable can not be called on message AddressGroups at list field GroupIds as it is not of Message kind"))
+}
+
+func (x *_AddressGroups_2_list) Truncate(n int) {
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_AddressGroups_2_list) NewElement() protoreflect.Value {
+	v := int64(0)
+	return protoreflect.ValueOfInt64(v)
+}
+
+func (x *_AddressGroups_2_list) IsValid() bool {
+	return x.list != nil
+}
+
+var (
+	md_AddressGroups          protoreflect.MessageDescriptor
+	fd_AddressGroups_address  protoreflect.FieldDescriptor
+	fd_AddressGroups_groupIds protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_chatty_chat_genesis_proto_init()
+	md_AddressGroups = File_chatty_chat_genesis_proto.Messages().ByName("AddressGroups")
+	fd_AddressGroups_address = md_AddressGroups.Fields().ByName("address")
+	fd_AddressGroups_groupIds = md_AddressGroups.Fields().ByName("groupIds")
+}
+
+var _ protoreflect.Message = (*fastReflection_AddressGroups)(nil)
+
+type fastReflection_AddressGroups AddressGroups
+
+func (x *AddressGroups) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_AddressGroups)(x)
+}
+
+func (x *AddressGroups) slowProtoReflect() protoreflect.Message {
+	mi := &file_chatty_chat_genesis_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_AddressGroups_messageType fastReflection_AddressGroups_messageType
+var _ protoreflect.MessageType = fastReflection_AddressGroups_messageType{}
+
+type fastReflection_AddressGroups_messageType struct{}
+
+func (x fastReflection_AddressGroups_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_AddressGroups)(nil)
+}
+func (x fastReflection_AddressGroups_messageType) New() protoreflect.Message {
+	return new(fastReflection_AddressGroups)
+}
+func (x fastReflection_AddressGroups_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_AddressGroups
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_AddressGroups) Descriptor() protoreflect.MessageDescriptor {
+	return md_AddressGroups
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_AddressGroups) Type() protoreflect.MessageType {
+	return _fastReflection_AddressGroups_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_AddressGroups) New() protoreflect.Message {
+	return new(fastReflection_AddressGroups)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_AddressGroups) Interface() protoreflect.ProtoMessage {
+	return (*AddressGroups)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_AddressGroups) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Address != "" {
+		value := protoreflect.ValueOfString(x.Address)
+		if !f(fd_AddressGroups_address, value) {
+			return
+		}
+	}
+	if len(x.GroupIds) != 0 {
+		value := protoreflect.ValueOfList(&_AddressGroups_2_list{list: &x.GroupIds})
+		if !f(fd_AddressGroups_groupIds, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_AddressGroups) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "chatty.chat.AddressGroups.address":
+		return x.Address != ""
+	case "chatty.chat.AddressGroups.groupIds":
+		return len(x.GroupIds) != 0
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.AddressGroups"))
+		}
+		panic(fmt.Errorf("message chatty.chat.AddressGroups does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_AddressGroups) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "chatty.chat.AddressGroups.address":
+		x.Address = ""
+	case "chatty.chat.AddressGroups.groupIds":
+		x.GroupIds = nil
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.AddressGroups"))
+		}
+		panic(fmt.Errorf("message chatty.chat.AddressGroups does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_AddressGroups) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "chatty.chat.AddressGroups.address":
+		value := x.Address
+		return protoreflect.ValueOfString(value)
+	case "chatty.chat.AddressGroups.groupIds":
+		if len(x.GroupIds) == 0 {
+			return protoreflect.ValueOfList(&_AddressGroups_2_list{})
+		}
+		listValue := &_AddressGroups_2_list{list: &x.GroupIds}
+		return protoreflect.ValueOfList(listValue)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.AddressGroups"))
+		}
+		panic(fmt.Errorf("message chatty.chat.AddressGroups does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_AddressGroups) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "chatty.chat.AddressGroups.address":
+		x.Address = value.Interface().(string)
+	case "chatty.chat.AddressGroups.groupIds":
+		lv := value.List()
+		clv := lv.(*_AddressGroups_2_list)
+		x.GroupIds = *clv.list
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.AddressGroups"))
+		}
+		panic(fmt.Errorf("message chatty.chat.AddressGroups does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_AddressGroups) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "chatty.chat.AddressGroups.groupIds":
+		if x.GroupIds == nil {
+			x.GroupIds = []int64{}
+		}
+		value := &_AddressGroups_2_list{list: &x.GroupIds}
+		return protoreflect.ValueOfList(value)
+	case "chatty.chat.AddressGroups.address":
+		panic(fmt.Errorf("field address of message chatty.chat.AddressGroups is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.AddressGroups"))
+		}
+		panic(fmt.Errorf("message chatty.chat.AddressGroups does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_AddressGroups) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "chatty.chat.AddressGroups.address":
+		return protoreflect.ValueOfString("")
+	case "chatty.chat.AddressGroups.groupIds":
+		list := []int64{}
+		return protoreflect.ValueOfList(&_AddressGroups_2_list{list: &list})
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.AddressGroups"))
+		}
+		panic(fmt.Errorf("message chatty.chat.AddressGroups does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_AddressGroups) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in chatty.chat.AddressGroups", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_AddressGroups) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_AddressGroups) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_AddressGroups) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_AddressGroups) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*AddressGroups)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.Address)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if len(x.GroupIds) > 0 {
+			l = 0
+			for _, e := range x.GroupIds {
+				l += runtime.Sov(uint64(e))
+			}
+			n += 1 + runtime.Sov(uint64(l)) + l
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*AddressGroups)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.GroupIds) > 0 {
+			var pksize2 int
+			for _, num := range x.GroupIds {
+				pksize2 += runtime.Sov(uint64(num))
+			}
+			i -= pksize2
+			j1 := i
+			for _, num1 := range x.GroupIds {
+				num := uint64(num1)
+				for num >= 1<<7 {
+					dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
+					num >>= 7
+					j1++
+				}
+				dAtA[j1] = uint8(num)
+				j1++
+			}
+			i = runtime.EncodeVarint(dAtA, i, uint64(pksize2))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Address) > 0 {
+			i -= len(x.Address)
+			copy(dAtA[i:], x.Address)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Address)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*AddressGroups)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: AddressGroups: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: AddressGroups: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Address = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType == 0 {
+					var v int64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= int64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					x.GroupIds = append(x.GroupIds, v)
+				} else if wireType == 2 {
+					var packedLen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						packedLen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if packedLen < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					postIndex := iNdEx + packedLen
+					if postIndex < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					if postIndex > l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					var elementCount int
+					var count int
+					for _, integer := range dAtA[iNdEx:postIndex] {
+						if integer < 128 {
+							count++
+						}
+					}
+					elementCount = count
+					if elementCount != 0 && len(x.GroupIds) == 0 {
+						x.GroupIds = make([]int64, 0, elementCount)
+					}
+					for iNdEx < postIndex {
+						var v int64
+						for shift := uint(0); ; shift += 7 {
+							if shift >= 64 {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+							}
+							if iNdEx >= l {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+							}
+							b := dAtA[iNdEx]
+							iNdEx++
+							v |= int64(b&0x7F) << shift
+							if b < 0x80 {
+								break
+							}
+						}
+						x.GroupIds = append(x.GroupIds, v)
+					}
+				} else {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GroupIds", wireType)
 				}
 			default:
 				iNdEx = preIndex
@@ -2600,7 +4382,9 @@ type GenesisState struct {
 	Params  *Params   `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
 	PubKeys []*PubKey `protobuf:"bytes,2,rep,name=pubKeys,proto3" json:"pubKeys,omitempty"`
 	// conversations defines all the conversations of the module.
-	Conversations []*Conversation `protobuf:"bytes,3,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	Conversations      []*Conversation      `protobuf:"bytes,3,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	GroupConversations []*GroupConversation `protobuf:"bytes,4,rep,name=groupConversations,proto3" json:"groupConversations,omitempty"`
+	AddressGroups      []*AddressGroups     `protobuf:"bytes,5,rep,name=addressGroups,proto3" json:"addressGroups,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -2640,6 +4424,20 @@ func (x *GenesisState) GetPubKeys() []*PubKey {
 func (x *GenesisState) GetConversations() []*Conversation {
 	if x != nil {
 		return x.Conversations
+	}
+	return nil
+}
+
+func (x *GenesisState) GetGroupConversations() []*GroupConversation {
+	if x != nil {
+		return x.GroupConversations
+	}
+	return nil
+}
+
+func (x *GenesisState) GetAddressGroups() []*AddressGroups {
+	if x != nil {
+		return x.AddressGroups
 	}
 	return nil
 }
@@ -2760,10 +4558,9 @@ type ChatMessage struct {
 	unknownFields protoimpl.UnknownFields
 
 	Sender    string `protobuf:"bytes,1,opt,name=sender,proto3" json:"sender,omitempty"`
-	Receiver  string `protobuf:"bytes,2,opt,name=receiver,proto3" json:"receiver,omitempty"`
-	Message   string `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	Encrypted bool   `protobuf:"varint,4,opt,name=encrypted,proto3" json:"encrypted,omitempty"`
-	CreatedAt int64  `protobuf:"varint,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Message   string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Encrypted bool   `protobuf:"varint,3,opt,name=encrypted,proto3" json:"encrypted,omitempty"`
+	CreatedAt int64  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 }
 
 func (x *ChatMessage) Reset() {
@@ -2793,13 +4590,6 @@ func (x *ChatMessage) GetSender() string {
 	return ""
 }
 
-func (x *ChatMessage) GetReceiver() string {
-	if x != nil {
-		return x.Receiver
-	}
-	return ""
-}
-
 func (x *ChatMessage) GetMessage() string {
 	if x != nil {
 		return x.Message
@@ -2821,6 +4611,140 @@ func (x *ChatMessage) GetCreatedAt() int64 {
 	return 0
 }
 
+type GroupConversation struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id            int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Admin         string         `protobuf:"bytes,2,opt,name=admin,proto3" json:"admin,omitempty"`
+	Name          string         `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Participants  []string       `protobuf:"bytes,4,rep,name=participants,proto3" json:"participants,omitempty"`
+	Messages      []*ChatMessage `protobuf:"bytes,5,rep,name=messages,proto3" json:"messages,omitempty"`
+	CreatedAt     int64          `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	LastMessageAt int64          `protobuf:"varint,7,opt,name=last_message_at,json=lastMessageAt,proto3" json:"last_message_at,omitempty"`
+	PubKey        *PubKey        `protobuf:"bytes,8,opt,name=pubKey,proto3" json:"pubKey,omitempty"`
+}
+
+func (x *GroupConversation) Reset() {
+	*x = GroupConversation{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chatty_chat_genesis_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GroupConversation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GroupConversation) ProtoMessage() {}
+
+// Deprecated: Use GroupConversation.ProtoReflect.Descriptor instead.
+func (*GroupConversation) Descriptor() ([]byte, []int) {
+	return file_chatty_chat_genesis_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GroupConversation) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *GroupConversation) GetAdmin() string {
+	if x != nil {
+		return x.Admin
+	}
+	return ""
+}
+
+func (x *GroupConversation) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GroupConversation) GetParticipants() []string {
+	if x != nil {
+		return x.Participants
+	}
+	return nil
+}
+
+func (x *GroupConversation) GetMessages() []*ChatMessage {
+	if x != nil {
+		return x.Messages
+	}
+	return nil
+}
+
+func (x *GroupConversation) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *GroupConversation) GetLastMessageAt() int64 {
+	if x != nil {
+		return x.LastMessageAt
+	}
+	return 0
+}
+
+func (x *GroupConversation) GetPubKey() *PubKey {
+	if x != nil {
+		return x.PubKey
+	}
+	return nil
+}
+
+type AddressGroups struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Address  string  `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	GroupIds []int64 `protobuf:"varint,2,rep,packed,name=groupIds,proto3" json:"groupIds,omitempty"`
+}
+
+func (x *AddressGroups) Reset() {
+	*x = AddressGroups{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chatty_chat_genesis_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddressGroups) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddressGroups) ProtoMessage() {}
+
+// Deprecated: Use AddressGroups.ProtoReflect.Descriptor instead.
+func (*AddressGroups) Descriptor() ([]byte, []int) {
+	return file_chatty_chat_genesis_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AddressGroups) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *AddressGroups) GetGroupIds() []int64 {
+	if x != nil {
+		return x.GroupIds
+	}
+	return nil
+}
+
 var File_chatty_chat_genesis_proto protoreflect.FileDescriptor
 
 var file_chatty_chat_genesis_proto_rawDesc = []byte{
@@ -2830,7 +4754,7 @@ var file_chatty_chat_genesis_proto_rawDesc = []byte{
 	0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67,
 	0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x1a, 0x18, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x70,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xb6, 0x01, 0x0a, 0x0c,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc8, 0x02, 0x0a, 0x0c,
 	0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x36, 0x0a, 0x06,
 	0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x63,
 	0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d,
@@ -2842,42 +4766,71 @@ var file_chatty_chat_genesis_proto_rawDesc = []byte{
 	0x69, 0x6f, 0x6e, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x68, 0x61,
 	0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0d, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x73, 0x22, 0x34, 0x0a, 0x06, 0x50, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x12, 0x18,
-	0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x22, 0xc5, 0x01, 0x0a, 0x0c, 0x43,
-	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1b, 0x0a, 0x09, 0x63,
-	0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x5f, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
-	0x63, 0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x41, 0x12, 0x1b, 0x0a, 0x09, 0x63, 0x68, 0x61, 0x74,
-	0x74, 0x65, 0x72, 0x5f, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x68, 0x61,
-	0x74, 0x74, 0x65, 0x72, 0x42, 0x12, 0x34, 0x0a, 0x08, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79,
-	0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x52, 0x08, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x63,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52,
-	0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x26, 0x0a, 0x0f, 0x6c, 0x61,
-	0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x61, 0x74, 0x18, 0x05, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x0d, 0x6c, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x41, 0x74, 0x22, 0x98, 0x01, 0x0a, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x12, 0x1a, 0x0a, 0x08, 0x72, 0x65,
-	0x63, 0x65, 0x69, 0x76, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x72, 0x65,
-	0x63, 0x65, 0x69, 0x76, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x12, 0x1c, 0x0a, 0x09, 0x65, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74, 0x65, 0x64, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x08, 0x52, 0x09, 0x65, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74, 0x65, 0x64, 0x12, 0x1d,
-	0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x05, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x42, 0x8a, 0x01,
-	0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61,
-	0x74, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
-	0x01, 0x5a, 0x1c, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f,
-	0x61, 0x70, 0x69, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0xa2,
-	0x02, 0x03, 0x43, 0x43, 0x58, 0xaa, 0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x43,
-	0x68, 0x61, 0x74, 0xca, 0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61,
-	0x74, 0xe2, 0x02, 0x17, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0x5c,
-	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0c, 0x43, 0x68,
-	0x61, 0x74, 0x74, 0x79, 0x3a, 0x3a, 0x43, 0x68, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x69, 0x6f, 0x6e, 0x73, 0x12, 0x4e, 0x0a, 0x12, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e,
+	0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x1e, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x12, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x12, 0x40, 0x0a, 0x0d, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x63, 0x68,
+	0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x52, 0x0d, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x22, 0x34, 0x0a, 0x06, 0x50, 0x75, 0x62, 0x4b, 0x65, 0x79,
+	0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65,
+	0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x22, 0xc5, 0x01, 0x0a,
+	0x0c, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1b, 0x0a,
+	0x09, 0x63, 0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x5f, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x08, 0x63, 0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x41, 0x12, 0x1b, 0x0a, 0x09, 0x63, 0x68,
+	0x61, 0x74, 0x74, 0x65, 0x72, 0x5f, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63,
+	0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x42, 0x12, 0x34, 0x0a, 0x08, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x68, 0x61, 0x74,
+	0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x52, 0x08, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x12, 0x1d, 0x0a,
+	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x26, 0x0a, 0x0f,
+	0x6c, 0x61, 0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x61, 0x74, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x6c, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x41, 0x74, 0x22, 0x7c, 0x0a, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x6d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x65, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74,
+	0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x65, 0x6e, 0x63, 0x72, 0x79, 0x70,
+	0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61,
+	0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
+	0x41, 0x74, 0x22, 0x9b, 0x02, 0x0a, 0x11, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76,
+	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x61, 0x64, 0x6d, 0x69,
+	0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x12,
+	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x70, 0x61, 0x72, 0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e,
+	0x74, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0c, 0x70, 0x61, 0x72, 0x74, 0x69, 0x63,
+	0x69, 0x70, 0x61, 0x6e, 0x74, 0x73, 0x12, 0x34, 0x0a, 0x08, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74,
+	0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x52, 0x08, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x12, 0x1d, 0x0a, 0x0a,
+	0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x26, 0x0a, 0x0f, 0x6c,
+	0x61, 0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x61, 0x74, 0x18, 0x07,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x6c, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x41, 0x74, 0x12, 0x2b, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x18, 0x08, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x2e, 0x50, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x52, 0x06, 0x70, 0x75, 0x62, 0x4b, 0x65, 0x79,
+	0x22, 0x45, 0x0a, 0x0d, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x47, 0x72, 0x6f, 0x75, 0x70,
+	0x73, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x67,
+	0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x03, 0x52, 0x08, 0x67,
+	0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x73, 0x42, 0x8a, 0x01, 0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x42, 0x0c, 0x47, 0x65, 0x6e,
+	0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1c, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x68,
+	0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0xa2, 0x02, 0x03, 0x43, 0x43, 0x58, 0xaa,
+	0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x43, 0x68, 0x61, 0x74, 0xca, 0x02, 0x0b,
+	0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0xe2, 0x02, 0x17, 0x43, 0x68,
+	0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
+	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0c, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x3a, 0x3a,
+	0x43, 0x68, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2892,24 +4845,30 @@ func file_chatty_chat_genesis_proto_rawDescGZIP() []byte {
 	return file_chatty_chat_genesis_proto_rawDescData
 }
 
-var file_chatty_chat_genesis_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_chatty_chat_genesis_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_chatty_chat_genesis_proto_goTypes = []interface{}{
-	(*GenesisState)(nil), // 0: chatty.chat.GenesisState
-	(*PubKey)(nil),       // 1: chatty.chat.PubKey
-	(*Conversation)(nil), // 2: chatty.chat.Conversation
-	(*ChatMessage)(nil),  // 3: chatty.chat.ChatMessage
-	(*Params)(nil),       // 4: chatty.chat.Params
+	(*GenesisState)(nil),      // 0: chatty.chat.GenesisState
+	(*PubKey)(nil),            // 1: chatty.chat.PubKey
+	(*Conversation)(nil),      // 2: chatty.chat.Conversation
+	(*ChatMessage)(nil),       // 3: chatty.chat.ChatMessage
+	(*GroupConversation)(nil), // 4: chatty.chat.GroupConversation
+	(*AddressGroups)(nil),     // 5: chatty.chat.AddressGroups
+	(*Params)(nil),            // 6: chatty.chat.Params
 }
 var file_chatty_chat_genesis_proto_depIdxs = []int32{
-	4, // 0: chatty.chat.GenesisState.params:type_name -> chatty.chat.Params
+	6, // 0: chatty.chat.GenesisState.params:type_name -> chatty.chat.Params
 	1, // 1: chatty.chat.GenesisState.pubKeys:type_name -> chatty.chat.PubKey
 	2, // 2: chatty.chat.GenesisState.conversations:type_name -> chatty.chat.Conversation
-	3, // 3: chatty.chat.Conversation.messages:type_name -> chatty.chat.ChatMessage
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	4, // 3: chatty.chat.GenesisState.groupConversations:type_name -> chatty.chat.GroupConversation
+	5, // 4: chatty.chat.GenesisState.addressGroups:type_name -> chatty.chat.AddressGroups
+	3, // 5: chatty.chat.Conversation.messages:type_name -> chatty.chat.ChatMessage
+	3, // 6: chatty.chat.GroupConversation.messages:type_name -> chatty.chat.ChatMessage
+	1, // 7: chatty.chat.GroupConversation.pubKey:type_name -> chatty.chat.PubKey
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_chatty_chat_genesis_proto_init() }
@@ -2967,6 +4926,30 @@ func file_chatty_chat_genesis_proto_init() {
 				return nil
 			}
 		}
+		file_chatty_chat_genesis_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GroupConversation); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chatty_chat_genesis_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddressGroups); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2974,7 +4957,7 @@ func file_chatty_chat_genesis_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_chatty_chat_genesis_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
