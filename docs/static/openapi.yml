@@ -4,6 +4,76 @@ info:
   name: ''
   description: ''
 paths:
+  /chatty/chat/conversation/{chatter_a}/{chatter_b}:
+    get:
+      summary: Queries a list of Conversation items.
+      operationId: ChattyChatConversation
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              conversations:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    chatter_a:
+                      type: string
+                    chatter_b:
+                      type: string
+                    messages:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          sender:
+                            type: string
+                          receiver:
+                            type: string
+                          message:
+                            type: string
+                          encrypted:
+                            type: boolean
+                          created_at:
+                            type: string
+                            format: int64
+                    created_at:
+                      type: string
+                      format: int64
+                    last_message_at:
+                      type: string
+                      format: int64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: chatter_a
+          in: path
+          required: true
+          type: string
+        - name: chatter_b
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /chatty/chat/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -531,9 +601,86 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
+  chatty.chat.ChatMessage:
+    type: object
+    properties:
+      sender:
+        type: string
+      receiver:
+        type: string
+      message:
+        type: string
+      encrypted:
+        type: boolean
+      created_at:
+        type: string
+        format: int64
+  chatty.chat.Conversation:
+    type: object
+    properties:
+      chatter_a:
+        type: string
+      chatter_b:
+        type: string
+      messages:
+        type: array
+        items:
+          type: object
+          properties:
+            sender:
+              type: string
+            receiver:
+              type: string
+            message:
+              type: string
+            encrypted:
+              type: boolean
+            created_at:
+              type: string
+              format: int64
+      created_at:
+        type: string
+        format: int64
+      last_message_at:
+        type: string
+        format: int64
   chatty.chat.Params:
     type: object
     description: Params defines the parameters for the module.
+  chatty.chat.QueryConversationResponse:
+    type: object
+    properties:
+      conversations:
+        type: array
+        items:
+          type: object
+          properties:
+            chatter_a:
+              type: string
+            chatter_b:
+              type: string
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  sender:
+                    type: string
+                  receiver:
+                    type: string
+                  message:
+                    type: string
+                  encrypted:
+                    type: boolean
+                  created_at:
+                    type: string
+                    format: int64
+            created_at:
+              type: string
+              format: int64
+            last_message_at:
+              type: string
+              format: int64
   chatty.chat.QueryParamsResponse:
     type: object
     properties:

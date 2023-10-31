@@ -20,6 +20,7 @@ func (k Keeper) CreateChatMessage(ctx sdk.Context, sender, receiver sdk.AccAddre
 		Receiver:  receiver.String(),
 		Message:   message,
 		Encrypted: encrypted,
+		CreatedAt: ctx.BlockTime().Unix(),
 	}
 	conversation.LastMessageAt = ctx.BlockTime().Unix()
 	conversation.Messages = append(conversation.Messages, &chatMessage)
