@@ -2,6 +2,9 @@ package keeper
 
 import (
 	"chatty/x/chat/types"
+	"context"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type msgServer struct {
@@ -15,3 +18,21 @@ func NewMsgServerImpl(keeper Keeper) types.MsgServer {
 }
 
 var _ types.MsgServer = msgServer{}
+
+func (k msgServer) CreateChatMessage(goCtx context.Context, msg *types.MsgCreateChatMessage) (*types.MsgCreateChatMessageResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	if err != nil {
+		return nil, err
+	}
+	receiver, err := sdk.AccAddressFromBech32(msg.Receiver)
+	if err != nil {
+		return nil, err
+	}
+	if err := k.Keeper.CreateChatMessage(ctx, creator, receiver, msg.Message, msg.Encrypted); err != nil {
+		return nil, err
+	}
+
+	return &types.MsgCreateChatMessageResponse{}, nil
+}

@@ -51,3 +51,35 @@ func (k Keeper) GetAuthority() string {
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
+
+// SetConversation sets a conversation to the store.
+func (k Keeper) SetConversation(ctx sdk.Context, conversation types.Conversation) error {
+	store := ctx.KVStore(k.storeKey)
+	key1, key2 := types.GetConversationKey(conversation.ChatterA, conversation.ChatterB)
+	store.Set(key1, k.cdc.MustMarshal(&conversation))
+	store.Set(key2, k.cdc.MustMarshal(&conversation))
+	return nil
+}
+
+// GetConversation gets a conversation from the store.
+func (k Keeper) GetConversation(ctx sdk.Context, chatterA, chatterB string) (*types.Conversation, bool) {
+	store := ctx.KVStore(k.storeKey)
+	key, _ := types.GetConversationKey(chatterA, chatterB)
+	conversationBs := store.Get(key)
+	if conversationBs == nil {
+		return nil, false
+	}
+	conversation := types.Conversation{}
+	k.cdc.MustUnmarshal(conversationBs, &conversation)
+	return &conversation, true
+}
+
+// SetChatMessage sets a chat message to the store.
+func (k Keeper) SetChatMessage(ctx sdk.Context, chatMessage types.ChatMessage) error {
+	conversation, hasConversation := k.GetConversation(ctx, chatMessage.Sender, chatMessage.Receiver)
+	if hasConversation {
+		return fmt.Errorf("conversation not found")
+	}
+	conversation.Messages = append(conversation.Messages, &chatMessage)
+	return k.SetConversation(ctx, *conversation)
+}

@@ -14,4 +14,30 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+
+  repeated PubKey pubKeys = 2;
+
+  // conversations defines all the conversations of the module.
+  repeated Conversation conversations = 3;
+}
+
+message PubKey {
+  string address = 1;
+  string key = 2;
+}
+
+message Conversation {
+  string chatter_a = 1;
+  string chatter_b = 2;
+  repeated ChatMessage messages = 3;
+  int64 created_at = 4;
+  int64 last_message_at = 5;
+}
+
+message ChatMessage {
+  string sender = 1;
+  string receiver = 2;
+  string message = 3;
+  bool encrypted = 4;
+  int64 created_at = 5;
 }

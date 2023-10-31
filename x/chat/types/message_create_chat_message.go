@@ -10,9 +10,12 @@ const TypeMsgCreateChatMessage = "create_chat_message"
 
 var _ sdk.Msg = &MsgCreateChatMessage{}
 
-func NewMsgCreateChatMessage(creator string) *MsgCreateChatMessage {
+func NewMsgCreateChatMessage(creator, receiver, message string, encrypted bool) *MsgCreateChatMessage {
 	return &MsgCreateChatMessage{
-		Creator: creator,
+		Creator:   creator,
+		Receiver:  receiver,
+		Message:   message,
+		Encrypted: encrypted,
 	}
 }
 

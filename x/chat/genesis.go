@@ -3,6 +3,7 @@ package chat
 import (
 	"chatty/x/chat/keeper"
 	"chatty/x/chat/types"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
