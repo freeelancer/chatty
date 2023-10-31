@@ -30,7 +30,9 @@ type GenesisState struct {
 	Params  Params    `protobuf:"bytes,1,opt,name=params,proto3" json:"params"`
 	PubKeys []*PubKey `protobuf:"bytes,2,rep,name=pubKeys,proto3" json:"pubKeys,omitempty"`
 	// conversations defines all the conversations of the module.
-	Conversations []*Conversation `protobuf:"bytes,3,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	Conversations      []*Conversation      `protobuf:"bytes,3,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	GroupConversations []*GroupConversation `protobuf:"bytes,4,rep,name=groupConversations,proto3" json:"groupConversations,omitempty"`
+	AddressGroups      []*AddressGroups     `protobuf:"bytes,5,rep,name=addressGroups,proto3" json:"addressGroups,omitempty"`
 }
 
 func (m *GenesisState) Reset()         { *m = GenesisState{} }
@@ -83,6 +85,20 @@ func (m *GenesisState) GetPubKeys() []*PubKey {
 func (m *GenesisState) GetConversations() []*Conversation {
 	if m != nil {
 		return m.Conversations
+	}
+	return nil
+}
+
+func (m *GenesisState) GetGroupConversations() []*GroupConversation {
+	if m != nil {
+		return m.GroupConversations
+	}
+	return nil
+}
+
+func (m *GenesisState) GetAddressGroups() []*AddressGroups {
+	if m != nil {
+		return m.AddressGroups
 	}
 	return nil
 }
@@ -217,10 +233,9 @@ func (m *Conversation) GetLastMessageAt() int64 {
 
 type ChatMessage struct {
 	Sender    string `protobuf:"bytes,1,opt,name=sender,proto3" json:"sender,omitempty"`
-	Receiver  string `protobuf:"bytes,2,opt,name=receiver,proto3" json:"receiver,omitempty"`
-	Message   string `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	Encrypted bool   `protobuf:"varint,4,opt,name=encrypted,proto3" json:"encrypted,omitempty"`
-	CreatedAt int64  `protobuf:"varint,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Message   string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Encrypted bool   `protobuf:"varint,3,opt,name=encrypted,proto3" json:"encrypted,omitempty"`
+	CreatedAt int64  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 }
 
 func (m *ChatMessage) Reset()         { *m = ChatMessage{} }
@@ -263,13 +278,6 @@ func (m *ChatMessage) GetSender() string {
 	return ""
 }
 
-func (m *ChatMessage) GetReceiver() string {
-	if m != nil {
-		return m.Receiver
-	}
-	return ""
-}
-
 func (m *ChatMessage) GetMessage() string {
 	if m != nil {
 		return m.Message
@@ -291,45 +299,207 @@ func (m *ChatMessage) GetCreatedAt() int64 {
 	return 0
 }
 
+type GroupConversation struct {
+	Id            int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Admin         string         `protobuf:"bytes,2,opt,name=admin,proto3" json:"admin,omitempty"`
+	Name          string         `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Participants  []string       `protobuf:"bytes,4,rep,name=participants,proto3" json:"participants,omitempty"`
+	Messages      []*ChatMessage `protobuf:"bytes,5,rep,name=messages,proto3" json:"messages,omitempty"`
+	CreatedAt     int64          `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	LastMessageAt int64          `protobuf:"varint,7,opt,name=last_message_at,json=lastMessageAt,proto3" json:"last_message_at,omitempty"`
+	PubKey        *PubKey        `protobuf:"bytes,8,opt,name=pubKey,proto3" json:"pubKey,omitempty"`
+}
+
+func (m *GroupConversation) Reset()         { *m = GroupConversation{} }
+func (m *GroupConversation) String() string { return proto.CompactTextString(m) }
+func (*GroupConversation) ProtoMessage()    {}
+func (*GroupConversation) Descriptor() ([]byte, []int) {
+	return fileDescriptor_beb80d6f6741e6ba, []int{4}
+}
+func (m *GroupConversation) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GroupConversation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GroupConversation.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GroupConversation) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupConversation.Merge(m, src)
+}
+func (m *GroupConversation) XXX_Size() int {
+	return m.Size()
+}
+func (m *GroupConversation) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupConversation.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupConversation proto.InternalMessageInfo
+
+func (m *GroupConversation) GetId() int64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *GroupConversation) GetAdmin() string {
+	if m != nil {
+		return m.Admin
+	}
+	return ""
+}
+
+func (m *GroupConversation) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *GroupConversation) GetParticipants() []string {
+	if m != nil {
+		return m.Participants
+	}
+	return nil
+}
+
+func (m *GroupConversation) GetMessages() []*ChatMessage {
+	if m != nil {
+		return m.Messages
+	}
+	return nil
+}
+
+func (m *GroupConversation) GetCreatedAt() int64 {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return 0
+}
+
+func (m *GroupConversation) GetLastMessageAt() int64 {
+	if m != nil {
+		return m.LastMessageAt
+	}
+	return 0
+}
+
+func (m *GroupConversation) GetPubKey() *PubKey {
+	if m != nil {
+		return m.PubKey
+	}
+	return nil
+}
+
+type AddressGroups struct {
+	Address  string  `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	GroupIds []int64 `protobuf:"varint,2,rep,packed,name=groupIds,proto3" json:"groupIds,omitempty"`
+}
+
+func (m *AddressGroups) Reset()         { *m = AddressGroups{} }
+func (m *AddressGroups) String() string { return proto.CompactTextString(m) }
+func (*AddressGroups) ProtoMessage()    {}
+func (*AddressGroups) Descriptor() ([]byte, []int) {
+	return fileDescriptor_beb80d6f6741e6ba, []int{5}
+}
+func (m *AddressGroups) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddressGroups) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddressGroups.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddressGroups) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddressGroups.Merge(m, src)
+}
+func (m *AddressGroups) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddressGroups) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddressGroups.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddressGroups proto.InternalMessageInfo
+
+func (m *AddressGroups) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+func (m *AddressGroups) GetGroupIds() []int64 {
+	if m != nil {
+		return m.GroupIds
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*GenesisState)(nil), "chatty.chat.GenesisState")
 	proto.RegisterType((*PubKey)(nil), "chatty.chat.PubKey")
 	proto.RegisterType((*Conversation)(nil), "chatty.chat.Conversation")
 	proto.RegisterType((*ChatMessage)(nil), "chatty.chat.ChatMessage")
+	proto.RegisterType((*GroupConversation)(nil), "chatty.chat.GroupConversation")
+	proto.RegisterType((*AddressGroups)(nil), "chatty.chat.AddressGroups")
 }
 
 func init() { proto.RegisterFile("chatty/chat/genesis.proto", fileDescriptor_beb80d6f6741e6ba) }
 
 var fileDescriptor_beb80d6f6741e6ba = []byte{
-	// 434 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x52, 0xb1, 0x6e, 0xd4, 0x40,
-	0x10, 0xf5, 0xc6, 0xc4, 0xb1, 0xe7, 0x12, 0x01, 0x1b, 0x84, 0x36, 0x07, 0x98, 0x93, 0x0b, 0x14,
-	0x21, 0xc5, 0x96, 0x20, 0xa2, 0x45, 0x77, 0x14, 0x14, 0x08, 0x09, 0x99, 0x8e, 0xe6, 0xb4, 0x67,
-	0x8f, 0x1c, 0x0b, 0xce, 0xb6, 0x76, 0x97, 0x08, 0xff, 0x05, 0x25, 0x9f, 0x40, 0x49, 0xc5, 0x1f,
-	0x20, 0xa5, 0xbc, 0x92, 0x0a, 0xa1, 0xbb, 0x82, 0xdf, 0x40, 0xde, 0x5d, 0x83, 0xef, 0xd2, 0xd8,
-	0x33, 0xef, 0xbd, 0x79, 0x33, 0xb3, 0x1a, 0x38, 0xc9, 0x2e, 0xb8, 0x52, 0x6d, 0xd2, 0xfd, 0x92,
-	0x02, 0x2b, 0x94, 0xa5, 0x8c, 0x1b, 0x51, 0xab, 0x9a, 0x8e, 0x0c, 0x15, 0x77, 0xbf, 0xf1, 0x6d,
-	0xbe, 0x2c, 0xab, 0x3a, 0xd1, 0x5f, 0xc3, 0x8f, 0xef, 0x14, 0x75, 0x51, 0xeb, 0x30, 0xe9, 0x22,
-	0x8b, 0xb2, 0xa1, 0x61, 0xc3, 0x05, 0x5f, 0x5a, 0xbf, 0xe8, 0x3b, 0x81, 0xc3, 0x97, 0xa6, 0xc3,
-	0x5b, 0xc5, 0x15, 0xd2, 0x67, 0xe0, 0x19, 0x01, 0x23, 0x13, 0x72, 0x3a, 0x7a, 0x72, 0x1c, 0x0f,
-	0x3a, 0xc6, 0x6f, 0x34, 0x35, 0x0b, 0xae, 0x7e, 0x3d, 0x74, 0xbe, 0xfe, 0xf9, 0xf6, 0x98, 0xa4,
-	0x56, 0x4d, 0xcf, 0xe0, 0xa0, 0xf9, 0xb8, 0x78, 0x85, 0xad, 0x64, 0x7b, 0x13, 0xf7, 0x7a, 0xa1,
-	0xe6, 0xd2, 0x5e, 0x43, 0x9f, 0xc3, 0x51, 0x56, 0x57, 0x97, 0x28, 0x24, 0x57, 0x65, 0x5d, 0x49,
-	0xe6, 0xea, 0xa2, 0x93, 0xad, 0xa2, 0x17, 0x03, 0x45, 0xba, 0xad, 0x8f, 0xce, 0xc1, 0x33, 0x9e,
-	0x94, 0xc1, 0x01, 0xcf, 0x73, 0x81, 0xd2, 0x8c, 0x1c, 0xa4, 0x7d, 0x4a, 0x6f, 0x81, 0xfb, 0x1e,
-	0x5b, 0xb6, 0xa7, 0xd1, 0x2e, 0x8c, 0x7e, 0x10, 0x38, 0x1c, 0xba, 0xd2, 0x7b, 0x10, 0xe8, 0x8e,
-	0x28, 0xe6, 0xdc, 0x96, 0xfb, 0x16, 0x98, 0x0e, 0xc9, 0x85, 0x75, 0xe9, 0xc9, 0x19, 0x3d, 0x07,
-	0x7f, 0x89, 0x52, 0xf2, 0x02, 0xfb, 0xe1, 0xd9, 0xf6, 0xf0, 0x17, 0x5c, 0xbd, 0x36, 0x82, 0xf4,
-	0x9f, 0x92, 0x3e, 0x00, 0xc8, 0x04, 0x72, 0x85, 0xf9, 0x9c, 0x2b, 0x76, 0x63, 0x42, 0x4e, 0xdd,
-	0x34, 0xb0, 0xc8, 0x54, 0xd1, 0x47, 0x70, 0xf3, 0x03, 0x97, 0x6a, 0x6e, 0xf5, 0x9d, 0x66, 0x5f,
-	0x6b, 0x8e, 0x3a, 0xd8, 0xda, 0x4d, 0x55, 0xf4, 0x85, 0xc0, 0x68, 0xd0, 0x80, 0xde, 0x05, 0x4f,
-	0x62, 0x95, 0xa3, 0xb0, 0x3b, 0xd8, 0x8c, 0x8e, 0xc1, 0x17, 0x98, 0x61, 0x79, 0x89, 0xa2, 0x5f,
-	0xa0, 0xcf, 0xbb, 0x77, 0xb3, 0x6d, 0x98, 0x6b, 0xde, 0xcd, 0xa6, 0xf4, 0x3e, 0x04, 0x58, 0x65,
-	0xa2, 0x6d, 0x14, 0xe6, 0x7a, 0x46, 0x3f, 0xfd, 0x0f, 0xec, 0xac, 0xb0, 0xbf, 0xb3, 0xc2, 0xec,
-	0xec, 0x6a, 0x1d, 0x92, 0xd5, 0x3a, 0x24, 0xbf, 0xd7, 0x21, 0xf9, 0xbc, 0x09, 0x9d, 0xd5, 0x26,
-	0x74, 0x7e, 0x6e, 0x42, 0xe7, 0xdd, 0xb1, 0xbd, 0xc2, 0x4f, 0xe6, 0x0e, 0x55, 0xdb, 0xa0, 0x5c,
-	0x78, 0xfa, 0x0e, 0x9f, 0xfe, 0x0d, 0x00, 0x00, 0xff, 0xff, 0xd2, 0x04, 0xc4, 0x6e, 0xf4, 0x02,
-	0x00, 0x00,
+	// 565 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0x4f, 0x8b, 0xd3, 0x40,
+	0x14, 0x6f, 0x92, 0x36, 0x6d, 0x5e, 0x5b, 0x75, 0xdf, 0x2e, 0x32, 0x5b, 0x35, 0x96, 0x1c, 0xa4,
+	0x28, 0xdb, 0x82, 0x2e, 0x5e, 0xb5, 0x5d, 0x64, 0x11, 0x51, 0x64, 0xbc, 0x79, 0x29, 0xd3, 0x66,
+	0xe8, 0x06, 0x6d, 0x12, 0x32, 0xb3, 0x62, 0xc1, 0x0f, 0xe1, 0xdd, 0x2f, 0xe0, 0xd1, 0x2f, 0x21,
+	0xf4, 0xb8, 0x47, 0x4f, 0x22, 0xed, 0xc1, 0xaf, 0x21, 0x99, 0x99, 0xae, 0x89, 0x5b, 0x54, 0xf6,
+	0xd2, 0xbc, 0x3f, 0xbf, 0xf7, 0x7b, 0x6f, 0x7e, 0x9d, 0x37, 0xb0, 0x3f, 0x3d, 0x61, 0x52, 0x2e,
+	0x06, 0xf9, 0x67, 0x30, 0xe3, 0x31, 0x17, 0x91, 0xe8, 0xa7, 0x59, 0x22, 0x13, 0x6c, 0xea, 0x54,
+	0x3f, 0xff, 0x74, 0x76, 0xd8, 0x3c, 0x8a, 0x93, 0x81, 0xfa, 0xd5, 0xf9, 0xce, 0xde, 0x2c, 0x99,
+	0x25, 0xca, 0x1c, 0xe4, 0x96, 0x89, 0x92, 0x22, 0x61, 0xca, 0x32, 0x36, 0x37, 0x7c, 0xc1, 0xd2,
+	0x86, 0xd6, 0xb1, 0xee, 0xf0, 0x4a, 0x32, 0xc9, 0xf1, 0x21, 0xb8, 0x1a, 0x40, 0xac, 0xae, 0xd5,
+	0x6b, 0xde, 0xdf, 0xed, 0x17, 0x3a, 0xf6, 0x5f, 0xaa, 0xd4, 0xc8, 0x5b, 0x7e, 0xbf, 0x5d, 0xf9,
+	0xfc, 0xf3, 0xcb, 0x5d, 0x8b, 0x1a, 0x34, 0x1e, 0x40, 0x3d, 0x3d, 0x9d, 0x3c, 0xe3, 0x0b, 0x41,
+	0xec, 0xae, 0x73, 0xb1, 0x50, 0xe5, 0xe8, 0x06, 0x83, 0x8f, 0xa0, 0x3d, 0x4d, 0xe2, 0x77, 0x3c,
+	0x13, 0x4c, 0x46, 0x49, 0x2c, 0x88, 0xa3, 0x8a, 0xf6, 0x4b, 0x45, 0x47, 0x05, 0x04, 0x2d, 0xe3,
+	0xf1, 0x05, 0xe0, 0x2c, 0x4b, 0x4e, 0xd3, 0xa3, 0x12, 0x4b, 0x55, 0xb1, 0xf8, 0x25, 0x96, 0xe3,
+	0x3f, 0x61, 0x74, 0x4b, 0x25, 0x3e, 0x86, 0x36, 0x0b, 0xc3, 0x8c, 0x0b, 0xa1, 0xf0, 0x82, 0xd4,
+	0x14, 0x55, 0xa7, 0x44, 0x35, 0x2c, 0x22, 0x68, 0xb9, 0x20, 0x38, 0x04, 0x57, 0x9f, 0x12, 0x09,
+	0xd4, 0x4d, 0x4a, 0x89, 0xe8, 0xd1, 0x8d, 0x8b, 0xd7, 0xc0, 0x79, 0xc3, 0x17, 0xc4, 0x56, 0xd1,
+	0xdc, 0x0c, 0xbe, 0x5a, 0xd0, 0x2a, 0x4e, 0x82, 0x37, 0xc0, 0x53, 0x2d, 0x79, 0x36, 0x66, 0xa6,
+	0xbc, 0x61, 0x02, 0xc3, 0x62, 0x72, 0x62, 0x58, 0x36, 0xc9, 0x11, 0x1e, 0x42, 0x63, 0xce, 0x85,
+	0x60, 0x33, 0xbe, 0x91, 0x93, 0x94, 0xe5, 0x3c, 0x61, 0xf2, 0xb9, 0x06, 0xd0, 0x73, 0x24, 0xde,
+	0x02, 0x98, 0x66, 0x9c, 0x49, 0x1e, 0x8e, 0x99, 0x24, 0xd5, 0xae, 0xd5, 0x73, 0xa8, 0x67, 0x22,
+	0x43, 0x89, 0x77, 0xe0, 0xea, 0x5b, 0x26, 0xe4, 0xd8, 0xe0, 0x73, 0x4c, 0x4d, 0x61, 0xda, 0x79,
+	0xd8, 0xd0, 0x0d, 0x65, 0xf0, 0x01, 0x9a, 0x05, 0x7e, 0xbc, 0x0e, 0xae, 0xe0, 0x71, 0xc8, 0x33,
+	0x73, 0x04, 0xe3, 0xe5, 0xd2, 0x18, 0x26, 0x33, 0xfe, 0xc6, 0xc5, 0x9b, 0xe0, 0xf1, 0x78, 0x9a,
+	0x2d, 0x52, 0xc9, 0x43, 0xe2, 0x74, 0xad, 0x5e, 0x83, 0xfe, 0x0e, 0xfc, 0x63, 0xca, 0xe0, 0x93,
+	0x0d, 0x3b, 0x17, 0xfe, 0x67, 0xbc, 0x02, 0x76, 0x14, 0xaa, 0x01, 0x1c, 0x6a, 0x47, 0x21, 0xee,
+	0x41, 0x8d, 0x85, 0xf3, 0x28, 0x36, 0xad, 0xb5, 0x83, 0x08, 0xd5, 0x98, 0xcd, 0xb9, 0xea, 0xe9,
+	0x51, 0x65, 0x63, 0x00, 0xad, 0x94, 0x65, 0x32, 0x9a, 0x46, 0x29, 0x8b, 0xa5, 0xbe, 0x57, 0x1e,
+	0x2d, 0xc5, 0x4a, 0x72, 0xd7, 0x2e, 0x29, 0xb7, 0xfb, 0x1f, 0x72, 0xd7, 0xb7, 0xc8, 0x8d, 0xf7,
+	0xc0, 0xd5, 0xab, 0x44, 0x1a, 0xdb, 0xd6, 0x54, 0x6f, 0x9b, 0x81, 0x04, 0x4f, 0xa0, 0x5d, 0xba,
+	0xb9, 0x7f, 0xb9, 0xa0, 0x1d, 0x68, 0xa8, 0xe5, 0x78, 0x1a, 0xea, 0x3d, 0x76, 0xe8, 0xb9, 0x3f,
+	0x3a, 0x58, 0xae, 0x7c, 0xeb, 0x6c, 0xe5, 0x5b, 0x3f, 0x56, 0xbe, 0xf5, 0x71, 0xed, 0x57, 0xce,
+	0xd6, 0x7e, 0xe5, 0xdb, 0xda, 0xaf, 0xbc, 0xde, 0x35, 0xef, 0xcb, 0x7b, 0xfd, 0xc2, 0xc8, 0x45,
+	0xca, 0xc5, 0xc4, 0x55, 0x2f, 0xcc, 0x83, 0x5f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x69, 0x25, 0x1b,
+	0x06, 0xce, 0x04, 0x00, 0x00,
 }
 
 func (m *GenesisState) Marshal() (dAtA []byte, err error) {
@@ -352,6 +522,34 @@ func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.AddressGroups) > 0 {
+		for iNdEx := len(m.AddressGroups) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.AddressGroups[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.GroupConversations) > 0 {
+		for iNdEx := len(m.GroupConversations) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.GroupConversations[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x22
+		}
+	}
 	if len(m.Conversations) > 0 {
 		for iNdEx := len(m.Conversations) - 1; iNdEx >= 0; iNdEx-- {
 			{
@@ -514,7 +712,7 @@ func (m *ChatMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.CreatedAt != 0 {
 		i = encodeVarintGenesis(dAtA, i, uint64(m.CreatedAt))
 		i--
-		dAtA[i] = 0x28
+		dAtA[i] = 0x20
 	}
 	if m.Encrypted {
 		i--
@@ -524,19 +722,12 @@ func (m *ChatMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			dAtA[i] = 0
 		}
 		i--
-		dAtA[i] = 0x20
+		dAtA[i] = 0x18
 	}
 	if len(m.Message) > 0 {
 		i -= len(m.Message)
 		copy(dAtA[i:], m.Message)
 		i = encodeVarintGenesis(dAtA, i, uint64(len(m.Message)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.Receiver) > 0 {
-		i -= len(m.Receiver)
-		copy(dAtA[i:], m.Receiver)
-		i = encodeVarintGenesis(dAtA, i, uint64(len(m.Receiver)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -544,6 +735,142 @@ func (m *ChatMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.Sender)
 		copy(dAtA[i:], m.Sender)
 		i = encodeVarintGenesis(dAtA, i, uint64(len(m.Sender)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GroupConversation) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GroupConversation) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GroupConversation) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.PubKey != nil {
+		{
+			size, err := m.PubKey.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintGenesis(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x42
+	}
+	if m.LastMessageAt != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.LastMessageAt))
+		i--
+		dAtA[i] = 0x38
+	}
+	if m.CreatedAt != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.CreatedAt))
+		i--
+		dAtA[i] = 0x30
+	}
+	if len(m.Messages) > 0 {
+		for iNdEx := len(m.Messages) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Messages[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.Participants) > 0 {
+		for iNdEx := len(m.Participants) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Participants[iNdEx])
+			copy(dAtA[i:], m.Participants[iNdEx])
+			i = encodeVarintGenesis(dAtA, i, uint64(len(m.Participants[iNdEx])))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintGenesis(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Admin) > 0 {
+		i -= len(m.Admin)
+		copy(dAtA[i:], m.Admin)
+		i = encodeVarintGenesis(dAtA, i, uint64(len(m.Admin)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Id != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddressGroups) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddressGroups) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddressGroups) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.GroupIds) > 0 {
+		dAtA4 := make([]byte, len(m.GroupIds)*10)
+		var j3 int
+		for _, num1 := range m.GroupIds {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA4[j3] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j3++
+			}
+			dAtA4[j3] = uint8(num)
+			j3++
+		}
+		i -= j3
+		copy(dAtA[i:], dAtA4[:j3])
+		i = encodeVarintGenesis(dAtA, i, uint64(j3))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintGenesis(dAtA, i, uint64(len(m.Address)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -577,6 +904,18 @@ func (m *GenesisState) Size() (n int) {
 	}
 	if len(m.Conversations) > 0 {
 		for _, e := range m.Conversations {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if len(m.GroupConversations) > 0 {
+		for _, e := range m.GroupConversations {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if len(m.AddressGroups) > 0 {
+		for _, e := range m.AddressGroups {
 			l = e.Size()
 			n += 1 + l + sovGenesis(uint64(l))
 		}
@@ -640,10 +979,6 @@ func (m *ChatMessage) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovGenesis(uint64(l))
 	}
-	l = len(m.Receiver)
-	if l > 0 {
-		n += 1 + l + sovGenesis(uint64(l))
-	}
 	l = len(m.Message)
 	if l > 0 {
 		n += 1 + l + sovGenesis(uint64(l))
@@ -653,6 +988,68 @@ func (m *ChatMessage) Size() (n int) {
 	}
 	if m.CreatedAt != 0 {
 		n += 1 + sovGenesis(uint64(m.CreatedAt))
+	}
+	return n
+}
+
+func (m *GroupConversation) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != 0 {
+		n += 1 + sovGenesis(uint64(m.Id))
+	}
+	l = len(m.Admin)
+	if l > 0 {
+		n += 1 + l + sovGenesis(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovGenesis(uint64(l))
+	}
+	if len(m.Participants) > 0 {
+		for _, s := range m.Participants {
+			l = len(s)
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if len(m.Messages) > 0 {
+		for _, e := range m.Messages {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.CreatedAt != 0 {
+		n += 1 + sovGenesis(uint64(m.CreatedAt))
+	}
+	if m.LastMessageAt != 0 {
+		n += 1 + sovGenesis(uint64(m.LastMessageAt))
+	}
+	if m.PubKey != nil {
+		l = m.PubKey.Size()
+		n += 1 + l + sovGenesis(uint64(l))
+	}
+	return n
+}
+
+func (m *AddressGroups) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovGenesis(uint64(l))
+	}
+	if len(m.GroupIds) > 0 {
+		l = 0
+		for _, e := range m.GroupIds {
+			l += sovGenesis(uint64(e))
+		}
+		n += 1 + sovGenesis(uint64(l)) + l
 	}
 	return n
 }
@@ -790,6 +1187,74 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 			}
 			m.Conversations = append(m.Conversations, &Conversation{})
 			if err := m.Conversations[len(m.Conversations)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupConversations", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupConversations = append(m.GroupConversations, &GroupConversation{})
+			if err := m.GroupConversations[len(m.GroupConversations)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AddressGroups", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AddressGroups = append(m.AddressGroups, &AddressGroups{})
+			if err := m.AddressGroups[len(m.AddressGroups)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -1177,38 +1642,6 @@ func (m *ChatMessage) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Receiver", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowGenesis
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthGenesis
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthGenesis
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Receiver = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
 			}
 			var stringLen uint64
@@ -1239,7 +1672,7 @@ func (m *ChatMessage) Unmarshal(dAtA []byte) error {
 			}
 			m.Message = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 4:
+		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Encrypted", wireType)
 			}
@@ -1259,7 +1692,7 @@ func (m *ChatMessage) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.Encrypted = bool(v != 0)
-		case 5:
+		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
 			}
@@ -1277,6 +1710,437 @@ func (m *ChatMessage) Unmarshal(dAtA []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGenesis(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GroupConversation) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGenesis
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GroupConversation: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GroupConversation: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Admin", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Admin = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Participants", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Participants = append(m.Participants, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Messages", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Messages = append(m.Messages, &ChatMessage{})
+			if err := m.Messages[len(m.Messages)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			m.CreatedAt = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CreatedAt |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastMessageAt", wireType)
+			}
+			m.LastMessageAt = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.LastMessageAt |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PubKey", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.PubKey == nil {
+				m.PubKey = &PubKey{}
+			}
+			if err := m.PubKey.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGenesis(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddressGroups) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGenesis
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddressGroups: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddressGroups: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType == 0 {
+				var v int64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowGenesis
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.GroupIds = append(m.GroupIds, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowGenesis
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthGenesis
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthGenesis
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.GroupIds) == 0 {
+					m.GroupIds = make([]int64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v int64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowGenesis
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= int64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.GroupIds = append(m.GroupIds, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupIds", wireType)
 			}
 		default:
 			iNdEx = preIndex

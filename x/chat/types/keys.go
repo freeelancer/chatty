@@ -1,5 +1,9 @@
 package types
 
+import (
+	sdk "github.com/cosmos/cosmos-sdk/types"
+)
+
 const (
 	// ModuleName defines the module name
 	ModuleName = "chat"
@@ -15,9 +19,11 @@ const (
 )
 
 var (
-	ParamsKey             = []byte("p_chat")
-	ConversationKeyPrefix = []byte{0x01}
-	PubkeyKeyPrefix       = []byte{0x02}
+	ParamsKey                  = []byte("p_chat")
+	ConversationKeyPrefix      = []byte{0x01}
+	AddressPubkeyKeyPrefix     = []byte{0x02}
+	GroupConversationKeyPrefix = []byte{0x03}
+	AddressGroupKeyPrefix      = []byte{0x04}
 )
 
 func KeyPrefix(p string) []byte {
@@ -28,6 +34,14 @@ func GetConversationKey(sender, receiver string) ([]byte, []byte) {
 	return append(ConversationKeyPrefix, []byte(sender+receiver)...), append(ConversationKeyPrefix, []byte(receiver+sender)...)
 }
 
-func GetPubkeyKey(creator string) []byte {
-	return append(PubkeyKeyPrefix, []byte(creator)...)
+func GetAddressPubkeyKey(creator string) []byte {
+	return append(AddressPubkeyKeyPrefix, []byte(creator)...)
+}
+
+func GetGroupConversationKey(id uint64) []byte {
+	return append(GroupConversationKeyPrefix, sdk.Uint64ToBigEndian(id)...)
+}
+
+func GetAddressGroupKey(address string) []byte {
+	return append(AddressGroupKeyPrefix, []byte(address)...)
 }

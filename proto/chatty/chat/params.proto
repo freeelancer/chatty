@@ -11,5 +11,5 @@ message Params {
   option (amino.name) = "chatty/x/chat/Params";
   option (gogoproto.equal) = true;
 
-  
+  int64 group_conversation_counter = 1;
 }

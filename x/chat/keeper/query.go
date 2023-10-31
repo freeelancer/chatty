@@ -69,7 +69,7 @@ func (k Keeper) Pubkeys(goCtx context.Context, req *types.QueryPubkeysRequest) (
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	store := ctx.KVStore(k.storeKey)
 	pubkeys := []*types.PubKey{}
-	iter := sdk.KVStorePrefixIterator(store, types.PubkeyKeyPrefix)
+	iter := sdk.KVStorePrefixIterator(store, types.AddressPubkeyKeyPrefix)
 	defer iter.Close()
 	for ; iter.Valid(); iter.Next() {
 		pubkey := &types.PubKey{}

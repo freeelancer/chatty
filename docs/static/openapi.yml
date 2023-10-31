@@ -28,8 +28,6 @@ paths:
                       properties:
                         sender:
                           type: string
-                        receiver:
-                          type: string
                         message:
                           type: string
                         encrypted:
@@ -98,8 +96,6 @@ paths:
                         properties:
                           sender:
                             type: string
-                          receiver:
-                            type: string
                           message:
                             type: string
                           encrypted:
@@ -151,6 +147,10 @@ paths:
               params:
                 description: params holds all the parameters of this module.
                 type: object
+                properties:
+                  group_conversation_counter:
+                    type: string
+                    format: int64
             description: >-
               QueryParamsResponse is response type for the Query/Params RPC
               method.
@@ -751,8 +751,6 @@ definitions:
     properties:
       sender:
         type: string
-      receiver:
-        type: string
       message:
         type: string
       encrypted:
@@ -774,8 +772,6 @@ definitions:
           properties:
             sender:
               type: string
-            receiver:
-              type: string
             message:
               type: string
             encrypted:
@@ -791,6 +787,10 @@ definitions:
         format: int64
   chatty.chat.Params:
     type: object
+    properties:
+      group_conversation_counter:
+        type: string
+        format: int64
     description: Params defines the parameters for the module.
   chatty.chat.PubKey:
     type: object
@@ -815,8 +815,6 @@ definitions:
               type: object
               properties:
                 sender:
-                  type: string
-                receiver:
                   type: string
                 message:
                   type: string
@@ -850,8 +848,6 @@ definitions:
                 properties:
                   sender:
                     type: string
-                  receiver:
-                    type: string
                   message:
                     type: string
                   encrypted:
@@ -871,6 +867,10 @@ definitions:
       params:
         description: params holds all the parameters of this module.
         type: object
+        properties:
+          group_conversation_counter:
+            type: string
+            format: int64
     description: QueryParamsResponse is response type for the Query/Params RPC method.
   chatty.chat.QueryPubkeyResponse:
     type: object

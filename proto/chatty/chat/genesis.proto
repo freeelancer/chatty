@@ -19,6 +19,10 @@ message GenesisState {
 
   // conversations defines all the conversations of the module.
   repeated Conversation conversations = 3;
+
+  repeated GroupConversation groupConversations = 4;
+
+  repeated AddressGroups addressGroups = 5;
 }
 
 message PubKey {
@@ -36,8 +40,23 @@ message Conversation {
 
 message ChatMessage {
   string sender = 1;
-  string receiver = 2;
-  string message = 3;
-  bool encrypted = 4;
-  int64 created_at = 5;
+  string message = 2;
+  bool encrypted = 3;
+  int64 created_at = 4;
+}
+
+message GroupConversation {
+  int64 id = 1;
+  string admin = 2;
+  string name = 3;
+  repeated string participants = 4;
+  repeated ChatMessage messages = 5;
+  int64 created_at = 6;
+  int64 last_message_at = 7;
+  PubKey pubKey = 8;
+}
+
+message AddressGroups {
+  string address = 1;
+  repeated int64 groupIds = 2;
 }

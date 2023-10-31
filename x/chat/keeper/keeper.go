@@ -55,14 +55,14 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 // SetPubkey sets a pubkey to the store.
 func (k Keeper) SetPubkey(ctx sdk.Context, pubkey types.PubKey) error {
 	store := ctx.KVStore(k.storeKey)
-	store.Set(types.GetPubkeyKey(pubkey.Address), k.cdc.MustMarshal(&pubkey))
+	store.Set(types.GetAddressPubkeyKey(pubkey.Address), k.cdc.MustMarshal(&pubkey))
 	return nil
 }
 
 // GetPubkey gets a pubkey from the store.
 func (k Keeper) GetPubkey(ctx sdk.Context, address string) (*types.PubKey, bool) {
 	store := ctx.KVStore(k.storeKey)
-	pubkeyBs := store.Get(types.GetPubkeyKey(address))
+	pubkeyBs := store.Get(types.GetAddressPubkeyKey(address))
 	if pubkeyBs == nil {
 		return nil, false
 	}
@@ -93,12 +93,50 @@ func (k Keeper) GetConversation(ctx sdk.Context, chatterA, chatterB string) (*ty
 	return &conversation, true
 }
 
-// SetChatMessage sets a chat message to the store.
-func (k Keeper) SetChatMessage(ctx sdk.Context, chatMessage types.ChatMessage) error {
-	conversation, hasConversation := k.GetConversation(ctx, chatMessage.Sender, chatMessage.Receiver)
-	if hasConversation {
-		return fmt.Errorf("conversation not found")
+// SetGroupConversation sets a group conversation to the store.
+func (k Keeper) SetGroupConversation(ctx sdk.Context, groupConversation types.GroupConversation) error {
+	store := ctx.KVStore(k.storeKey)
+	store.Set(types.GetGroupConversationKey(uint64(groupConversation.Id)), k.cdc.MustMarshal(&groupConversation))
+	return nil
+}
+
+// GetGroupConversation gets a group conversation from the store.
+func (k Keeper) GetGroupConversation(ctx sdk.Context, id uint64) (*types.GroupConversation, bool) {
+	store := ctx.KVStore(k.storeKey)
+	groupConversationBs := store.Get(types.GetGroupConversationKey(id))
+	if groupConversationBs == nil {
+		return nil, false
 	}
-	conversation.Messages = append(conversation.Messages, &chatMessage)
-	return k.SetConversation(ctx, *conversation)
+	groupConversation := types.GroupConversation{}
+	k.cdc.MustUnmarshal(groupConversationBs, &groupConversation)
+	return &groupConversation, true
+}
+
+// GetAddressGroup gets a group conversation ids from an address.
+func (k Keeper) GetAddressGroup(ctx sdk.Context, address string) (*types.AddressGroups, bool) {
+	store := ctx.KVStore(k.storeKey)
+	key := types.GetAddressGroupKey(address)
+	idsBs := store.Get(key)
+	if idsBs == nil {
+		return nil, false
+	}
+	addressGroups := types.AddressGroups{}
+	k.cdc.MustUnmarshal(idsBs, &addressGroups)
+	return &addressGroups, true
+}
+
+// AddIdToAddressGroup adds a group conversation id to an address.
+func (k Keeper) AddIdToAddressGroup(ctx sdk.Context, address string, id int64) error {
+	store := ctx.KVStore(k.storeKey)
+	key := types.GetAddressGroupKey(address)
+	addressGroup, found := k.GetAddressGroup(ctx, address)
+	if !found {
+		addressGroup = &types.AddressGroups{
+			Address:  address,
+			GroupIds: []int64{},
+		}
+	}
+	addressGroup.GroupIds = append(addressGroup.GroupIds, id)
+	store.Set(key, k.cdc.MustMarshal(addressGroup))
+	return nil
 }
