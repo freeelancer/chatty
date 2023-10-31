@@ -56,3 +56,13 @@ func (k msgServer) CreateGroupConversation(goCtx context.Context, msg *types.Msg
 
 	return &types.MsgCreateGroupConversationResponse{}, nil
 }
+
+func (k msgServer) CreateGroupConversationMessage(goCtx context.Context, msg *types.MsgCreateGroupConversationMessage) (*types.MsgCreateGroupConversationMessageResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	if err := k.Keeper.CreateGroupConversationMessage(ctx, msg.Creator, msg.ConversationId, msg.Messsage, msg.Encrypted); err != nil {
+		return nil, err
+	}
+
+	return &types.MsgCreateGroupConversationMessageResponse{}, nil
+}

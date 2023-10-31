@@ -90,7 +90,7 @@ func (k Keeper) CreateGroupConversation(ctx sdk.Context, admin, name string, par
 }
 
 // CreateGroupConversationMessage for Group Conversation
-func (k Keeper) CreateGroupConversationMessage(ctx sdk.Context, sender sdk.AccAddress, id int64, message string, encrypted bool) error {
+func (k Keeper) CreateGroupConversationMessage(ctx sdk.Context, sender string, id int64, message string, encrypted bool) error {
 	groupConvo, hasGroupConvo := k.GetGroupConversation(ctx, id)
 	if !hasGroupConvo {
 		return fmt.Errorf("group conversation with id %d does not exist", id)
@@ -98,17 +98,17 @@ func (k Keeper) CreateGroupConversationMessage(ctx sdk.Context, sender sdk.AccAd
 
 	canSend := false
 	for _, participant := range groupConvo.Participants {
-		if participant == sender.String() {
+		if participant == sender {
 			canSend = true
 			break
 		}
 	}
 	if !canSend {
-		return fmt.Errorf("sender %s is not a participant of group conversation with id %d", sender.String(), id)
+		return fmt.Errorf("sender %s is not a participant of group conversation with id %d", sender, id)
 	}
 
 	chatMessage := types.ChatMessage{
-		Sender:    sender.String(),
+		Sender:    sender,
 		Message:   message,
 		Encrypted: encrypted,
 		CreatedAt: ctx.BlockTime().Unix(),

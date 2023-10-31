@@ -4346,12 +4346,14 @@ func (x *fastReflection_QueryPubkeyResponse) ProtoMethods() *protoiface.Methods 
 }
 
 var (
-	md_QueryGroupConversationByIdRequest protoreflect.MessageDescriptor
+	md_QueryGroupConversationByIdRequest    protoreflect.MessageDescriptor
+	fd_QueryGroupConversationByIdRequest_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_chatty_chat_query_proto_init()
 	md_QueryGroupConversationByIdRequest = File_chatty_chat_query_proto.Messages().ByName("QueryGroupConversationByIdRequest")
+	fd_QueryGroupConversationByIdRequest_id = md_QueryGroupConversationByIdRequest.Fields().ByName("id")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryGroupConversationByIdRequest)(nil)
@@ -4419,6 +4421,12 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) Interface() protorefl
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryGroupConversationByIdRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Id != int64(0) {
+		value := protoreflect.ValueOfInt64(x.Id)
+		if !f(fd_QueryGroupConversationByIdRequest_id, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -4434,6 +4442,8 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) Range(f func(protoref
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryGroupConversationByIdRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdRequest.id":
+		return x.Id != int64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdRequest"))
@@ -4450,6 +4460,8 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) Has(fd protoreflect.F
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationByIdRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdRequest.id":
+		x.Id = int64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdRequest"))
@@ -4466,6 +4478,9 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) Clear(fd protoreflect
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryGroupConversationByIdRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdRequest.id":
+		value := x.Id
+		return protoreflect.ValueOfInt64(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdRequest"))
@@ -4486,6 +4501,8 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) Get(descriptor protor
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationByIdRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdRequest.id":
+		x.Id = value.Int()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdRequest"))
@@ -4506,6 +4523,8 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) Set(fd protoreflect.F
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationByIdRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdRequest.id":
+		panic(fmt.Errorf("field id of message chatty.chat.QueryGroupConversationByIdRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdRequest"))
@@ -4519,6 +4538,8 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) Mutable(fd protorefle
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryGroupConversationByIdRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdRequest.id":
+		return protoreflect.ValueOfInt64(int64(0))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdRequest"))
@@ -4588,6 +4609,9 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) ProtoMethods() *proto
 		var n int
 		var l int
 		_ = l
+		if x.Id != 0 {
+			n += 1 + runtime.Sov(uint64(x.Id))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -4616,6 +4640,11 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) ProtoMethods() *proto
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Id != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
+			i--
+			dAtA[i] = 0x8
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -4666,6 +4695,25 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) ProtoMethods() *proto
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryGroupConversationByIdRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				x.Id = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Id |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -4702,12 +4750,14 @@ func (x *fastReflection_QueryGroupConversationByIdRequest) ProtoMethods() *proto
 }
 
 var (
-	md_QueryGroupConversationByIdResponse protoreflect.MessageDescriptor
+	md_QueryGroupConversationByIdResponse                    protoreflect.MessageDescriptor
+	fd_QueryGroupConversationByIdResponse_group_conversation protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_chatty_chat_query_proto_init()
 	md_QueryGroupConversationByIdResponse = File_chatty_chat_query_proto.Messages().ByName("QueryGroupConversationByIdResponse")
+	fd_QueryGroupConversationByIdResponse_group_conversation = md_QueryGroupConversationByIdResponse.Fields().ByName("group_conversation")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryGroupConversationByIdResponse)(nil)
@@ -4775,6 +4825,12 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) Interface() protoref
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryGroupConversationByIdResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.GroupConversation != nil {
+		value := protoreflect.ValueOfMessage(x.GroupConversation.ProtoReflect())
+		if !f(fd_QueryGroupConversationByIdResponse_group_conversation, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -4790,6 +4846,8 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) Range(f func(protore
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryGroupConversationByIdResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdResponse.group_conversation":
+		return x.GroupConversation != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdResponse"))
@@ -4806,6 +4864,8 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) Has(fd protoreflect.
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationByIdResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdResponse.group_conversation":
+		x.GroupConversation = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdResponse"))
@@ -4822,6 +4882,9 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) Clear(fd protoreflec
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryGroupConversationByIdResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdResponse.group_conversation":
+		value := x.GroupConversation
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdResponse"))
@@ -4842,6 +4905,8 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) Get(descriptor proto
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationByIdResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdResponse.group_conversation":
+		x.GroupConversation = value.Message().Interface().(*GroupConversation)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdResponse"))
@@ -4862,6 +4927,11 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) Set(fd protoreflect.
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationByIdResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdResponse.group_conversation":
+		if x.GroupConversation == nil {
+			x.GroupConversation = new(GroupConversation)
+		}
+		return protoreflect.ValueOfMessage(x.GroupConversation.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdResponse"))
@@ -4875,6 +4945,9 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) Mutable(fd protorefl
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryGroupConversationByIdResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationByIdResponse.group_conversation":
+		m := new(GroupConversation)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationByIdResponse"))
@@ -4944,6 +5017,10 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) ProtoMethods() *prot
 		var n int
 		var l int
 		_ = l
+		if x.GroupConversation != nil {
+			l = options.Size(x.GroupConversation)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -4972,6 +5049,20 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) ProtoMethods() *prot
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.GroupConversation != nil {
+			encoded, err := options.Marshal(x.GroupConversation)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -5022,6 +5113,42 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) ProtoMethods() *prot
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryGroupConversationByIdResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GroupConversation", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.GroupConversation == nil {
+					x.GroupConversation = &GroupConversation{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.GroupConversation); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -5058,12 +5185,14 @@ func (x *fastReflection_QueryGroupConversationByIdResponse) ProtoMethods() *prot
 }
 
 var (
-	md_QueryGroupConversationsByAddressRequest protoreflect.MessageDescriptor
+	md_QueryGroupConversationsByAddressRequest         protoreflect.MessageDescriptor
+	fd_QueryGroupConversationsByAddressRequest_address protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_chatty_chat_query_proto_init()
 	md_QueryGroupConversationsByAddressRequest = File_chatty_chat_query_proto.Messages().ByName("QueryGroupConversationsByAddressRequest")
+	fd_QueryGroupConversationsByAddressRequest_address = md_QueryGroupConversationsByAddressRequest.Fields().ByName("address")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryGroupConversationsByAddressRequest)(nil)
@@ -5131,6 +5260,12 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) Interface() pro
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryGroupConversationsByAddressRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Address != "" {
+		value := protoreflect.ValueOfString(x.Address)
+		if !f(fd_QueryGroupConversationsByAddressRequest_address, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -5146,6 +5281,8 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) Range(f func(pr
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryGroupConversationsByAddressRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressRequest.address":
+		return x.Address != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressRequest"))
@@ -5162,6 +5299,8 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) Has(fd protoref
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationsByAddressRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressRequest.address":
+		x.Address = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressRequest"))
@@ -5178,6 +5317,9 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) Clear(fd protor
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryGroupConversationsByAddressRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressRequest.address":
+		value := x.Address
+		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressRequest"))
@@ -5198,6 +5340,8 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) Get(descriptor 
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationsByAddressRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressRequest.address":
+		x.Address = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressRequest"))
@@ -5218,6 +5362,8 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) Set(fd protoref
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationsByAddressRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressRequest.address":
+		panic(fmt.Errorf("field address of message chatty.chat.QueryGroupConversationsByAddressRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressRequest"))
@@ -5231,6 +5377,8 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) Mutable(fd prot
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryGroupConversationsByAddressRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressRequest.address":
+		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressRequest"))
@@ -5300,6 +5448,10 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) ProtoMethods() 
 		var n int
 		var l int
 		_ = l
+		l = len(x.Address)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -5328,6 +5480,13 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) ProtoMethods() 
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.Address) > 0 {
+			i -= len(x.Address)
+			copy(dAtA[i:], x.Address)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Address)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -5378,6 +5537,38 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) ProtoMethods() 
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryGroupConversationsByAddressRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Address = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -5413,13 +5604,66 @@ func (x *fastReflection_QueryGroupConversationsByAddressRequest) ProtoMethods() 
 	}
 }
 
+var _ protoreflect.List = (*_QueryGroupConversationsByAddressResponse_1_list)(nil)
+
+type _QueryGroupConversationsByAddressResponse_1_list struct {
+	list *[]*GroupConversation
+}
+
+func (x *_QueryGroupConversationsByAddressResponse_1_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_QueryGroupConversationsByAddressResponse_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_QueryGroupConversationsByAddressResponse_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*GroupConversation)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_QueryGroupConversationsByAddressResponse_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*GroupConversation)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_QueryGroupConversationsByAddressResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(GroupConversation)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryGroupConversationsByAddressResponse_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_QueryGroupConversationsByAddressResponse_1_list) NewElement() protoreflect.Value {
+	v := new(GroupConversation)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryGroupConversationsByAddressResponse_1_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_QueryGroupConversationsByAddressResponse protoreflect.MessageDescriptor
+	md_QueryGroupConversationsByAddressResponse                     protoreflect.MessageDescriptor
+	fd_QueryGroupConversationsByAddressResponse_group_conversations protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_chatty_chat_query_proto_init()
 	md_QueryGroupConversationsByAddressResponse = File_chatty_chat_query_proto.Messages().ByName("QueryGroupConversationsByAddressResponse")
+	fd_QueryGroupConversationsByAddressResponse_group_conversations = md_QueryGroupConversationsByAddressResponse.Fields().ByName("group_conversations")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryGroupConversationsByAddressResponse)(nil)
@@ -5487,6 +5731,12 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) Interface() pr
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryGroupConversationsByAddressResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.GroupConversations) != 0 {
+		value := protoreflect.ValueOfList(&_QueryGroupConversationsByAddressResponse_1_list{list: &x.GroupConversations})
+		if !f(fd_QueryGroupConversationsByAddressResponse_group_conversations, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -5502,6 +5752,8 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) Range(f func(p
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryGroupConversationsByAddressResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressResponse.group_conversations":
+		return len(x.GroupConversations) != 0
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressResponse"))
@@ -5518,6 +5770,8 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) Has(fd protore
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationsByAddressResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressResponse.group_conversations":
+		x.GroupConversations = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressResponse"))
@@ -5534,6 +5788,12 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) Clear(fd proto
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryGroupConversationsByAddressResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressResponse.group_conversations":
+		if len(x.GroupConversations) == 0 {
+			return protoreflect.ValueOfList(&_QueryGroupConversationsByAddressResponse_1_list{})
+		}
+		listValue := &_QueryGroupConversationsByAddressResponse_1_list{list: &x.GroupConversations}
+		return protoreflect.ValueOfList(listValue)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressResponse"))
@@ -5554,6 +5814,10 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) Get(descriptor
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationsByAddressResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressResponse.group_conversations":
+		lv := value.List()
+		clv := lv.(*_QueryGroupConversationsByAddressResponse_1_list)
+		x.GroupConversations = *clv.list
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressResponse"))
@@ -5574,6 +5838,12 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) Set(fd protore
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryGroupConversationsByAddressResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressResponse.group_conversations":
+		if x.GroupConversations == nil {
+			x.GroupConversations = []*GroupConversation{}
+		}
+		value := &_QueryGroupConversationsByAddressResponse_1_list{list: &x.GroupConversations}
+		return protoreflect.ValueOfList(value)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressResponse"))
@@ -5587,6 +5857,9 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) Mutable(fd pro
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryGroupConversationsByAddressResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "chatty.chat.QueryGroupConversationsByAddressResponse.group_conversations":
+		list := []*GroupConversation{}
+		return protoreflect.ValueOfList(&_QueryGroupConversationsByAddressResponse_1_list{list: &list})
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: chatty.chat.QueryGroupConversationsByAddressResponse"))
@@ -5656,6 +5929,12 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) ProtoMethods()
 		var n int
 		var l int
 		_ = l
+		if len(x.GroupConversations) > 0 {
+			for _, e := range x.GroupConversations {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -5684,6 +5963,22 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) ProtoMethods()
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.GroupConversations) > 0 {
+			for iNdEx := len(x.GroupConversations) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.GroupConversations[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0xa
+			}
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -5734,6 +6029,40 @@ func (x *fastReflection_QueryGroupConversationsByAddressResponse) ProtoMethods()
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryGroupConversationsByAddressResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GroupConversations", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.GroupConversations = append(x.GroupConversations, &GroupConversation{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.GroupConversations[len(x.GroupConversations)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -6129,6 +6458,8 @@ type QueryGroupConversationByIdRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *QueryGroupConversationByIdRequest) Reset() {
@@ -6151,10 +6482,19 @@ func (*QueryGroupConversationByIdRequest) Descriptor() ([]byte, []int) {
 	return file_chatty_chat_query_proto_rawDescGZIP(), []int{10}
 }
 
+func (x *QueryGroupConversationByIdRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
 type QueryGroupConversationByIdResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	GroupConversation *GroupConversation `protobuf:"bytes,1,opt,name=group_conversation,json=groupConversation,proto3" json:"group_conversation,omitempty"`
 }
 
 func (x *QueryGroupConversationByIdResponse) Reset() {
@@ -6177,10 +6517,19 @@ func (*QueryGroupConversationByIdResponse) Descriptor() ([]byte, []int) {
 	return file_chatty_chat_query_proto_rawDescGZIP(), []int{11}
 }
 
+func (x *QueryGroupConversationByIdResponse) GetGroupConversation() *GroupConversation {
+	if x != nil {
+		return x.GroupConversation
+	}
+	return nil
+}
+
 type QueryGroupConversationsByAddressRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 }
 
 func (x *QueryGroupConversationsByAddressRequest) Reset() {
@@ -6203,10 +6552,19 @@ func (*QueryGroupConversationsByAddressRequest) Descriptor() ([]byte, []int) {
 	return file_chatty_chat_query_proto_rawDescGZIP(), []int{12}
 }
 
+func (x *QueryGroupConversationsByAddressRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
 type QueryGroupConversationsByAddressResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	GroupConversations []*GroupConversation `protobuf:"bytes,1,rep,name=group_conversations,json=groupConversations,proto3" json:"group_conversations,omitempty"`
 }
 
 func (x *QueryGroupConversationsByAddressResponse) Reset() {
@@ -6227,6 +6585,13 @@ func (*QueryGroupConversationsByAddressResponse) ProtoMessage() {}
 // Deprecated: Use QueryGroupConversationsByAddressResponse.ProtoReflect.Descriptor instead.
 func (*QueryGroupConversationsByAddressResponse) Descriptor() ([]byte, []int) {
 	return file_chatty_chat_query_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *QueryGroupConversationsByAddressResponse) GetGroupConversations() []*GroupConversation {
+	if x != nil {
+		return x.GroupConversations
+	}
+	return nil
 }
 
 var File_chatty_chat_query_proto protoreflect.FileDescriptor
@@ -6284,89 +6649,102 @@ var file_chatty_chat_query_proto_rawDesc = []byte{
 	0x72, 0x79, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x12, 0x2b, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x13, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x50,
-	0x75, 0x62, 0x4b, 0x65, 0x79, 0x52, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x22, 0x23, 0x0a,
+	0x75, 0x62, 0x4b, 0x65, 0x79, 0x52, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x22, 0x33, 0x0a,
 	0x21, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65,
 	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x22, 0x24, 0x0a, 0x22, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70,
+	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x73, 0x0a, 0x22, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70,
 	0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x49, 0x64,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x29, 0x0a, 0x27, 0x51, 0x75, 0x65, 0x72,
-	0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x42, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x22, 0x2a, 0x0a, 0x28, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75,
-	0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x79,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32,
-	0xe9, 0x07, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x68, 0x0a, 0x06, 0x50, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x12, 0x1f, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61,
-	0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68,
-	0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x15, 0x12, 0x13,
-	0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x70, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x12, 0x98, 0x01, 0x0a, 0x0c, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x25, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68,
-	0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x63, 0x68,
-	0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43,
-	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x22, 0x39, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x33, 0x12, 0x31, 0x2f, 0x63, 0x68,
-	0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72,
-	0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x7b, 0x63, 0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x5f,
-	0x61, 0x7d, 0x2f, 0x7b, 0x63, 0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x5f, 0x62, 0x7d, 0x12, 0x8d,
-	0x01, 0x0a, 0x0d, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x12, 0x26, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74,
-	0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x76,
-	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x2b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x25, 0x12, 0x23, 0x2f, 0x63, 0x68, 0x61, 0x74,
-	0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x7b, 0x63, 0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x7d, 0x12, 0x6b,
-	0x0a, 0x07, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x73, 0x12, 0x20, 0x2e, 0x63, 0x68, 0x61, 0x74,
-	0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x75, 0x62,
-	0x6b, 0x65, 0x79, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x63, 0x68,
-	0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50,
-	0x75, 0x62, 0x6b, 0x65, 0x79, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1b,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x15, 0x12, 0x13, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f,
-	0x63, 0x68, 0x61, 0x74, 0x2f, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x12, 0x72, 0x0a, 0x06, 0x50,
-	0x75, 0x62, 0x6b, 0x65, 0x79, 0x12, 0x1f, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63,
-	0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e,
-	0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x25, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1f,
-	0x12, 0x1d, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x70,
-	0x75, 0x62, 0x6b, 0x65, 0x79, 0x2f, 0x7b, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x7d, 0x12,
-	0xa7, 0x01, 0x0a, 0x15, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x49, 0x64, 0x12, 0x2e, 0x2e, 0x63, 0x68, 0x61, 0x74,
-	0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f,
-	0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x79,
-	0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2f, 0x2e, 0x63, 0x68, 0x61, 0x74,
-	0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f,
-	0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x79,
-	0x49, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2d, 0x82, 0xd3, 0xe4, 0x93,
-	0x02, 0x27, 0x12, 0x25, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74,
-	0x2f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x5f, 0x62, 0x79, 0x5f, 0x69, 0x64, 0x12, 0xbf, 0x01, 0x0a, 0x1b, 0x47, 0x72,
-	0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x42, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x34, 0x2e, 0x63, 0x68, 0x61, 0x74,
-	0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f,
-	0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42,
-	0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x35, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x33, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2d, 0x12, 0x2b,
-	0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x67, 0x72, 0x6f,
-	0x75, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x5f, 0x62, 0x79, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0x88, 0x01, 0x0a, 0x0f,
-	0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x42,
-	0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1c, 0x63,
-	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0xa2, 0x02, 0x03, 0x43, 0x43,
-	0x58, 0xaa, 0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x43, 0x68, 0x61, 0x74, 0xca,
-	0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0xe2, 0x02, 0x17,
-	0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0x5c, 0x47, 0x50, 0x42, 0x4d,
-	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0c, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79,
-	0x3a, 0x3a, 0x43, 0x68, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4d, 0x0a, 0x12, 0x67, 0x72, 0x6f, 0x75,
+	0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68,
+	0x61, 0x74, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x11, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65,
+	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x43, 0x0a, 0x27, 0x51, 0x75, 0x65, 0x72, 0x79,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x42, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x7b, 0x0a, 0x28,
+	0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72,
+	0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4f, 0x0a, 0x13, 0x67, 0x72, 0x6f, 0x75,
+	0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x12, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76,
+	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x32, 0xf1, 0x07, 0x0a, 0x05, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x12, 0x68, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x1f, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x20,
+	0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x1b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x15, 0x12, 0x13, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74,
+	0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x98, 0x01,
+	0x0a, 0x0c, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x25,
+	0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x39, 0x82,
+	0xd3, 0xe4, 0x93, 0x02, 0x33, 0x12, 0x31, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63,
+	0x68, 0x61, 0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x2f, 0x7b, 0x63, 0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x5f, 0x61, 0x7d, 0x2f, 0x7b, 0x63, 0x68,
+	0x61, 0x74, 0x74, 0x65, 0x72, 0x5f, 0x62, 0x7d, 0x12, 0x8d, 0x01, 0x0a, 0x0d, 0x43, 0x6f, 0x6e,
+	0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x26, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f,
+	0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x27, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74,
+	0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2b, 0x82, 0xd3, 0xe4,
+	0x93, 0x02, 0x25, 0x12, 0x23, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61,
+	0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x7b,
+	0x63, 0x68, 0x61, 0x74, 0x74, 0x65, 0x72, 0x7d, 0x12, 0x6b, 0x0a, 0x07, 0x50, 0x75, 0x62, 0x6b,
+	0x65, 0x79, 0x73, 0x12, 0x20, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x73, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x73,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x15,
+	0x12, 0x13, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x70,
+	0x75, 0x62, 0x6b, 0x65, 0x79, 0x12, 0x72, 0x0a, 0x06, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x12,
+	0x1f, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x20, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x50, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x25, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1f, 0x12, 0x1d, 0x2f, 0x63, 0x68, 0x61,
+	0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x2f,
+	0x7b, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x7d, 0x12, 0xa9, 0x01, 0x0a, 0x15, 0x47, 0x72,
+	0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42,
+	0x79, 0x49, 0x64, 0x12, 0x2e, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76,
+	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x2f, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76,
+	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x29, 0x12, 0x27, 0x2f, 0x63,
+	0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x67, 0x72, 0x6f, 0x75, 0x70,
+	0x5f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x69, 0x64,
+	0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0xc5, 0x01, 0x0a, 0x1b, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43,
+	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x79, 0x41, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x34, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f,
+	0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x79, 0x41, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x35, 0x2e, 0x63, 0x68,
+	0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x42, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x39, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x33, 0x12, 0x31, 0x2f, 0x63, 0x68, 0x61,
+	0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x63,
+	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x61, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x2f, 0x7b, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x7d, 0x42, 0x88, 0x01,
+	0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
+	0x1c, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2f, 0x63, 0x68, 0x61, 0x74, 0xa2, 0x02, 0x03,
+	0x43, 0x43, 0x58, 0xaa, 0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x2e, 0x43, 0x68, 0x61,
+	0x74, 0xca, 0x02, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0xe2,
+	0x02, 0x17, 0x43, 0x68, 0x61, 0x74, 0x74, 0x79, 0x5c, 0x43, 0x68, 0x61, 0x74, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0c, 0x43, 0x68, 0x61, 0x74,
+	0x74, 0x79, 0x3a, 0x3a, 0x43, 0x68, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -6400,6 +6778,7 @@ var file_chatty_chat_query_proto_goTypes = []interface{}{
 	(*Params)(nil),                                   // 14: chatty.chat.Params
 	(*Conversation)(nil),                             // 15: chatty.chat.Conversation
 	(*PubKey)(nil),                                   // 16: chatty.chat.PubKey
+	(*GroupConversation)(nil),                        // 17: chatty.chat.GroupConversation
 }
 var file_chatty_chat_query_proto_depIdxs = []int32{
 	14, // 0: chatty.chat.QueryParamsResponse.params:type_name -> chatty.chat.Params
@@ -6407,25 +6786,27 @@ var file_chatty_chat_query_proto_depIdxs = []int32{
 	15, // 2: chatty.chat.QueryConversationsResponse.conversations:type_name -> chatty.chat.Conversation
 	16, // 3: chatty.chat.QueryPubkeysResponse.pubkeys:type_name -> chatty.chat.PubKey
 	16, // 4: chatty.chat.QueryPubkeyResponse.pubkey:type_name -> chatty.chat.PubKey
-	0,  // 5: chatty.chat.Query.Params:input_type -> chatty.chat.QueryParamsRequest
-	2,  // 6: chatty.chat.Query.Conversation:input_type -> chatty.chat.QueryConversationRequest
-	4,  // 7: chatty.chat.Query.Conversations:input_type -> chatty.chat.QueryConversationsRequest
-	6,  // 8: chatty.chat.Query.Pubkeys:input_type -> chatty.chat.QueryPubkeysRequest
-	8,  // 9: chatty.chat.Query.Pubkey:input_type -> chatty.chat.QueryPubkeyRequest
-	10, // 10: chatty.chat.Query.GroupConversationById:input_type -> chatty.chat.QueryGroupConversationByIdRequest
-	12, // 11: chatty.chat.Query.GroupConversationsByAddress:input_type -> chatty.chat.QueryGroupConversationsByAddressRequest
-	1,  // 12: chatty.chat.Query.Params:output_type -> chatty.chat.QueryParamsResponse
-	3,  // 13: chatty.chat.Query.Conversation:output_type -> chatty.chat.QueryConversationResponse
-	5,  // 14: chatty.chat.Query.Conversations:output_type -> chatty.chat.QueryConversationsResponse
-	7,  // 15: chatty.chat.Query.Pubkeys:output_type -> chatty.chat.QueryPubkeysResponse
-	9,  // 16: chatty.chat.Query.Pubkey:output_type -> chatty.chat.QueryPubkeyResponse
-	11, // 17: chatty.chat.Query.GroupConversationById:output_type -> chatty.chat.QueryGroupConversationByIdResponse
-	13, // 18: chatty.chat.Query.GroupConversationsByAddress:output_type -> chatty.chat.QueryGroupConversationsByAddressResponse
-	12, // [12:19] is the sub-list for method output_type
-	5,  // [5:12] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	17, // 5: chatty.chat.QueryGroupConversationByIdResponse.group_conversation:type_name -> chatty.chat.GroupConversation
+	17, // 6: chatty.chat.QueryGroupConversationsByAddressResponse.group_conversations:type_name -> chatty.chat.GroupConversation
+	0,  // 7: chatty.chat.Query.Params:input_type -> chatty.chat.QueryParamsRequest
+	2,  // 8: chatty.chat.Query.Conversation:input_type -> chatty.chat.QueryConversationRequest
+	4,  // 9: chatty.chat.Query.Conversations:input_type -> chatty.chat.QueryConversationsRequest
+	6,  // 10: chatty.chat.Query.Pubkeys:input_type -> chatty.chat.QueryPubkeysRequest
+	8,  // 11: chatty.chat.Query.Pubkey:input_type -> chatty.chat.QueryPubkeyRequest
+	10, // 12: chatty.chat.Query.GroupConversationById:input_type -> chatty.chat.QueryGroupConversationByIdRequest
+	12, // 13: chatty.chat.Query.GroupConversationsByAddress:input_type -> chatty.chat.QueryGroupConversationsByAddressRequest
+	1,  // 14: chatty.chat.Query.Params:output_type -> chatty.chat.QueryParamsResponse
+	3,  // 15: chatty.chat.Query.Conversation:output_type -> chatty.chat.QueryConversationResponse
+	5,  // 16: chatty.chat.Query.Conversations:output_type -> chatty.chat.QueryConversationsResponse
+	7,  // 17: chatty.chat.Query.Pubkeys:output_type -> chatty.chat.QueryPubkeysResponse
+	9,  // 18: chatty.chat.Query.Pubkey:output_type -> chatty.chat.QueryPubkeyResponse
+	11, // 19: chatty.chat.Query.GroupConversationById:output_type -> chatty.chat.QueryGroupConversationByIdResponse
+	13, // 20: chatty.chat.Query.GroupConversationsByAddress:output_type -> chatty.chat.QueryGroupConversationsByAddressResponse
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_chatty_chat_query_proto_init() }

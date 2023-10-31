@@ -18,10 +18,11 @@ service Msg {
   // parameters. The authority defaults to the x/gov module account.
   
   // Since: cosmos-sdk 0.47
-  rpc UpdateParams            (MsgUpdateParams           ) returns (MsgUpdateParamsResponse           );
-  rpc CreateChatMessage       (MsgCreateChatMessage      ) returns (MsgCreateChatMessageResponse      );
-  rpc UpdatePubkey            (MsgUpdatePubkey           ) returns (MsgUpdatePubkeyResponse           );
-  rpc CreateGroupConversation (MsgCreateGroupConversation) returns (MsgCreateGroupConversationResponse);
+  rpc UpdateParams                   (MsgUpdateParams                  ) returns (MsgUpdateParamsResponse                  );
+  rpc CreateChatMessage              (MsgCreateChatMessage             ) returns (MsgCreateChatMessageResponse             );
+  rpc UpdatePubkey                   (MsgUpdatePubkey                  ) returns (MsgUpdatePubkeyResponse                  );
+  rpc CreateGroupConversation        (MsgCreateGroupConversation       ) returns (MsgCreateGroupConversationResponse       );
+  rpc CreateGroupConversationMessage (MsgCreateGroupConversationMessage) returns (MsgCreateGroupConversationMessageResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 //
@@ -62,14 +63,22 @@ message MsgUpdatePubkey {
 message MsgUpdatePubkeyResponse {}
 
 message MsgCreateGroupConversation {
-  string creator = 1;
-  string name    = 2;
+  string creator      = 1;
+  string name         = 2;
   repeated string participants = 3;
-  string pubkey = 4;
-  string message = 5;
-  bool encrypted = 6;
+  string pubkey       = 4;
+  string message      = 5;
+  bool   encrypted    = 6;
 }
 
-
 message MsgCreateGroupConversationResponse {}
+
+message MsgCreateGroupConversationMessage {
+  string creator = 1;
+  int64 conversation_id = 2;
+  string messsage = 3;
+  bool encrypted = 4;
+}
+
+message MsgCreateGroupConversationMessageResponse {}
 
