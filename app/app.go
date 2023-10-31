@@ -76,8 +76,9 @@ import (
 	solomachine "github.com/cosmos/ibc-go/v7/modules/light-clients/06-solomachine"
 	ibctm "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
 
-	chattymodule "chatty/x/chatty"
-	chattymodulekeeper "chatty/x/chatty/keeper"
+	chatmodule "chatty/x/chat"
+	chatmodulekeeper "chatty/x/chat/keeper"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"chatty/docs"
@@ -135,7 +136,7 @@ var (
 		ica.AppModuleBasic{},
 		vesting.AppModuleBasic{},
 		consensus.AppModuleBasic{},
-		chattymodule.AppModuleBasic{},
+		chatmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 )
@@ -189,7 +190,7 @@ type App struct {
 	ScopedICAControllerKeeper capabilitykeeper.ScopedKeeper
 	ScopedICAHostKeeper       capabilitykeeper.ScopedKeeper
 
-	ChattyKeeper chattymodulekeeper.Keeper
+	ChatKeeper chatmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -274,7 +275,7 @@ func New(
 		&app.FeeGrantKeeper,
 		&app.GroupKeeper,
 		&app.ConsensusParamsKeeper,
-		&app.ChattyKeeper,
+		&app.ChatKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

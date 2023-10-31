@@ -49,8 +49,8 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v7/modules/core/exported"
 	"google.golang.org/protobuf/types/known/durationpb"
 
-	chattymodulev1 "chatty/api/chatty/chatty/module"
-	chattymoduletypes "chatty/x/chatty/types"
+	chatmodulev1 "chatty/api/chatty/chat/module"
+	chatmoduletypes "chatty/x/chat/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -84,7 +84,7 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		consensustypes.ModuleName,
-		chattymoduletypes.ModuleName,
+		chatmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -118,7 +118,7 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		consensustypes.ModuleName,
-		chattymoduletypes.ModuleName,
+		chatmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -146,7 +146,7 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		consensustypes.ModuleName,
-		chattymoduletypes.ModuleName,
+		chatmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -287,8 +287,8 @@ var (
 				Config: appconfig.WrapAny(&consensusmodulev1.Module{}),
 			},
 			{
-				Name:   chattymoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&chattymodulev1.Module{}),
+				Name:   chatmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&chatmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

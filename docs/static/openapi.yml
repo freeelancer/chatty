@@ -4,10 +4,10 @@ info:
   name: ''
   description: ''
 paths:
-  /chatty/chatty/params:
+  /chatty/chat/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: ChattyChattyParams
+      operationId: ChattyChatParams
       responses:
         '200':
           description: A successful response.
@@ -531,16 +531,23 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  chatty.chatty.Params:
+  chatty.chat.Params:
     type: object
     description: Params defines the parameters for the module.
-  chatty.chatty.QueryParamsResponse:
+  chatty.chat.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  chatty.chat.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.
+
+      Since: cosmos-sdk 0.47
   chatty.chatty.MsgUpdateParamsResponse:
     type: object
     description: |-
@@ -548,6 +555,9 @@ definitions:
       MsgUpdateParams message.
 
       Since: cosmos-sdk 0.47
+  chatty.chatty.Params:
+    type: object
+    description: Params defines the parameters for the module.
   cosmos.auth.v1beta1.MsgUpdateParamsResponse:
     type: object
     description: |-
