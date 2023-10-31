@@ -1,0 +1,15 @@
+syntax = "proto3";
+package chatty.chatty;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "chatty/x/chatty/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "chatty/x/chatty/Params";
+  option (gogoproto.equal) = true;
+
+  
+}
