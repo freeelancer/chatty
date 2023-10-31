@@ -45,5 +45,12 @@ func (msg *MsgCreateChatMessage) ValidateBasic() error {
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+	_, err = sdk.AccAddressFromBech32(msg.Receiver)
+	if err != nil {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid receiver address (%s)", err)
+	}
+	if msg.Creator == msg.Receiver {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "creator and receiver are the same")
+	}
 	return nil
 }
