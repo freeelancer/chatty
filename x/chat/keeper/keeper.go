@@ -125,6 +125,20 @@ func (k Keeper) GetAddressGroup(ctx sdk.Context, address string) (*types.Address
 	return &addressGroups, true
 }
 
+// GetAllAddressGroup gets all group conversation ids from all addresses.
+func (k Keeper) GetAllAddressGroup(ctx sdk.Context) []*types.AddressGroups {
+	store := ctx.KVStore(k.storeKey)
+	iter := sdk.KVStorePrefixIterator(store, types.AddressGroupKeyPrefix)
+	defer iter.Close()
+	addressGroups := []*types.AddressGroups{}
+	for ; iter.Valid(); iter.Next() {
+		addressGroup := &types.AddressGroups{}
+		k.cdc.MustUnmarshal(iter.Value(), addressGroup)
+		addressGroups = append(addressGroups, addressGroup)
+	}
+	return addressGroups
+}
+
 // AddIdToAddressGroup adds a group conversation id to an address.
 func (k Keeper) AddIdToAddressGroup(ctx sdk.Context, address string, id int64) error {
 	store := ctx.KVStore(k.storeKey)
@@ -138,5 +152,13 @@ func (k Keeper) AddIdToAddressGroup(ctx sdk.Context, address string, id int64) e
 	}
 	addressGroup.GroupIds = append(addressGroup.GroupIds, id)
 	store.Set(key, k.cdc.MustMarshal(addressGroup))
+	return nil
+}
+
+// SetAddressGroup sets a group conversation ids to an address.
+func (k Keeper) SetAddressGroup(ctx sdk.Context, addressGroup types.AddressGroups) error {
+	store := ctx.KVStore(k.storeKey)
+	key := types.GetAddressGroupKey(addressGroup.Address)
+	store.Set(key, k.cdc.MustMarshal(&addressGroup))
 	return nil
 }

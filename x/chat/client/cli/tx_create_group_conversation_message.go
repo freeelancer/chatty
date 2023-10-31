@@ -39,7 +39,7 @@ func CmdCreateGroupConversationMessage() *cobra.Command {
 			if message == "" {
 				return fmt.Errorf("message cannot be empty")
 			}
-			pubkeyFilePath := args[3]
+			pubkeyFilePath := args[2]
 			encrypted := false
 			if pubkeyFilePath != "" {
 				encrypted = true

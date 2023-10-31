@@ -36,6 +36,9 @@ func (k Keeper) Conversations(goCtx context.Context, req *types.QueryConversatio
 	conversations := []*types.Conversation{}
 	store := ctx.KVStore(k.storeKey)
 	iter := sdk.KVStorePrefixIterator(store, types.ConversationKeyPrefix)
+	if req.Chatter == "" {
+		iter = sdk.KVStorePrefixIterator(store, append(types.ConversationKeyPrefix, []byte(req.Chatter)...))
+	}
 	defer iter.Close()
 	for ; iter.Valid(); iter.Next() {
 		conversation := &types.Conversation{}
