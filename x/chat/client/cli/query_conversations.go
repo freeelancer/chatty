@@ -1,7 +1,6 @@
 package cli
 
 import (
-	"fmt"
 	"strconv"
 
 	"chatty/x/chat/types"
@@ -13,11 +12,11 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdConversation() *cobra.Command {
+func CmdConversations() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "conversation",
-		Short: "Query conversation [chatterA] [chatterB]",
-		Args:  cobra.ExactArgs(2),
+		Use:   "conversations [chatter]",
+		Short: "Query conversations",
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -27,22 +26,14 @@ func CmdConversation() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			chatterA := args[0]
-			if chatterA == "" {
-				return fmt.Errorf("chatterA cannot be empty")
+			chatter := args[0]
+			if chatter == "" {
+				return err
 			}
 
-			chatterB := args[1]
-			if chatterB == "" {
-				return fmt.Errorf("chatterB cannot be empty")
-			}
+			params := &types.QueryConversationsRequest{Chatter: chatter}
 
-			params := &types.QueryConversationRequest{
-				ChatterA: chatterA,
-				ChatterB: chatterB,
-			}
-
-			res, err := queryClient.Conversation(cmd.Context(), params)
+			res, err := queryClient.Conversations(cmd.Context(), params)
 			if err != nil {
 				return err
 			}

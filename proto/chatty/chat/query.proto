@@ -25,6 +25,12 @@ service Query {
     option (google.api.http).get = "/chatty/chat/conversation/{chatter_a}/{chatter_b}";
   
   }
+  
+  // Queries a list of Conversations items.
+  rpc Conversations (QueryConversationsRequest) returns (QueryConversationsResponse) {
+    option (google.api.http).get = "/chatty/chat/conversation/{chatter}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -42,6 +48,14 @@ message QueryConversationRequest {
 }
 
 message QueryConversationResponse {
+  Conversation conversation = 1;
+}
+
+message QueryConversationsRequest {
+  string chatter = 1;
+}
+
+message QueryConversationsResponse {
   repeated Conversation conversations = 1;
 }
 

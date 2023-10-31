@@ -17,22 +17,31 @@ func (k Keeper) Conversation(goCtx context.Context, req *types.QueryConversation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	conversations := []*types.Conversation{}
-	if req.ChatterB == "" {
-		store := ctx.KVStore(k.storeKey)
-		iter := sdk.KVStorePrefixIterator(store, append(types.ConversationKeyPrefix, []byte(req.ChatterA)...))
-		defer iter.Close()
-		for ; iter.Valid(); iter.Next() {
-			var conversation types.Conversation
-			k.cdc.MustUnmarshal(iter.Value(), &conversation)
-			conversations = append(conversations, &conversation)
-		}
-	} else {
-		conversation, hasConversation := k.GetConversation(ctx, req.ChatterA, req.ChatterB)
-		if hasConversation {
-			conversations = append(conversations, conversation)
-		}
+
+	conversation, hasConversation := k.GetConversation(ctx, req.ChatterA, req.ChatterB)
+	if !hasConversation {
+		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryConversationResponse{Conversations: conversations}, nil
+	return &types.QueryConversationResponse{Conversation: conversation}, nil
+}
+
+func (k Keeper) Conversations(goCtx context.Context, req *types.QueryConversationsRequest) (*types.QueryConversationsResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	conversations := []*types.Conversation{}
+	store := ctx.KVStore(k.storeKey)
+	iter := sdk.KVStorePrefixIterator(store, types.ConversationKeyPrefix)
+	defer iter.Close()
+	for ; iter.Valid(); iter.Next() {
+		conversation := &types.Conversation{}
+		k.cdc.MustUnmarshal(iter.Value(), conversation)
+		conversations = append(conversations, conversation)
+	}
+
+	return &types.QueryConversationsResponse{Conversations: conversations}, nil
 }
