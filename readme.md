@@ -13,40 +13,30 @@ ignite chain serve
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
 
-### Web Frontend
+### Chat Module
 
-Ignite CLI has scaffolded a Vue.js-based web app in the `vue` directory. Run the following commands to install dependencies and start the app:
+The Chat Module is designed such that users can send messages either directly to other users or create group chats where they can speak to multiple participants like any other web chat application. Data is saved in the state, it can also be retrieved from the message data of archival nodes if the state is pruned.
 
-```
-cd vue
-npm install
-npm run serve
-```
+In order to encrypt the messages, the encryption should be done off chain on users own local machines. This is to ensure the privacy of the messages. Although it is possible to encrypt the data with public keys on chain, this is pointless as the call message data are public.
 
-The frontend app is built using the `@starport/vue` and `@starport/vuex` packages. For details, see the [monorepo for Ignite front-end development](https://github.com/ignite/web).
+Some encryption code can be found x/chat/client/cli. Currently this module only supports rsa key pairs pkcs1v15. It can be upgraded to support multiple different keys as ultimately encryption and decryption is handled on frontend applications.
 
-## Release
-To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.
+Users generate rsa keys and store their public keys in the blockchain state so other users are able to access it to encrypt messages sent to them. 
 
-```
-git tag v0.1
-git push origin v0.1
-```
+Group conversation creators sets the public key for the group conversation on creation (this is optional). The creator will need to find another way to send the participants the private key for this to work effectively.
 
-After a draft release is created, make your final changes from the release page and publish it.
-
-### Install
-To install the latest version of your blockchain node's binary, execute the following command on your machine:
+### commands
 
 ```
-curl https://get.ignite.com/username/chatty@latest! | sudo bash
+
 ```
-`username/chatty` should match the `username` and `repo_name` of the Github repository to which the source code was pushed. Learn more about [the install process](https://github.com/allinbits/starport-installer).
+```
+chattyd tx chat create-group-conversation <chat_name> <"list of participants separated by space"> <message> <path the pubkey> --from <alice/bob> --keyring-backend test
+```
 
-## Learn more
+### Future Improvements
 
-- [Ignite CLI](https://ignite.com/cli)
-- [Tutorials](https://docs.ignite.com/guide)
-- [Ignite CLI docs](https://docs.ignite.com)
-- [Cosmos SDK docs](https://docs.cosmos.network)
-- [Developer Chat](https://discord.gg/ignite)
+- Allow state updates to group conversation like adding/updating of pubkey, participants, admin
+- State pruning of messages passed a certain duration. This can be either done through beginblockers or at the beginning of every createMessage transaction
+
+
