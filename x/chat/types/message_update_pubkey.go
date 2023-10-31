@@ -1,6 +1,10 @@
 package types
 
 import (
+	"crypto/x509"
+	"encoding/hex"
+	"encoding/pem"
+
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -43,5 +47,24 @@ func (msg *MsgUpdatePubkey) ValidateBasic() error {
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
+	keyBytes, err := hex.DecodeString(msg.Pubkey)
+	if err != nil {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "invalid pubkey (%s)", err)
+	}
+	block, _ := pem.Decode(keyBytes)
+	if block == nil {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "Error decoding PEM block")
+	}
+
+	if block.Type != "PUBLIC KEY" {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "Found block of type %s instead of PUBLIC KEY", block.Type)
+	}
+	// Parse the RSA public key
+	_, err = x509.ParsePKIXPublicKey(block.Bytes)
+	if err != nil {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "Error parsing RSA public key:", err)
+	}
+
 	return nil
 }
