@@ -541,6 +541,8 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  chatty.chat.MsgCreateChatMessageResponse:
+    type: object
   chatty.chat.MsgUpdateParamsResponse:
     type: object
     description: |-
@@ -548,16 +550,6 @@ definitions:
       MsgUpdateParams message.
 
       Since: cosmos-sdk 0.47
-  chatty.chatty.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
-
-      Since: cosmos-sdk 0.47
-  chatty.chatty.Params:
-    type: object
-    description: Params defines the parameters for the module.
   cosmos.auth.v1beta1.MsgUpdateParamsResponse:
     type: object
     description: |-

@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package chatty.chat;
 
 import "amino/amino.proto";
@@ -15,28 +16,25 @@ service Msg {
 
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  //
+  
   // Since: cosmos-sdk 0.47
-  rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+  rpc UpdateParams      (MsgUpdateParams     ) returns (MsgUpdateParamsResponse     );
+  rpc CreateChatMessage (MsgCreateChatMessage) returns (MsgCreateChatMessageResponse);
 }
-
 // MsgUpdateParams is the Msg/UpdateParams request type.
 //
 // Since: cosmos-sdk 0.47
 message MsgUpdateParams {
-  option (cosmos.msg.v1.signer) = "authority";
-  option (amino.name) = "chatty/x/chat/MsgUpdateParams";
-
+  option (cosmos.msg.v1.signer) =                     "authority";
+  option           (amino.name) = "chatty/x/chat/MsgUpdateParams";
+  
   // authority is the address that controls the module (defaults to x/gov unless overwritten).
   string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 
   // params defines the module parameters to update.
-  //
+  
   // NOTE: All parameters must be supplied.
-  Params params = 2 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
 
 // MsgUpdateParamsResponse defines the response structure for executing a
@@ -44,3 +42,12 @@ message MsgUpdateParams {
 //
 // Since: cosmos-sdk 0.47
 message MsgUpdateParamsResponse {}
+
+message MsgCreateChatMessage {
+  string creator = 1;
+  string receiver = 2;
+  string encrypted_message = 3;
+}
+
+message MsgCreateChatMessageResponse {}
+

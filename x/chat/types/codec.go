@@ -11,6 +11,7 @@ import (
 
 // RegisterLegacyAminoCodec registers concrete types on the LegacyAmino codec
 func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
+	cdc.RegisterConcrete(&MsgCreateChatMessage{}, "chat/CreateChatMessage", nil)
 	// this line is used by starport scaffolding # 2
 
 	cdc.RegisterConcrete(Params{}, "chatty/x/chat/Params", nil)
@@ -18,6 +19,9 @@ func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateChatMessage{},
+	)
 	// this line is used by starport scaffolding # 3
 
 	registry.RegisterImplementations((*sdk.Msg)(nil),
